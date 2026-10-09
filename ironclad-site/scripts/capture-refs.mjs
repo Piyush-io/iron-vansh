@@ -10,6 +10,7 @@ const dir = path.join(root, 'design/refs');
 const { pages, files = [] } = JSON.parse(await fs.readFile(path.join(dir, 'targets.json'), 'utf8'));
 const browser = await chromium.launch();
 for (const t of pages) {
+  if (t.skip) continue;
   for (const [label, viewport, mobile] of [['desktop', { width: 1440, height: 900 }, false], ['mobile', { width: 390, height: 844 }, true]]) {
     if (t.shots === false && label === 'mobile') continue;
     const ctx = await browser.newContext({ viewport, isMobile: mobile, hasTouch: mobile, deviceScaleFactor: 1,
@@ -27,6 +28,20 @@ for (const t of pages) {
         await page.screenshot({ path: path.join(dir, `${t.name}-${label}.jpg`), type: 'jpeg', quality: 70,
           fullPage: full <= 12000, clip: full > 12000 ? { x: 0, y: 0, width: viewport.width, height: 12000 } : undefined });
       }
+      if (t.fonts && label === 'desktop') {
+        // Computed type of key elements plus every @font-face the page loaded, for matching typography.
+        const report = await page.evaluate(() => {
+          const pick = (sel) => [...document.querySelectorAll(sel)].filter((e) => e.offsetParent && e.textContent.trim()).slice(0, 4).map((e) => {
+            const c = getComputedStyle(e);
+            return { sel, text: e.textContent.trim().slice(0, 60), family: c.fontFamily, size: c.fontSize, weight: c.fontWeight, lh: c.lineHeight, ls: c.letterSpacing, tt: c.textTransform, color: c.color, bg: c.backgroundColor };
+          });
+          const faces = [...document.fonts].map((f) => `${f.family} ${f.weight} ${f.style} ${f.status}`);
+          const sheets = [];
+          for (const s of document.styleSheets) { try { for (const r of s.cssRules) if (r.type === 5) sheets.push(r.cssText.slice(0, 300)); } catch {} }
+          return { faces: [...new Set(faces)], fontFaceRules: sheets, els: ['h1', 'h2', 'h3', 'h4', 'p', 'nav a', 'header a', 'button', 'a[class*=btn], a[class*=button]', 'footer a', 'body'].flatMap(pick) };
+        });
+        await fs.writeFile(path.join(dir, `${t.name}-type.json`), JSON.stringify(report, null, 2));
+      }
       if (t.html && label === 'desktop') await fs.writeFile(path.join(dir, `${t.name}.html`), await page.content());
       console.log(`✓ ${t.name} ${label}`);
     } catch (e) { console.warn(`✗ ${t.name} ${label}: ${e.message.split('\n')[0]}`); }
@@ -37,6 +52,7 @@ await browser.close();
 
 // Copy documents from the live site into public/ (same names), skipping ones already present.
 for (const f of files) {
+  if (process.env.SKIP_FILES) break;
   const out = path.join(root, f.out);
   if (await fs.stat(out).catch(() => null)) { console.log(`✓ ${f.out} (exists)`); continue; }
   try {

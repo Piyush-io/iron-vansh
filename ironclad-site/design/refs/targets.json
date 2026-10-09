@@ -4,38 +4,56 @@
     {
       "name": "ironclad-live-home",
       "url": "https://www.ironcladamc.com/",
-      "html": true
+      "html": true,
+      "skip": true
     },
     {
       "name": "ironclad-live-privacy",
       "url": "https://www.ironcladamc.com/privacy-policy.html",
       "html": true,
-      "shots": false
+      "shots": false,
+      "skip": true
     },
     {
       "name": "ironclad-live-updates",
       "url": "https://www.ironcladamc.com/investor-update.html",
       "html": true,
-      "shots": false
+      "shots": false,
+      "skip": true
     },
     {
       "name": "ironclad-live-media",
       "url": "https://www.ironcladamc.com/media.html",
       "html": true,
-      "shots": false
+      "shots": false,
+      "skip": true
     },
     {
       "name": "rre",
-      "url": "https://rre.com/"
+      "url": "https://rre.com/",
+      "skip": true
     },
     {
       "name": "interfere-blog",
       "url": "https://interfere.com/blog/how-we-built-interferes-new-website",
-      "html": true
+      "html": true,
+      "skip": true
     },
     {
       "name": "interfere-home",
-      "url": "https://interfere.com/"
+      "url": "https://interfere.com/",
+      "skip": true
+    },
+    {
+      "name": "blackstone-wb-home",
+      "url": "https://web.archive.org/web/2026/https://www.blackstone.com/",
+      "html": true,
+      "fonts": true
+    },
+    {
+      "name": "blackstone-wb-about",
+      "url": "https://web.archive.org/web/2026/https://www.blackstone.com/the-firm/",
+      "fonts": true
     }
   ],
   "files_readme": "Documents copied from the live site into public/ with the same file names, so existing links keep working.",
