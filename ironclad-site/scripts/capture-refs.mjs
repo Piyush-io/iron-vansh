@@ -19,6 +19,9 @@ for (const t of pages) {
     try {
       await page.goto(t.url, { waitUntil: 'networkidle', timeout: 60_000 }).catch(() => page.goto(t.url, { waitUntil: 'load', timeout: 60_000 }));
       await page.waitForTimeout(1500);
+      // dismiss interstitials (residency / cookie prompts) and hide the Wayback toolbar
+      for (const sel of t.clicks ?? []) await page.locator(sel).first().click({ timeout: 4000 }).catch(() => {});
+      await page.addStyleTag({ content: '#wm-ipp-base,#wm-ipp-print,#donato{display:none!important}' }).catch(() => {});
       // scroll through so lazy content and scroll animations render
       const h = await page.evaluate(() => document.documentElement.scrollHeight);
       for (let y = 0; y < Math.min(h, 14000); y += 600) { await page.evaluate((v) => scrollTo(0, v), y); await page.waitForTimeout(150); }
@@ -41,6 +44,19 @@ for (const t of pages) {
           return { faces: [...new Set(faces)], fontFaceRules: sheets, els: ['h1', 'h2', 'h3', 'h4', 'p', 'nav a', 'header a', 'button', 'a[class*=btn], a[class*=button]', 'footer a', 'body'].flatMap(pick) };
         });
         await fs.writeFile(path.join(dir, `${t.name}-type.json`), JSON.stringify(report, null, 2));
+      }
+      if (t.css && label === 'desktop') {
+        // Save every same-origin stylesheet the page uses, so spacing and type can be copied exactly.
+        const css = await page.evaluate(async () => {
+          const out = [];
+          for (const l of document.querySelectorAll('link[rel=stylesheet]')) {
+            if (/web-static\.archive|securiti|brightcove/.test(l.href)) continue;
+            try { out.push(`/* ${l.href} */\n` + await (await fetch(l.href)).text()); } catch {}
+          }
+          for (const st of document.querySelectorAll('style')) out.push('/* inline */\n' + st.textContent);
+          return out.join('\n\n');
+        });
+        await fs.writeFile(path.join(dir, `${t.name}.css`), css);
       }
       if (t.html && label === 'desktop') await fs.writeFile(path.join(dir, `${t.name}.html`), await page.content());
       console.log(`✓ ${t.name} ${label}`);

@@ -45,15 +45,53 @@
       "skip": true
     },
     {
-      "name": "blackstone-wb-home",
+      "name": "bx-home",
       "url": "https://web.archive.org/web/2026/https://www.blackstone.com/",
-      "html": true,
-      "fonts": true
+      "clicks": [
+        "text=I am not a United States Resident",
+        "text=I Understand"
+      ],
+      "css": true,
+      "fonts": true,
+      "html": true
     },
     {
-      "name": "blackstone-wb-about",
+      "name": "bx-firm",
       "url": "https://web.archive.org/web/2026/https://www.blackstone.com/the-firm/",
-      "fonts": true
+      "clicks": [
+        "text=I am not a United States Resident",
+        "text=I Understand"
+      ],
+      "fonts": true,
+      "html": true
+    },
+    {
+      "name": "bx-people",
+      "url": "https://web.archive.org/web/2026/https://www.blackstone.com/our-people/",
+      "clicks": [
+        "text=I am not a United States Resident",
+        "text=I Understand"
+      ],
+      "fonts": true,
+      "html": true
+    },
+    {
+      "name": "bx-realestate",
+      "url": "https://web.archive.org/web/2026/https://www.blackstone.com/our-businesses/real-estate/",
+      "clicks": [
+        "text=I am not a United States Resident",
+        "text=I Understand"
+      ],
+      "fonts": true,
+      "html": true
+    },
+    {
+      "name": "bx-insights",
+      "url": "https://web.archive.org/web/2026/https://www.blackstone.com/insights/",
+      "clicks": [
+        "text=I am not a United States Resident",
+        "text=I Understand"
+      ]
     }
   ],
   "files_readme": "Documents copied from the live site into public/ with the same file names, so existing links keep working.",
