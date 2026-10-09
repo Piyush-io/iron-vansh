@@ -1,11 +1,20 @@
 ---
+import Photo from './Photo.astro';
 import { site } from '../data/site';
 interface Props { heading?: string; lede?: string }
 const { heading = 'Talk to our investment team.', lede = 'We can walk you through the mandates, the investment process, and the risks of each strategy.' } = Astro.props;
 ---
 <section class="contact-band" id="contact" aria-labelledby="contact-title">
-  <div class="wrap contact-layout">
-    <div><h2 id="contact-title">{heading}</h2><p>{lede}</p><a class="button button-light" href="/contact">Contact the team</a></div>
-    <dl class="contact-direct"><div><dt>Email</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div><div><dt>Phone</dt><dd><a href={site.phoneHref}>{site.phone}</a></dd></div><div><dt>Office</dt><dd>Noida, India</dd></div></dl>
+  <div class="wrap">
+    <div class="cta" data-reveal>
+      <Photo name="ridges" decorative sizes="(max-width: 1440px) 100vw, 1440px" class="cta-bg" position="50% 60%" />
+      <div class="cta-copy">
+        <p class="eyebrow"><span class="dot"></span>Contact</p>
+        <h2 id="contact-title">{heading}</h2>
+        <p class="lede">{lede}</p>
+        <div class="actions"><a class="btn btn-primary" href="/contact">Contact the team</a><a class="btn btn-secondary" href={`mailto:${site.email}`}>{site.email}</a></div>
+      </div>
+      <dl class="cta-direct"><div><dt>Phone</dt><dd><a href={site.phoneHref}>{site.phone}</a></dd></div><div><dt>Office</dt><dd>Noida, India</dd></div></dl>
+    </div>
   </div>
 </section>

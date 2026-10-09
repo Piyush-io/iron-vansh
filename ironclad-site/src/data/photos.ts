@@ -1,11 +1,31 @@
-// Responsive Unsplash originals, including 4K for large displays.
-// Local photographs remain available when the image CDN cannot be reached.
-export const photos = {
-  pavilion: { file: '/images/ironclad-pavilion-v3', width: 1672, height: 941, alt: 'Conceptual emerald and bronze architectural pavilion overlooking still water at sunrise' },
-  mumbai: { id: 'photo-1753806390462-580d7a625f76', fallback: '/images/g-waterfront.jpg', alt: 'Marine Drive and the South Mumbai skyline across the Arabian Sea', fallbackAlt: 'City buildings along a waterfront' },
-  architecture: { id: 'photo-1486406146926-c627a92ad1ab', fallback: '/images/g-waterfront.jpg', alt: 'Glass towers rising into the sky, seen from below' },
-  ventures: { id: 'photo-1497366754035-f200968a6e72', fallback: '/images/g-ventures.jpg', alt: 'A light-filled contemporary workspace' },
-  global: { id: 'photo-1519501025264-65ba15a82390', fallback: '/images/g-waterfront.jpg', alt: 'New York skyline stretching towards the horizon' },
-} as const;
-export type PhotoName = keyof typeof photos;
-export const photoUrl = (id: string, width: number) => `https://images.unsplash.com/${id}?auto=format&fit=max&w=${width}&q=85`;
+// Real photography, fetched at 3840px by `npm run photos` (runs automatically before dev/build)
+// from the sources in photo-sources.json, into public/images/photos/ with a manifest of the
+// widths actually available. Until a photo has been fetched its slot renders a neutral placeholder.
+import fs from 'node:fs';
+import path from 'node:path';
+import sources from './photo-sources.json';
+
+export type PhotoName = Exclude<keyof typeof sources, '_readme'>;
+export const productPhoto = { pms: 'mumbai', ventures: 'glass', latius: 'giftcity' } as const satisfies Record<string, PhotoName>;
+
+interface Entry { width: number; height: number; widths: number[] }
+let manifest: Record<string, Entry> | undefined;
+const read = (): Record<string, Entry> => {
+  try { return JSON.parse(fs.readFileSync(path.resolve('public/images/photos/manifest.json'), 'utf8')); } catch { return {}; }
+};
+
+export function getPhoto(name: PhotoName) {
+  manifest ??= read();
+  const m = manifest[name];
+  const src = sources[name];
+  const url = (w: number) => `/images/photos/${name}-${w}.webp`;
+  return {
+    alt: src.alt,
+    page: src.page,
+    ready: !!m,
+    width: m?.width ?? 3840,
+    height: m?.height ?? 2160,
+    src: m ? url(m.widths.includes(1920) ? 1920 : m.widths.at(-1)!) : '',
+    srcset: m ? m.widths.map((w) => `${url(w)} ${w}w`).join(', ') : '',
+  };
+}

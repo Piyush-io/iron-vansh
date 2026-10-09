@@ -11,12 +11,12 @@ const { Content } = await render(post);
 const fmt = new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 <Base title={post.data.title} description={post.data.summary}>
-  <article class="section" style="padding-top:clamp(140px,16vw,200px)">
+  <article class="section article">
     <div class="wrap">
       <p class="small"><time datetime={post.data.date.toISOString()}>{fmt.format(post.data.date)}</time></p>
-      <h1 class="d2" style="color:var(--ink);margin:12px 0 40px;max-width:16em">{post.data.title}</h1>
+      <h1 class="d2 article-title">{post.data.title}</h1>
       <div class="post-body"><Content /></div>
-      <p style="margin-top:56px"><a class="textlink" href="/blogs">All posts</a></p>
+      <p class="article-back"><a class="textlink" href="/blogs">All posts</a></p>
     </div>
   </article>
 </Base>

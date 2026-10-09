@@ -1,0 +1,103 @@
+# DESIGN.md — Ironclad Asset Management
+
+Light-mode design system. Structure from Blackstone (large photography, one huge statement at a time, a numbers band, large image cards). Craft from Polar's brand language (monochrome, tight grotesk, hairlines, pill buttons, soft rounded surfaces, generous air).
+
+> **Provenance, read this.** `polar.sh/brand` and `blackstone.com` could not be opened from the build environment (egress policy). This file is written from knowledge of both design languages, not from a live inspection. If you want pixel-faithful parity with either, paste their brand tokens in and adjust §2–§3; everything downstream reads CSS variables.
+
+---
+
+## 1. Principles
+
+1. **Quiet, then one loud thing.** Each screen has a single focal element: a headline, a number, or an image. Everything else recedes.
+2. **Light is the product.** Pale sky, mist, porcelain, paper. No dark sections, no dark mode. Contrast comes from navy ink, not from black backgrounds.
+3. **Hairlines, not boxes.** Structure is drawn with 1px rules and whitespace. Cards exist only where they hold imagery or a link.
+4. **Imagery is atmospheric, never stocky.** 4K, soft, low-contrast, one warm light source. No people-at-laptops, no handshakes.
+5. **Say only what is true.** This is a SEBI-regulated manager. No invented AUM, returns, client counts or logos. Numbers on the page come from `src/data/*`.
+
+## 2. Colour
+
+| Token | Value | Use |
+|---|---|---|
+| `--bg` | `#FFFFFF` | Page |
+| `--bg-soft` | `#F6F8FA` | Alternate sections, footer (porcelain) |
+| `--bg-sunken` | `#EDF1F5` | Tracks, table heads |
+| `--ink` | `#07192B` | Headlines, body strong |
+| `--navy` | `#052F4E` | Brand. Primary buttons, logo, links on hover |
+| `--navy-hover` | `#0B456F` | Primary button hover |
+| `--text` | `#2B3E52` | Body (11.4:1 on white) |
+| `--text-2` | `#4F6176` | Secondary (6.2:1) |
+| `--text-3` | `#6C7B8C` | Meta, large type only (4.2:1) |
+| `--line` | `#E2E8EE` | Hairlines |
+| `--line-2` | `#CBD5DF` | Hover/strong hairlines, input borders |
+| `--gold` | `#C8923A` | Single warm accent: dots, rings, rim light. Never body text |
+| `--gold-ink` | `#8A5F14` | The only gold allowed as text (5.4:1) |
+| `--focus` | `#1F6FEB` | Focus ring only |
+
+Imagery palette (matches generator): haze `#ECF2F8`, steel `#7894B2`, navy `#052F4E`, warm `#FFD69E`.
+Allocation bars: Compounders `--navy`, Special situations `#6F93B6`, Seed `--gold`, Series B `#BFD0E2`.
+
+## 3. Typography
+
+- **Geist** (variable 300–700), self-hosted. **Geist Mono** (400–500) for labels and indices.
+- Headlines: weight 500, tracking `-0.045em` (display) to `-0.03em` (h3), leading 0.96–1.1. Never bold.
+- Numbers: weight 300, tabular, tracking `-0.05em`.
+- Body 17/1.65. Lead 20–22/1.5, `--text-2`. Measure ≤ 62ch.
+- Labels: Geist Mono 12px, uppercase, tracking `0.08em`, `--text-3`.
+
+| Role | Size (fluid) |
+|---|---|
+| Display `h1` | `clamp(48px, 8.2vw, 132px)` |
+| Statement | `clamp(28px, 4.2vw, 64px)` |
+| `h2` | `clamp(36px, 5vw, 80px)` |
+| `h3` | `clamp(22px, 2.2vw, 32px)` |
+| Number | `clamp(56px, 7vw, 112px)` |
+
+## 4. Layout
+
+- Max width `1440px`, side gutter `clamp(20px, 4vw, 56px)`. 12-col grid, `32px` gap.
+- Vertical rhythm: sections `clamp(88px, 12vw, 176px)` apart. Inside a section, heading → content gap `clamp(40px, 5vw, 72px)`.
+- Header: 72px, sticky, glass (`rgba(255,255,255,.72)` + 18px blur). Hairline appears after 8px scroll.
+- Breakpoints: 640 / 900 / 1200. Mobile is a first-class layout, not a collapse.
+
+## 5. Surfaces
+
+- Radius: `12` inputs/chips · `24` cards · `32` image panels · `999` buttons.
+- Shadow (rare, only on floating glass): `0 1px 0 rgba(7,25,43,.04), 0 28px 56px -28px rgba(7,25,43,.22)`.
+- Glass: `rgba(255,255,255,.66)`, `backdrop-filter: blur(20px) saturate(1.5)`, 1px `rgba(255,255,255,.8)` border.
+
+## 6. Components
+
+- **Button.** Pill, 48px high, 15px/500. *Primary* navy fill + white text. *Secondary* white fill, `--line-2` border. *Quiet* text + arrow. Hover: fill shifts one step; arrow nudges 3px.
+- **Eyebrow.** Mono label with a 6px gold dot.
+- **Image card.** 24px radius, image fills, white gradient from the bottom carries the text. Hover: image scales 1.04 over 1.2s, arrow chip fills navy.
+- **Number tile.** Number (300) + mono label + one line of explanation, separated by vertical hairlines. Never decorated.
+- **Spec table.** Hairline rows, mono column heads. Used for the strategy comparison and registrations.
+- **Statement.** Large paragraph that resolves from `--text-3` to `--ink` word by word on scroll.
+
+## 7. Imagery
+
+- Real photography only. Sources live in `src/data/photo-sources.json` (Unsplash, free for commercial use under the Unsplash License; each entry links its photo page).
+- `npm run photos` downloads each at **3840px** and writes WebP at 640 / 1280 / 1920 / 2560 / 3840 plus `manifest.json` into `public/images/photos/`. It runs automatically before `dev` and `build`. Commit the output once fetched.
+- Slots: `dawn` (hero panel), `mumbai` (PMS), `glass` (Ventures), `giftcity` (Latius), `manhattan` (interlude), `ridges` (contact band).
+- To use your own photograph, add `"file": "path/to/photo.jpg"` to its entry and re-run `npm run photos -- --force <name>`.
+- Text never sits directly on an unknown photo: the hero copy is on the page ground, strategy links sit on glass, cards and the contact band carry white scrims.
+- Always `width`/`height` from the manifest, `srcset` + `sizes`, `loading="lazy"` except the hero. Decorative images get `alt=""`.
+
+## 8. Motion
+
+- Easing `cubic-bezier(.2,.7,.2,1)`. Durations 200ms (hover) / 700–900ms (reveal) / 1200ms (image).
+- Content is visible at rest. Elements below the fold rise 14px as they enter, once, staggered 70ms. Nothing starts at opacity 0.
+- Hero photo drifts at most 60px on scroll. Everything respects `prefers-reduced-motion`.
+
+## 9. Content and compliance rules
+
+- Registration numbers, SEBI line and investor-awareness text come from `src/data/site.ts` and stay on every page.
+- The numbers band may only show facts already in `products.ts` / `team.ts` / `site.ts`.
+- Performance claims render only through `PerformanceNote` and only while `SHOW_PERFORMANCE_CLAIMS` is true. Do not add claims anywhere else.
+- Placeholder disclosures marked `tbc` stay visibly marked until compliance supplies wording.
+
+## 10. Accessibility
+
+- Text contrast ≥ 4.5:1 (≥ 3:1 for large type). 2px `--focus` ring, 3px offset, on every interactive element.
+- Skip link, landmark roles, `aria-current`, inert background while the mobile drawer is open.
+- Targets ≥ 44px on touch. No motion-only meaning.

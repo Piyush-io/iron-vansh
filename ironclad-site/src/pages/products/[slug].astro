@@ -5,6 +5,7 @@ import AllocationBars from '../../components/AllocationBars.astro';
 import PerformanceNote from '../../components/PerformanceNote.astro';
 import ContactBand from '../../components/ContactBand.astro';
 import { products } from '../../data/products';
+import { productPhoto } from '../../data/photos';
 
 export function getStaticPaths() {
   return products.map((p) => ({ params: { slug: p.slug }, props: { product: p } }));
@@ -12,16 +13,15 @@ export function getStaticPaths() {
 const { product: p } = Astro.props;
 const others = products.filter((o) => o.slug !== p.slug);
 ---
-<Base title={p.name} description={p.metaDescription} darkHero={true}>
+<Base title={p.name} description={p.metaDescription}>
   <PageHero
     title={p.name}
     where={p.where}
     reg={p.reg}
     status={p.status}
     summary={p.heroSummary}
-    image={p.image}
-    imagePos={p.imagePos}
-    globe={!p.image}
+    photo={productPhoto[p.slug]}
+    position={p.slug === 'pms' ? '30% 58%' : p.slug === 'latius' ? '66% 50%' : '60% 50%'}
   />
 
   <section class="section" aria-labelledby="invest-title">
@@ -34,7 +34,7 @@ const others = products.filter((o) => o.slug !== p.slug);
             <h3>{p.focusHeading}</h3>
             <ul>{p.focus.map((f) => <li>{f}</li>)}</ul>
           </div>
-          {p.slug === 'ventures' && <p class="small" style="margin-top:20px">The fund is sector-agnostic and may invest opportunistically elsewhere.</p>}
+          {p.slug === 'ventures' && <p class="small note">The fund is sector-agnostic and may invest opportunistically elsewhere.</p>}
         </div>
       </div>
     </div>
@@ -69,7 +69,7 @@ const others = products.filter((o) => o.slug !== p.slug);
 
   <section class="others" aria-labelledby="others-title">
     <div class="wrap">
-      <h2 class="d3" id="others-title" style="color:var(--ink)">Our other strategies</h2>
+      <h2 class="d3 sec-title" id="others-title">Our other strategies</h2>
       <ul>
         {others.map((o) => (
           <li><a href={`/products/${o.slug}`}><b>{o.name}</b><span>{o.status ?? o.where}</span></a></li>

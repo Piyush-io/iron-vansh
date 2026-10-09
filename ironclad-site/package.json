@@ -7,9 +7,15 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "review": "npm run build && node scripts/create-review.mjs"
+    "review": "npm run build && node scripts/create-review.mjs",
+    "photos": "node scripts/fetch-photos.mjs",
+    "predev": "node scripts/fetch-photos.mjs --soft",
+    "prebuild": "node scripts/fetch-photos.mjs --soft"
   },
   "dependencies": {
     "astro": "^7.3.5"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5"
   }
 }

@@ -2,22 +2,21 @@
 import { products } from '../data/products';
 import { site } from '../data/site';
 
-interface Props { darkHero?: boolean; pathname: string }
-const { darkHero = false, pathname } = Astro.props;
+interface Props { pathname: string }
+const { pathname } = Astro.props;
 const path = pathname.replace(/\/+$/, '') || '/';
 const is = (p: string) => path === p || path.startsWith(p + '/');
 const cur = (p: string) => (is(p) ? 'page' : undefined);
 const inProducts = is('/products');
 ---
-<header class:list={['site-header', { 'is-solid': !darkHero }]} id="header" data-dark-hero={darkHero ? 'true' : 'false'}>
+<header class="site-header" id="header">
   <div class="wrap bar">
     <a class="brand" href="/" aria-label="Ironclad Asset Management, home">
-      <img class="on-dark" src="/images/logo-white.png" alt="" width="200" height="44">
-      <img class="on-light" src="/images/logo-navy.png" alt="" width="200" height="44">
+      <img src="/images/logo-navy.png" alt="" width="200" height="58">
     </a>
     <nav class="primary" aria-label="Primary">
       <div class:list={['dd', { 'is-current': inProducts }]} id="dd">
-        <button type="button" aria-expanded="false" aria-controls="dd-panel">Our strategies
+        <button type="button" aria-expanded="false" aria-controls="dd-panel">Strategies
           <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
         </button>
         <div class="dd-panel" id="dd-panel">
@@ -29,15 +28,15 @@ const inProducts = is('/products');
       <a href="/team" aria-current={cur('/team')}>The firm</a>
       <a href="/blogs" aria-current={cur('/blogs')}>Insights</a>
       <a href="/contact" aria-current={cur('/contact')}>Contact</a>
-      <a class="login" href={site.investorLoginUrl} rel="noopener" target="_blank">Investor login</a>
     </nav>
+    <a class="btn btn-primary login" href={site.investorLoginUrl} rel="noopener" target="_blank">Investor login</a>
     <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer" id="open"><i></i></button>
   </div>
 </header>
 
 <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Navigation menu" aria-hidden="true" inert>
   <div class="top">
-    <img src="/images/logo-navy.png" alt="Ironclad Asset Management" width="200" height="40">
+    <img src="/images/logo-navy.png" alt="Ironclad Asset Management" width="200" height="58">
     <button class="menu-btn" type="button" aria-label="Close menu" id="close" style="display:flex">
       <svg width="20" height="20" viewBox="0 0 20 20" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 3l14 14M17 3L3 17"/></svg>
     </button>
@@ -50,5 +49,5 @@ const inProducts = is('/products');
     <a href="/blogs" aria-current={cur('/blogs')}>Insights</a>
     <a href="/contact" aria-current={cur('/contact')}>Contact</a>
   </nav>
-  <a class="login" href={site.investorLoginUrl} rel="noopener" target="_blank">Investor login</a>
+  <a class="btn btn-primary login" href={site.investorLoginUrl} rel="noopener" target="_blank">Investor login</a>
 </div>

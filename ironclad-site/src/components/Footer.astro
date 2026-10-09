@@ -6,14 +6,14 @@ const year = 2026;
 <footer class="site-footer">
   <div class="wrap">
     <div class="cols">
-      <div>
-        <img src="/images/logo-navy.png" alt="Ironclad Asset Management" width="230" height="52">
-        <p style="max-width:28em">{site.tagline}</p>
+      <div class="f-brand">
+        <img src="/images/logo-navy.png" alt="Ironclad Asset Management" width="230" height="66">
+        <p>{site.tagline}</p>
       </div>
-      <nav aria-label="Strategies"><h2>Strategies</h2><ul>
+      <nav aria-label="Strategies"><h2 class="mono">Strategies</h2><ul>
         {products.map((p) => <li><a href={`/products/${p.slug}`}>{p.name}</a></li>)}
       </ul></nav>
-      <nav aria-label="Company"><h2>Company</h2><ul>
+      <nav aria-label="Company"><h2 class="mono">Company</h2><ul>
         <li><a href="/team">The firm</a></li>
         <li><a href="/blogs">Insights</a></li>
         <li><a href="/contact">Contact</a></li>
@@ -21,7 +21,7 @@ const year = 2026;
         <li><a href="/disclosures#investor-charter">Investor charter</a></li>
         <li><a href="/disclosures#grievance">Grievance redressal</a></li>
       </ul></nav>
-      <div><h2>Contact</h2><ul>
+      <div><h2 class="mono">Contact</h2><ul>
         <li>{site.addressShort[0]}<br>{site.addressShort[1]}</li>
         <li><a href={site.phoneHref}>{site.phone}</a></li>
         <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
@@ -40,4 +40,5 @@ const year = 2026;
       <p>© {year} {site.legalName}.</p>
     </div>
   </div>
+  <div class="wordmark" aria-hidden="true">Ironclad</div>
 </footer>

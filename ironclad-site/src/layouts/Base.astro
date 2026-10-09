@@ -6,9 +6,10 @@ import InvestorAwareness from '../components/InvestorAwareness.astro';
 import { site } from '../data/site';
 
 interface Props { title?: string; description?: string; darkHero?: boolean }
-const { title, description = site.description, darkHero = false } = Astro.props;
+const { title, description = site.description } = Astro.props;
 const fullTitle = title ? `${title} | ${site.name}` : site.name;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const isHome = Astro.url.pathname === '/';
 ---
 <!doctype html>
 <html lang="en">
@@ -22,16 +23,15 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <meta property="og:title" content={fullTitle}>
   <meta property="og:description" content={description}>
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#0B5546">
-  <meta property="og:image" content={new URL('/images/ironclad-pavilion-v3-1672.webp', Astro.site)}>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://images.unsplash.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta property="og:image" content={new URL('/images/og.jpg', Astro.site)}>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="preload" href="/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <script is:inline>document.documentElement.classList.add('js')</script>
 </head>
-<body class:list={{ home: Astro.url.pathname === '/' }}>
+<body class:list={{ home: isHome }}>
   <a class="skip" href="#main">Skip to content</a>
-  <Header darkHero={darkHero} pathname={Astro.url.pathname} />
+  <Header pathname={Astro.url.pathname} />
   <main id="main">
     <slot />
   </main>
@@ -40,6 +40,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <script is:inline>
     (() => {
       const header = document.getElementById('header');
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
       // Products dropdown: click and keyboard, closes on outside click / Escape
       const dd = document.getElementById('dd'), ddBtn = dd.querySelector('button');
       const setDD = open => { dd.toggleAttribute('data-open', open); ddBtn.setAttribute('aria-expanded', open); };
@@ -78,11 +80,55 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       });
       matchMedia('(min-width:901px)').addEventListener('change', e => { if (e.matches && drawer.hasAttribute('data-open')) setDrawer(false); });
 
-      // Product panels: hover or focus widens one panel (desktop only)
-      const panels = [...document.querySelectorAll('.panel')];
-      const wide = matchMedia('(min-width:901px)');
-      const openPanel = p => { if (!wide.matches) return; panels.forEach(x => x.classList.toggle('is-open', x === p)); };
-      panels.forEach(p => { p.addEventListener('mouseenter', () => openPanel(p)); p.addEventListener('focus', () => openPanel(p)); });
+      // Scroll reveals. Content is visible by default; this only runs when JS and motion are available.
+      const items = [...document.querySelectorAll('[data-reveal]')];
+      if (reduce || !('IntersectionObserver' in window)) {
+        items.forEach(el => el.classList.add('is-in'));
+      } else {
+        const io = new IntersectionObserver(entries => entries.forEach(en => {
+          if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
+        }), { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+        items.forEach(el => {
+          if (el.getBoundingClientRect().top < innerHeight) return el.classList.add('is-in');
+          el.classList.add('will-rise');
+          io.observe(el);
+        });
+      }
+
+      // Statement: words resolve from grey to ink as the section scrolls through
+      const statements = [...document.querySelectorAll('[data-statement]')].map(el => {
+        const words = el.textContent.trim().split(/\s+/);
+        el.setAttribute('aria-label', words.join(' '));
+        el.innerHTML = words.map(w => `<span class="w" aria-hidden="true">${w}</span>`).join(' ');
+        return { el, spans: [...el.querySelectorAll('.w')] };
+      });
+
+      // Parallax and header state, one rAF-throttled scroll handler
+      const drift = [...document.querySelectorAll('[data-drift]')];
+      let ticking = false;
+      const update = () => {
+        ticking = false;
+        const y = window.scrollY, vh = window.innerHeight;
+        header.classList.toggle('is-scrolled', y > 8);
+        if (reduce) { statements.forEach(s => s.spans.forEach(w => w.classList.add('on'))); return; }
+        statements.forEach(({ el, spans }) => {
+          const r = el.getBoundingClientRect();
+          const p = Math.min(1, Math.max(0, (vh * 0.86 - r.top) / (r.height + vh * 0.38)));
+          const n = Math.round(p * spans.length);
+          spans.forEach((w, i) => w.classList.toggle('on', i < n));
+        });
+        drift.forEach(el => {
+          const r = el.parentElement.getBoundingClientRect();
+          if (r.bottom < -100 || r.top > vh + 100) return;
+          const k = parseFloat(el.dataset.drift) || 0.08;
+          const py = Math.max(-60, Math.min(60, (r.top + r.height / 2 - vh / 2) * -k));
+          el.style.setProperty('--py', py.toFixed(1));
+        });
+      };
+      const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+      addEventListener('scroll', onScroll, { passive: true });
+      addEventListener('resize', onScroll, { passive: true });
+      update();
     })();
   </script>
 </body>

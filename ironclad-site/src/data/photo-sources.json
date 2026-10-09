@@ -1,0 +1,35 @@
+{
+  "_readme": "Real photography. 'cdn' = images.unsplash.com photo id; 'id' = unsplash.com/photos/<id> short id; 'file' = a local path (relative to the project) if you want to supply your own. Run `npm run photos` to download at 3840px and build the responsive set into public/images/photos/. Unsplash License: free for commercial use, attribution optional.",
+  "dawn": {
+    "id": "uskLD4MZeb8",
+    "page": "https://unsplash.com/photos/sunrise-over-a-misty-mountain-range-uskLD4MZeb8",
+    "alt": "Drone view of sunrise above a sea of fog with distant mountain peaks on the horizon"
+  },
+  "mumbai": {
+    "cdn": "photo-1753806390462-580d7a625f76",
+    "page": "https://unsplash.com/photos/city-skyline-is-seen-across-a-body-of-water-Z2SFnEVfqUE",
+    "credit": "Zoshua Colah",
+    "alt": "Marine Drive and the South Mumbai skyline across the Arabian Sea"
+  },
+  "glass": {
+    "id": "wyF7ZzJSMAM",
+    "page": "https://unsplash.com/photos/modern-building-with-glass-facade-reflecting-clouds-wyF7ZzJSMAM",
+    "alt": "A modern glass building facade reflecting clouds"
+  },
+  "giftcity": {
+    "id": "KRtXOg-c9LE",
+    "page": "https://unsplash.com/photos/a-view-of-a-city-from-a-high-viewpoint-KRtXOg-c9LE",
+    "credit": "Vivek Doshi",
+    "alt": "Aerial view of GIFT City, Gandhinagar, Gujarat"
+  },
+  "manhattan": {
+    "id": "BAfzYlMlQRs",
+    "page": "https://unsplash.com/photos/aerial-view-of-high-rise-buildings-BAfzYlMlQRs",
+    "alt": "Aerial view of high-rise buildings in Manhattan at sunrise"
+  },
+  "ridges": {
+    "id": "sizw4cX8Sds",
+    "page": "https://unsplash.com/photos/misty-mountain-peaks-at-sunrise-with-warm-light-sizw4cX8Sds",
+    "alt": "Layered misty mountain peaks at sunrise with warm light"
+  }
+}

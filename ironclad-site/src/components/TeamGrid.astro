@@ -2,25 +2,27 @@
 import { team } from '../data/team';
 interface Props { full?: boolean }
 const { full = false } = Astro.props;
+const [lead, ...rest] = team;
 ---
 <div class:list={['people', { page: full }]}>
-  {team.map((p, i) => (
-    <article class:list={['person', { lead: i === 0 }]}>
-      <figure><img src={p.image} alt={p.name} loading="lazy" /></figure>
-      {i === 0 ? (
-        <div>
-          <h3>{p.name}</h3>
-          <p>{p.title}</p>
-          <p class="bio">{full ? p.bio : p.shortBio}</p>
-          <a class="textlink" href={p.linkedin} rel="noopener" target="_blank">LinkedIn</a>
-        </div>
-      ) : (
-        <>
-          <h3>{p.name}</h3>
-          {p.title && <p>{p.title}</p>}
-          <a class="textlink" href={p.linkedin} rel="noopener" target="_blank">LinkedIn</a>
-        </>
-      )}
-    </article>
-  ))}
+  <article class="person person-lead" data-reveal>
+    <figure><img src={lead.image} alt={lead.name} width="900" height="1202" loading="lazy" /></figure>
+    <div>
+      <p class="eyebrow"><span class="dot"></span>Founder</p>
+      <h3>{lead.name}</h3>
+      <p class="role">{lead.title}</p>
+      <p class="bio">{full ? lead.bio : lead.shortBio}</p>
+      <a class="textlink" href={lead.linkedin} rel="noopener" target="_blank">LinkedIn</a>
+    </div>
+  </article>
+  <div class="people-row">
+    {rest.map((p, i) => (
+      <article class="person" data-reveal style={`--d:${i * 70}ms`}>
+        <figure><img src={p.image} alt={p.name} width="900" height="1200" loading="lazy" /></figure>
+        <h3>{p.name}</h3>
+        {p.title && <p class="role">{p.title}</p>}
+        <a class="textlink" href={p.linkedin} rel="noopener" target="_blank">LinkedIn</a>
+      </article>
+    ))}
+  </div>
 </div>
