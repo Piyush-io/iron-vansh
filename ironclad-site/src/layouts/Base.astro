@@ -105,7 +105,14 @@ const isHome = Astro.url.pathname === '/';
         ].join(',');
         const curtainSel = '.carousel__media, .hero-media, .vlist__image, .founder figure, .associate figure';
         const io = new IntersectionObserver((entries) => {
-          entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            io.unobserve(e.target);
+            // open a photo only once it has decoded, so it never wipes in half-loaded
+            const img = e.target.matches('[data-curtain]') && e.target.querySelector('img');
+            const show = () => e.target.classList.add('in');
+            if (img && !img.complete) { img.loading = 'eager'; img.decode().then(show, show); } else show();
+          });
         }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
         document.querySelectorAll(revealSel).forEach((el) => {
           if (el.closest('.promo-header')) return;

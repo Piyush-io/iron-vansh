@@ -4,7 +4,7 @@ import Go from './Go.astro';
 interface Props { full?: boolean }
 const { full = false } = Astro.props;
 const Portrait = ({ p }: { p: Person }) => p.image
-  ? `<img src="${p.image}" alt="${p.name}" width="900" height="1200" loading="lazy" />`
+  ? `<picture><source srcset="${p.image}.webp" type="image/webp" /><img src="${p.image}.jpg" alt="${p.name}" width="1000" height="1000" loading="lazy" decoding="async" /></picture>`
   : `<span class="monogram" role="img" aria-label="${p.name}">${p.initials}</span>`;
 ---
 <div class:list={['people', { page: full }]}>

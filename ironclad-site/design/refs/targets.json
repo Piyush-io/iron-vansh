@@ -53,7 +53,8 @@
       ],
       "css": true,
       "fonts": true,
-      "html": true
+      "html": true,
+      "skip": true
     },
     {
       "name": "bx-firm",
@@ -63,7 +64,8 @@
         "text=I Understand"
       ],
       "fonts": true,
-      "html": true
+      "html": true,
+      "skip": true
     },
     {
       "name": "bx-people",
@@ -73,7 +75,8 @@
         "text=I Understand"
       ],
       "fonts": true,
-      "html": true
+      "html": true,
+      "skip": true
     },
     {
       "name": "bx-realestate",
@@ -83,7 +86,8 @@
         "text=I Understand"
       ],
       "fonts": true,
-      "html": true
+      "html": true,
+      "skip": true
     },
     {
       "name": "bx-insights",
@@ -91,7 +95,13 @@
       "clicks": [
         "text=I am not a United States Resident",
         "text=I Understand"
-      ]
+      ],
+      "skip": true
+    },
+    {
+      "name": "fontshare-pairs",
+      "url": "https://www.fontshare.com/pairs",
+      "html": true
     }
   ],
   "files_readme": "Documents copied from the live site into public/ with the same file names, so existing links keep working.",

@@ -74,14 +74,19 @@ if (args.includes('--scout')) {
   delete list._readme;
   const dir = path.join(root, 'design/photo-scout');
   await fs.mkdir(dir, { recursive: true });
+  const index = {};
   for (const [name, s] of Object.entries(list)) {
     try {
+      // the original size tells us whether a candidate is good enough for full-width 4K use
+      const orig = await load(s, 6000).then(({ buf }) => sharp(buf).metadata()).catch(() => ({}));
       const { buf, cdn } = await load(s, 1280);
       const meta = await sharp(buf).metadata();
+      index[name] = { ...s, width: orig.width, height: orig.height };
       await sharp(buf).rotate().resize({ width: 1280, withoutEnlargement: true }).jpeg({ quality: 78 }).toFile(path.join(dir, `${name}.jpg`));
       console.log(`✓ scout ${name} (${meta.width}x${meta.height}) ${cdn}`);
     } catch (e) { console.warn(`✗ scout ${name}: ${e.message}`); }
   }
+  await fs.writeFile(path.join(dir, 'index.json'), JSON.stringify(index, null, 2) + '\n');
   process.exit(0);
 }
 

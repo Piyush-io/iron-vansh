@@ -1,0 +1,16 @@
+{
+  "_readme": "Fontshare families to evaluate for the Blackstone-style serif + sans pairing. Downloaded by scripts/fetch-fontshare.mjs in CI.",
+  "fonts": [
+    { "slug": "sentient", "weights": [300, 400, 500, 700], "italic": true },
+    { "slug": "gambetta", "weights": [300, 400, 500, 700], "italic": true },
+    { "slug": "erode", "weights": [300, 400, 500, 700], "italic": true },
+    { "slug": "zodiak", "weights": [300, 400, 700], "italic": true },
+    { "slug": "boska", "weights": [300, 400, 500, 700], "italic": true },
+    { "slug": "author", "weights": [300, 400, 500, 600] },
+    { "slug": "switzer", "weights": [300, 400, 500] },
+    { "slug": "general-sans", "weights": [300, 400, 500] },
+    { "slug": "satoshi", "weights": [300, 400, 500] },
+    { "slug": "supreme", "weights": [300, 400, 500] },
+    { "slug": "synonym", "weights": [300, 400, 500] }
+  ]
+}

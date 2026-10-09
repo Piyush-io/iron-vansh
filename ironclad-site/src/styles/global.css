@@ -366,8 +366,9 @@ a:hover > .bx-icon .bx-icon__arrow, button:hover > .bx-icon .bx-icon__arrow { op
 .people-section { padding-block: var(--pad); }
 .founders { display: grid; gap: 4rem; }
 .founder { display: grid; gap: 2rem; }
-.founder figure, .associate figure { aspect-ratio: 4 / 5; overflow: hidden; background: var(--c-slate-3); }
-.founder img, .associate img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 16%; }
+.founder figure, .associate figure { aspect-ratio: 1; overflow: hidden; background: #e9e9e9; }
+.founder picture, .associate picture { display: block; width: 100%; height: 100%; }
+.founder img, .associate img { width: 100%; height: 100%; object-fit: cover; }
 .monogram { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font: 300 5rem/1 var(--f-serif); letter-spacing: .04em; color: #fff; background: #000; }
 .founder h3 { font-size: 2.5rem; line-height: 1.3; }
 .role { margin-top: .5rem; font-size: 1.125rem; font-weight: 400; }
@@ -605,8 +606,6 @@ a:hover > .bx-icon .bx-icon__arrow, button:hover > .bx-icon .bx-icon__arrow { op
 /* ───── narrow screens ───── */
 @media (max-width: 47.99em) {
   .founder figure { max-width: 20rem; }
-  .founder figure:has(.monogram) { max-width: 8rem; aspect-ratio: 1; }
-  .founder figure .monogram { font-size: 2.5rem; }
   .associates { gap: 2.5rem; }
   .associate { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); column-gap: 1.25rem; align-items: start; }
   .associate figure { grid-row: span 5; }
