@@ -27,6 +27,15 @@
     {
       "name": "rre",
       "url": "https://rre.com/"
+    },
+    {
+      "name": "interfere-blog",
+      "url": "https://interfere.com/blog/how-we-built-interferes-new-website",
+      "html": true
+    },
+    {
+      "name": "interfere-home",
+      "url": "https://interfere.com/"
     }
   ],
   "files_readme": "Documents copied from the live site into public/ with the same file names, so existing links keep working.",
