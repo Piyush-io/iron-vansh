@@ -82,12 +82,11 @@ Blackstone-style pairing: a sharp, institutional serif for everything that is a 
 
 ## 7. Imagery
 
-- Real photography only. Sources live in `src/data/photo-sources.json` (Unsplash, free for commercial use under the Unsplash License; each entry links its photo page).
-- `npm run photos` downloads each at **3840px** and writes WebP at 640 / 1280 / 1920 / 2560 / 3840 plus `manifest.json` into `public/images/photos/`. It runs automatically before `dev` and `build`. Commit the output once fetched.
-- Slots: `dawn` (hero panel), `mumbai` (PMS), `glass` (Ventures), `giftcity` (Latius), `manhattan` (interlude), `ridges` (contact band).
-- To use your own photograph, add `"file": "path/to/photo.jpg"` to its entry and re-run `npm run photos -- --force <name>`.
-- Text never sits directly on an unknown photo: the hero copy is on the page ground, strategy links sit on glass, cards and the contact band carry white scrims.
-- Always `width`/`height` from the manifest, `srcset` + `sizes`, `loading="lazy"` except the hero. Decorative images get `alt=""`.
+- Real photography only, stored in the repo under `public/images/photos/` (WebP at 640 / 1280 / 1920 / 2560 / 3840 + `manifest.json`). The site never fetches images at runtime once these exist.
+- Sources: `src/data/photo-sources.json` (Unsplash `cdn` ids or Pexels ids; both licences allow commercial use without attribution). Changing that file triggers `.github/workflows/photos.yml`, which downloads at 3840px on GitHub's runners and commits the result.
+- Slots: `mumbai` (hero; South Mumbai skyline, black and white), `sealink` (Flexicap+), `desk` (Ventures), `nyc` (Latius), `centralpark` (interlude).
+- Choosing new photos: add candidates to `src/data/photo-candidates.json`; the workflow saves 1280px previews to `design/photo-scout/` for review. Promote the winner into `photo-sources.json`.
+- Text never sits on an uncontrolled part of a photo: hero copy is on the page ground, strategy links on glass, cards carry a white scrim.
 
 ## 8. Motion
 

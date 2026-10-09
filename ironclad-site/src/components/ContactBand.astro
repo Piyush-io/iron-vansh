@@ -1,5 +1,4 @@
 ---
-import Photo from './Photo.astro';
 import { site } from '../data/site';
 interface Props { heading?: string; lede?: string }
 const { heading = 'Talk to our investment team.', lede = 'We can walk you through the mandates, the investment process, and the risks of each strategy.' } = Astro.props;
@@ -7,7 +6,6 @@ const { heading = 'Talk to our investment team.', lede = 'We can walk you throug
 <section class="contact-band" id="contact" aria-labelledby="contact-title">
   <div class="wrap">
     <div class="cta" data-reveal>
-      <Photo name="ridges" decorative sizes="(max-width: 1440px) 100vw, 1440px" class="cta-bg" position="50% 60%" />
       <div class="cta-copy">
         <p class="eyebrow"><span class="dot"></span>Contact</p>
         <h2 id="contact-title">{heading}</h2>

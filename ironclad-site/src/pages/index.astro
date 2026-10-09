@@ -10,7 +10,7 @@ import { site } from '../data/site';
 import { products } from '../data/products';
 import { productPhoto } from '../data/photos';
 const hasPosts = (await getCollection('blog')).length > 0;
-const cardPos = { pms: '50% 50%', ventures: '50% 40%', latius: '50% 50%' } as const;
+const cardPos = { pms: '50% 40%', ventures: '50% 50%', latius: '50% 45%' } as const;
 const market = { pms: 'Indian listed equities', ventures: 'Venture-backed startups', latius: 'Global equities' } as const;
 ---
 <Base>
@@ -26,7 +26,7 @@ const market = { pms: 'Indian listed equities', ventures: 'Venture-backed startu
     </div>
     <div class="wrap">
       <div class="hero-panel" data-reveal style="--d:200ms">
-        <div class="hero-media" data-drift="0.06" aria-hidden="true"><Photo name="dawn" eager decorative sizes="(max-width: 1440px) 100vw, 1440px" position="50% 60%" /></div>
+        <div class="hero-media" data-drift="0.06" aria-hidden="true"><Photo name="mumbai" eager decorative sizes="(max-width: 1440px) 100vw, 1440px" position="50% 72%" /></div>
         <ul class="hero-links glass">
           {products.map((p) => (
             <li><a href={`/products/${p.slug}`}><span class="mono">{market[p.slug]}</span><b>{p.name}</b><Arrow class="go" diagonal /></a></li>
@@ -117,7 +117,7 @@ const market = { pms: 'Indian listed equities', ventures: 'Venture-backed startu
   </section>
 
   <section class="interlude" aria-label="India at our core">
-    <div class="interlude-media" data-drift="0.1" aria-hidden="true"><Photo name="manhattan" decorative sizes="100vw" position="50% 55%" class="interlude-img" /></div>
+    <div class="interlude-media" data-drift="0.1" aria-hidden="true"><Photo name="centralpark" decorative sizes="100vw" position="50% 50%" class="interlude-img" /></div>
     <div class="wrap">
       <div class="interlude-card glass" data-reveal>
         <p class="eyebrow"><span class="dot"></span>Geography</p>

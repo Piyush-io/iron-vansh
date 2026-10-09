@@ -235,9 +235,8 @@ a.compare-row:hover { background: var(--bg-soft); padding-inline: 16px; margin-i
 
 /* ───── CTA ───── */
 .contact-band { padding-block: 0 clamp(72px, 9vw, 136px); }
-.cta { position: relative; isolation: isolate; overflow: hidden; border-radius: 40px; padding: clamp(32px, 6vw, 96px); min-height: clamp(440px, 46vw, 620px); display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; background: #e9eff6; }
+.cta { position: relative; isolation: isolate; overflow: hidden; border-radius: 40px; padding: clamp(32px, 6vw, 96px); display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; background: radial-gradient(120% 140% at 100% 100%, #f6ead6 0%, rgba(246, 234, 214, 0) 55%), linear-gradient(180deg, #eaf0f6 0%, #f6f8fa 100%); border: 1px solid var(--line); }
 .cta-bg { position: absolute; inset: 0; z-index: -2; }
-.cta::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(255, 255, 255, .95) 0%, rgba(255, 255, 255, .82) 46%, rgba(255, 255, 255, .15) 100%); }
 .cta .eyebrow { margin-bottom: 24px; }
 .cta h2 { max-width: 11em; }
 .cta .lede { margin-top: 24px; max-width: 44ch; }
@@ -435,7 +434,6 @@ a.compare-row:hover { background: var(--bg-soft); padding-inline: 16px; margin-i
   .principles li { padding: 30px 0; }
   .person.person-lead figure { max-width: 420px; }
   .cta { grid-template-columns: 1fr; border-radius: 28px; }
-  .cta::before { background: linear-gradient(180deg, rgba(255, 255, 255, .95) 0%, rgba(255, 255, 255, .86) 60%, rgba(255, 255, 255, .5) 100%); }
   .cols { grid-template-columns: 1fr 1fr; }
   .f-brand { grid-column: 1 / -1; }
   .row { grid-template-columns: 1fr; gap: 6px; padding: 24px 0; }
