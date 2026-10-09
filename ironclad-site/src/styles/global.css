@@ -1,7 +1,7 @@
 /* Ironclad — light-mode design system. Spec: ../../DESIGN.md */
 
 @font-face { font-family: 'Geist'; src: url('/fonts/geist-latin.woff2') format('woff2'); font-weight: 300 700; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Newsreader'; src: url('/fonts/newsreader-latin.woff2') format('woff2'); font-weight: 300 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Source Serif 4'; src: url('/fonts/source-serif-4-latin.woff2') format('woff2'); font-weight: 300 600; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Geist Mono'; src: url('/fonts/geist-mono-latin.woff2') format('woff2'); font-weight: 400 500; font-style: normal; font-display: swap; }
 
 :root {
@@ -25,7 +25,7 @@
   --c-later: #bfd0e2;
 
   --sans: 'Geist', 'Helvetica Neue', Arial, system-ui, sans-serif;
-  --serif: 'Newsreader', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --serif: 'Source Serif 4', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
   --mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
   --ease: cubic-bezier(.2, .7, .2, 1);
 
@@ -57,10 +57,11 @@ p { text-wrap: pretty; }
 .skip:focus { top: 12px; }
 
 /* ───── type ───── */
-.mono { font: 500 12px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); }
-.eyebrow { display: inline-flex; align-items: center; gap: 10px; font: 500 12px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--text-2); }
-.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex: none; }
-.display { font-size: clamp(48px, 8.2vw, 132px); line-height: .95; letter-spacing: -.045em; }
+.mono { font: 500 14px/1.3 var(--sans); letter-spacing: -.005em; color: var(--text-3); }
+.eyebrow { display: inline-flex; align-items: center; gap: 12px; font: 500 15px/1.3 var(--sans); letter-spacing: -.005em; color: var(--text-2); }
+.eyebrow::after { content: ''; width: 32px; height: 1px; background: var(--line-2); order: -1; }
+.eyebrow .dot { display: none; }
+.display { font-size: clamp(46px, 6.8vw, 108px); line-height: .95; letter-spacing: -.045em; }
 .d1 { font-size: clamp(44px, 7vw, 112px); line-height: .98; letter-spacing: -.045em; color: var(--ink); }
 .d2 { font-size: clamp(32px, 4.4vw, 68px); line-height: 1.02; letter-spacing: -.04em; color: var(--ink); }
 .d3 { font-size: clamp(24px, 2.6vw, 38px); line-height: 1.1; letter-spacing: -.03em; color: var(--ink); font-weight: 500; }
@@ -139,7 +140,7 @@ p { text-wrap: pretty; }
 .hero-links a:hover .go { transform: translate(3px, -3px); }
 .reg-strip { display: flex; flex-wrap: wrap; gap: 12px 40px; padding: 22px 0 0; }
 .reg-strip div { display: flex; gap: 10px; align-items: baseline; }
-.reg-strip dt { font: 500 11px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); }
+.reg-strip dt { font: 500 13px/1.3 var(--sans); color: var(--text-3); }
 .reg-strip dd { font: 400 13px/1.3 var(--mono); color: var(--ink); }
 
 /* ───── statement ───── */
@@ -269,7 +270,7 @@ a.compare-row:hover { background: var(--bg-soft); padding-inline: 16px; margin-i
 /* ───── page hero (inner pages) ───── */
 .ph { padding-top: calc(var(--header) + clamp(48px, 9vw, 136px)); padding-bottom: clamp(48px, 7vw, 96px); background: linear-gradient(180deg, #eef3f8 0%, #fff 100%); }
 .ph-where { margin-bottom: 28px; }
-.ph-title { font-size: clamp(44px, 8vw, 128px); line-height: .96; letter-spacing: -.045em; max-width: 12em; }
+.ph-title { font-size: clamp(44px, 6.6vw, 104px); line-height: .96; letter-spacing: -.045em; max-width: 12em; }
 .ph-sub { display: grid; grid-template-columns: 7fr 5fr; gap: 48px; margin-top: clamp(28px, 4vw, 48px); align-items: end; }
 .ph-summary { font-size: clamp(19px, 1.8vw, 24px); line-height: 1.5; color: var(--text); max-width: 40ch; }
 .ph-meta { display: grid; gap: 10px; justify-items: start; font: 400 13px/1.5 var(--mono); color: var(--text-2); }
@@ -352,15 +353,15 @@ a.compare-row:hover { background: var(--bg-soft); padding-inline: 16px; margin-i
   *, *::before, *::after { transition-duration: .01ms !important; }
 }
 
-/* ───── serif display layer (Blackstone-style: fine serif headlines, sans for reading) ───── */
+/* ───── serif display layer (Blackstone-style: sharp serif headlines, sans for reading) ───── */
 .display, .d1, .d2, .d3, .sec-head h2, .approach-intro h2, .cta h2, .statement, .num b, .s-body h3,
 .principles h3, .interlude-line, .person-lead h3, .ph-title, .disc h2, .others b, .post h3,
 .drawer nav a, .hero-links b, .c-name, .kp h3, .person h3, .alloc h3, .perf h2, .empty .d3 {
   font-family: var(--serif); font-optical-sizing: auto; font-weight: 400; letter-spacing: -.012em;
 }
-.display, .ph-title, .d1 { font-weight: 300; letter-spacing: -.028em; line-height: .98; }
-.sec-head h2, .approach-intro h2, .cta h2, .d2, .person-lead h3, .interlude-line { font-weight: 300; letter-spacing: -.022em; line-height: 1.02; }
-.statement { font-weight: 300; letter-spacing: -.018em; line-height: 1.16; }
+.display, .ph-title, .d1 { font-weight: 400; letter-spacing: -.022em; line-height: 1; }
+.sec-head h2, .approach-intro h2, .cta h2, .d2, .person-lead h3, .interlude-line { font-weight: 400; letter-spacing: -.02em; line-height: 1.04; }
+.statement { font-weight: 400; letter-spacing: -.015em; line-height: 1.18; }
 .num b { font-weight: 300; letter-spacing: -.03em; }
 .num b i { margin-left: .04em; }
 .s-body h3, .principles h3 { letter-spacing: -.016em; }

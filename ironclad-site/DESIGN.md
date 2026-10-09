@@ -38,21 +38,21 @@ Allocation bars: Compounders `--navy`, Special situations `#6F93B6`, Seed `--gol
 
 ## 3. Typography
 
-Blackstone-style pairing: a fine, high-contrast serif for everything that is a title or a figure; a neutral grotesk for reading and UI. The serif also echoes the Ironclad wordmark.
+Blackstone-style pairing: a sharp, institutional serif for everything that is a title or a figure; a neutral grotesk for reading and UI. The serif also echoes the Ironclad wordmark.
 
-- **Newsreader** (variable, optical sizes 6–72, weights 300–500), self-hosted. Headlines, section titles, the statement, strategy names, numbers.
+- **Source Serif 4** (variable, optical sizes 8–60, weights 300–600), self-hosted. Headlines, section titles, the statement, strategy names, numbers. Chosen over softer book serifs, which read as literary rather than financial.
 - **Geist** (300–700) for body, navigation, buttons. **Geist Mono** (400–500) for labels and registration numbers.
-- Display (`h1`, page titles): Newsreader 300, tracking `-0.028em`, leading 0.98.
-- Section titles (`h2`): Newsreader 300, tracking `-0.022em`, leading 1.02. Card and row titles: Newsreader 400.
-- Numbers: Newsreader 300, tabular, with the separator (`/`, `+`) in `--gold`.
+- Display (`h1`, page titles): Source Serif 4 400, tracking `-0.022em`, leading 1.
+- Section titles (`h2`): Source Serif 4 400, tracking `-0.02em`, leading 1.04. Card and row titles: same face, 400.
+- Numbers: Source Serif 4 300, tabular, with the separator (`/`, `+`) in `--gold`.
 - Body 17/1.65 Geist. Lead 20–22/1.5, `--text-2`. Measure ≤ 62ch.
-- Labels: Geist Mono 12px, uppercase, tracking `0.08em`, `--text-3`.
+- Labels: Geist 14–15px, sentence case, `--text-3`. No uppercase mono "title tags" above headlines; section labels get a short hairline before them. Geist Mono only for registration codes.
 
 **Title placement.** Section headers are split rows: eyebrow across the top, the serif title on the left (7 cols), a short intro on the right (4 cols) aligned to the title's last line. The hero follows the same rule: title left, lead and actions bottom-right. Titles are always left-aligned, never centred.
 
 | Role | Size (fluid) |
 |---|---|
-| Display `h1` | `clamp(48px, 8.2vw, 132px)` |
+| Display `h1` | `clamp(46px, 6.8vw, 108px)` |
 | Statement | `clamp(28px, 4.2vw, 64px)` |
 | `h2` | `clamp(36px, 5vw, 80px)` |
 | `h3` | `clamp(22px, 2.2vw, 32px)` |
@@ -74,7 +74,7 @@ Blackstone-style pairing: a fine, high-contrast serif for everything that is a t
 ## 6. Components
 
 - **Button.** Pill, 48px high, 15px/500. *Primary* navy fill + white text. *Secondary* white fill, `--line-2` border. *Quiet* text + arrow. Hover: fill shifts one step; arrow nudges 3px.
-- **Eyebrow.** Mono label with a 6px gold dot.
+- **Section label.** Sentence-case sans with a 32px hairline before it. Never on the hero.
 - **Image card.** 24px radius, image fills, white gradient from the bottom carries the text. Hover: image scales 1.04 over 1.2s, arrow chip fills navy.
 - **Number tile.** Number (300) + mono label + one line of explanation, separated by vertical hairlines. Never decorated.
 - **Spec table.** Hairline rows, mono column heads. Used for the strategy comparison and registrations.

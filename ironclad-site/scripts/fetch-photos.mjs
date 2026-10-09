@@ -34,8 +34,8 @@ const urlFor = (s) =>
 
 async function load(name, s) {
   if (s.file) return fs.readFile(path.resolve(root, s.file));
-  const res = await fetch(urlFor(s), { redirect: 'follow', signal: AbortSignal.timeout(90_000), headers: { 'user-agent': 'ironclad-site-photo-fetch' } });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const res = await fetch(urlFor(s), { redirect: 'follow', signal: AbortSignal.timeout(90_000), headers: { 'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36', accept: 'image/avif,image/webp,image/*,*/*;q=0.8' } });
+  if (!res.ok) throw new Error(`HTTP ${res.status} from ${res.url}`);
   if (!(res.headers.get('content-type') || '').startsWith('image/')) throw new Error(`not an image (${res.headers.get('content-type')})`);
   return Buffer.from(await res.arrayBuffer());
 }
@@ -59,10 +59,11 @@ for (const [name, s] of Object.entries(sources)) {
   } catch (e) {
     failed++;
     console.warn(`✗ ${name}: ${e.cause?.code || e.message}`);
+    if (e.cause) console.warn(`  ${e.cause.message || e.cause}`);
   }
 }
 await fs.writeFile(manifestPath, JSON.stringify(manifest, null, 2));
 if (failed) {
-  console.warn(`\n${failed} photo(s) could not be fetched. The site still builds; those slots render as a neutral placeholder until you run \`npm run photos\` somewhere with open internet access.`);
+  console.warn(`\n${failed} photo(s) could not be fetched. The site still builds; those photos load from Unsplash's CDN in the browser instead. Re-run \`npm run photos\` to make them local.`);
   if (!soft) process.exit(1);
 }
