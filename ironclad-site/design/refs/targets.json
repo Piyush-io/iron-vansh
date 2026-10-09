@@ -1,0 +1,12 @@
+{
+  "_readme": "Pages captured by .github/workflows/refs.yml (screenshots at 1440 and 390 wide, plus saved HTML) for design reference. Edit this list to capture different pages.",
+  "pages": [
+    { "name": "ironclad-live-home", "url": "https://www.ironcladamc.com/", "html": true },
+    { "name": "ironclad-live-privacy", "url": "https://www.ironcladamc.com/privacy-policy.html", "html": true, "shots": false },
+    { "name": "ironclad-live-updates", "url": "https://www.ironcladamc.com/investor-update.html", "html": true, "shots": false },
+    { "name": "ironclad-live-media", "url": "https://www.ironcladamc.com/media.html", "html": true, "shots": false },
+    { "name": "likova", "url": "https://likova.space/" },
+    { "name": "rre", "url": "https://rre.com/" },
+    { "name": "blackstone", "url": "https://www.blackstone.com/" }
+  ]
+}
