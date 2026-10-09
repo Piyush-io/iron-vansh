@@ -25,9 +25,9 @@ const isHome = Astro.url.pathname === '/';
   <meta property="og:image" content={new URL('/images/og.jpg', Astro.site)}>
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content={dark ? '#000000' : '#ffffff'}>
-  <link rel="preload" href="/fonts/caslon-display-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/noto-serif-display-300.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/public-sans-300.woff2" as="font" type="font/woff2" crossorigin>
-  <script is:inline>document.documentElement.classList.add('js');try{if(sessionStorage.getItem('seen'))document.documentElement.classList.add('seen');else sessionStorage.setItem('seen','1')}catch(e){}</script>
+  <script is:inline>document.documentElement.classList.add('js')</script>
 </head>
 <body class:list={{ home: isHome, 'theme-dark': dark }}>
   <a class="skip" href="#main">Skip to content</a>
@@ -90,6 +90,32 @@ const isHome = Astro.url.pathname === '/';
       };
       addEventListener('scroll', onScroll, { passive: true });
       onScroll();
+
+      // Scroll reveals: content fades up, photos open with a curtain. Elements are tagged here (never in markup),
+      // so the page is fully visible without JS. Siblings get a stagger index.
+      if (!reduce && 'IntersectionObserver' in window) {
+        const revealSel = [
+          'main .eyebrow', 'main .eyebrow-plain', 'main .divider', 'main h2', 'main .split-head__desc', 'main .lede',
+          '.offerings__sub', '.offerings__content', '.offerings__stat', '.two-up__copy', '.two-up__cta', '.two-up__links li',
+          '.cmp__card', '.vlist__item', '.tenets li', '.founder-body', '.associate', '.team-title', '.kp', '.checklist li',
+          '.bullets-lg li', '.focus', '.alloc', '.philosophy-line', '.philosophy-by', '.capture__copy', '.capture__fields div',
+          '.doclist li', '.post', '.disc', '.rows .row', '.reg-table', '.legal-text > *', '.prose .lede', '.ticker__disclaimer',
+          '.page-header__desc', '.linklist li', '.carousel__main',
+          '.site-footer__col', '.site-footer__bottom',
+        ].join(',');
+        const curtainSel = '.carousel__media, .hero-media, .vlist__image, .founder figure, .associate figure';
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+        document.querySelectorAll(revealSel).forEach((el) => {
+          if (el.closest('.promo-header')) return;
+          const sibs = [...el.parentElement.children].filter((c) => c.matches(revealSel));
+          el.style.setProperty('--d', String(Math.min(sibs.indexOf(el), 5)));
+          el.dataset.reveal = '';
+          io.observe(el);
+        });
+        document.querySelectorAll(curtainSel).forEach((el) => { el.dataset.curtain = ''; io.observe(el); });
+      }
 
       // Carousels: prev/next buttons and dots; inactive slides are inert.
       document.querySelectorAll('[data-carousel]').forEach((root) => {

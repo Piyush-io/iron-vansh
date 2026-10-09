@@ -107,35 +107,39 @@ const slides = [
   <section class="compare" id="compare" aria-labelledby="compare-title">
     <div class="wrap">
       <p class="eyebrow">At a Glance</p>
-      <h2 class="section-title" id="compare-title">How the products compare</h2>
-      <div class="mandates">
-        <div class="m-labels" aria-hidden="true"><span></span><span>Portfolio</span><span>Construction</span><span>Invests in</span><span></span></div>
+      <div class="split-head">
+        <h2 class="section-title" id="compare-title">How the products compare</h2>
+        <p class="split-head__desc">What each product owns, how its portfolio is built, and how it is regulated.</p>
+      </div>
+      <div class="cmp">
         {products.map((p) => (
-          <article class="m-col" aria-labelledby={`m-${p.slug}`}>
-            <header class="m-head">
-              <span class="m-market">{market[p.slug]}</span>
-              <h3 id={`m-${p.slug}`}>{p.name}</h3>
-              <span class:list={['status-line', p.compare.status]}>{p.compare.status === 'pending' ? 'Licence under application' : 'SEBI-registered'}</span>
+          <article class="cmp__card" aria-labelledby={`cmp-${p.slug}`}>
+            <header class="cmp__head">
+              <p class="cmp__market">{market[p.slug]}</p>
+              <h3 id={`cmp-${p.slug}`}>{p.name}</h3>
+              <span class:list={['cmp__status', p.compare.status]}>{p.compare.status === 'pending' ? 'Licence under application' : 'SEBI-registered'}</span>
             </header>
-            <div class="m-figure" data-label="Portfolio">
-              <p><b>{p.compare.figure}</b> <span>{p.compare.figureLabel}</span></p>
-              <p class="m-detail">{p.compare.detail}</p>
+            <div class="cmp__figure">
+              <p class="cmp__label">Portfolio</p>
+              <p class="cmp__num">{p.compare.figure}</p>
+              <p class="cmp__unit">{p.compare.figureLabel}</p>
+              <p class="cmp__detail">{p.compare.detail}</p>
             </div>
-            <div class="m-build" data-label="Construction">
+            <div class="cmp__build">
+              <p class="cmp__label">Construction</p>
               {p.alloc ? (
                 <>
-                  <span class="alloc-bar" role="img" aria-label={p.alloc.aria}>{p.alloc.segs.map((s) => <span class={`seg ${s.cls}`} style={`flex:${s.flex}`}></span>)}</span>
-                  <ul class="m-legend">{p.alloc.segs.map((s) => <li><span><i class={`sw ${s.cls}`}></i>{s.label}</span><b>{s.strong}</b></li>)}</ul>
+                  <span class="alloc-bar" role="img" aria-label={p.alloc.aria}>{p.alloc.segs.map((sg) => <span class={`seg ${sg.cls}`} style={`flex:${sg.flex}`}></span>)}</span>
+                  <ul class="cmp__rows">{p.alloc.segs.map((sg) => <li><span><i class={`sw ${sg.cls}`}></i>{sg.label}</span><b>{sg.strong}</b></li>)}</ul>
                 </>
               ) : (
-                <ul class="m-stages">{p.compare.stages?.map((t) => <li>{t}</li>)}</ul>
+                <ul class="cmp__rows cmp__rows--stages">{p.compare.stages?.map((t) => <li><span>{t}</span></li>)}</ul>
               )}
             </div>
-            <div class="m-where" data-label="Invests in">
-              <p>{p.where}</p>
-              <p class="m-reg">{p.compare.regShort}</p>
-            </div>
-            <Go class="m-link" href={`/products/${p.slug}`} />
+            <footer class="cmp__foot">
+              <p class="cmp__reg">{p.compare.regShort}</p>
+              <Go href={`/products/${p.slug}`} />
+            </footer>
           </article>
         ))}
       </div>
