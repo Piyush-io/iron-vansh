@@ -29,14 +29,14 @@ const inProducts = is('/products');
       <a href="/blogs" aria-current={cur('/blogs')}>Insights</a>
       <a href="/contact" aria-current={cur('/contact')}>Contact</a>
     </nav>
-    <a class="btn btn-invert login" href={site.investorLoginUrl} rel="noopener" target="_blank">Investor login</a>
+    <a class="login" href={site.investorLoginUrl} rel="noopener" target="_blank">Investor login</a>
     <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer" id="open"><i></i></button>
   </div>
 </header>
 
 <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Navigation menu" aria-hidden="true" inert>
   <div class="top">
-    <img src="/images/logo-navy.png" alt="Ironclad Asset Management" width="200" height="58">
+    <img src="/images/logo-white.png" alt="Ironclad Asset Management" width="200" height="58">
     <button class="menu-btn" type="button" aria-label="Close menu" id="close" style="display:flex">
       <svg width="20" height="20" viewBox="0 0 20 20" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 3l14 14M17 3L3 17"/></svg>
     </button>
@@ -49,5 +49,5 @@ const inProducts = is('/products');
     <a href="/blogs" aria-current={cur('/blogs')}>Insights</a>
     <a href="/contact" aria-current={cur('/contact')}>Contact</a>
   </nav>
-  <a class="btn btn-invert login" href={site.investorLoginUrl} rel="noopener" target="_blank">Investor login</a>
+  <a class="btn login" href={site.investorLoginUrl} rel="noopener" target="_blank">Investor login</a>
 </div>

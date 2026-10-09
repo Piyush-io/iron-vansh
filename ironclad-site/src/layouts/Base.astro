@@ -25,8 +25,9 @@ const isHome = Astro.url.pathname === '/';
   <meta property="og:type" content="website">
   <meta property="og:image" content={new URL('/images/og.jpg', Astro.site)}>
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#ffffff">
-  <link rel="preload" href="/fonts/tinos-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <meta name="theme-color" content="#000000">
+  <link rel="preload" href="/fonts/caslon-display-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/public-sans-300.woff2" as="font" type="font/woff2" crossorigin>
   <script is:inline>document.documentElement.classList.add('js');try{if(sessionStorage.getItem('seen'))document.documentElement.classList.add('seen');else sessionStorage.setItem('seen','1')}catch(e){}</script>
 </head>
 <body class:list={{ home: isHome }}>

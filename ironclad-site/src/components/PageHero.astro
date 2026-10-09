@@ -6,7 +6,7 @@ const { title, summary, where, reg, status, photo, position } = Astro.props;
 ---
 <section class:list={['ph', { 'ph-plain': !photo }]}>
   <div class="wrap">
-    {where && <p class="label ph-where">{where}</p>}
+    {where && <p class="eyebrow ph-where">{where}</p>}
     <h1 class="ph-title">{title.replace(/\.$/, '')}</h1>
     {(summary || reg || status) && (
       <div class="ph-sub">
