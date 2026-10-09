@@ -1,12 +1,79 @@
 {
   "_readme": "Pages captured by .github/workflows/refs.yml (screenshots at 1440 and 390 wide, plus saved HTML) for design reference. Edit this list to capture different pages.",
   "pages": [
-    { "name": "ironclad-live-home", "url": "https://www.ironcladamc.com/", "html": true },
-    { "name": "ironclad-live-privacy", "url": "https://www.ironcladamc.com/privacy-policy.html", "html": true, "shots": false },
-    { "name": "ironclad-live-updates", "url": "https://www.ironcladamc.com/investor-update.html", "html": true, "shots": false },
-    { "name": "ironclad-live-media", "url": "https://www.ironcladamc.com/media.html", "html": true, "shots": false },
-    { "name": "likova", "url": "https://likova.space/" },
-    { "name": "rre", "url": "https://rre.com/" },
-    { "name": "blackstone", "url": "https://www.blackstone.com/" }
+    {
+      "name": "ironclad-live-home",
+      "url": "https://www.ironcladamc.com/",
+      "html": true
+    },
+    {
+      "name": "ironclad-live-privacy",
+      "url": "https://www.ironcladamc.com/privacy-policy.html",
+      "html": true,
+      "shots": false
+    },
+    {
+      "name": "ironclad-live-updates",
+      "url": "https://www.ironcladamc.com/investor-update.html",
+      "html": true,
+      "shots": false
+    },
+    {
+      "name": "ironclad-live-media",
+      "url": "https://www.ironcladamc.com/media.html",
+      "html": true,
+      "shots": false
+    },
+    {
+      "name": "rre",
+      "url": "https://rre.com/"
+    }
+  ],
+  "files_readme": "Documents copied from the live site into public/ with the same file names, so existing links keep working.",
+  "files": [
+    {
+      "url": "https://www.ironcladamc.com/Disclosure-Document-2026-Ironclad-Signed.pdf",
+      "out": "public/docs/Disclosure-Document-2026-Ironclad-Signed.pdf"
+    },
+    {
+      "url": "https://www.ironcladamc.com/01%20SEBI%20Reg%20Certificate.pdf",
+      "out": "public/docs/01 SEBI Reg Certificate.pdf"
+    },
+    {
+      "url": "https://www.ironcladamc.com/Investor-Grevience-Sept-2026.pdf",
+      "out": "public/docs/Investor-Grevience-Sept-2026.pdf"
+    },
+    {
+      "url": "https://www.ironcladamc.com/03%20Investor%20Charter.pdf",
+      "out": "public/docs/03 Investor Charter.pdf"
+    },
+    {
+      "url": "https://www.ironcladamc.com/PMS-Investor-Complains-Sept-2026.pdf",
+      "out": "public/docs/PMS-Investor-Complains-Sept-2026.pdf"
+    },
+    {
+      "url": "https://www.ironcladamc.com/AIF-Investor-Complains-Sept-2026.pdf",
+      "out": "public/docs/AIF-Investor-Complains-Sept-2026.pdf"
+    },
+    {
+      "url": "https://www.ironcladamc.com/202509-Ironclad%20PMS-Investor%20Update-September2025.pdf",
+      "out": "public/docs/202509-Ironclad PMS-Investor Update-September2025.pdf"
+    },
+    {
+      "url": "https://www.ironcladamc.com/202507-Ironclad-PMS-Investor-Update-August2025.pdf",
+      "out": "public/docs/202507-Ironclad-PMS-Investor-Update-August2025.pdf"
+    },
+    {
+      "url": "https://www.ironcladamc.com/202506-Ironclad-PMS-Investor-Update-june2025.pdf",
+      "out": "public/docs/202506-Ironclad-PMS-Investor-Update-june2025.pdf"
+    },
+    {
+      "url": "https://www.ironcladamc.com/202504-Ironclad-PMS-Investor-Update-April2025.pdf",
+      "out": "public/docs/202504-Ironclad-PMS-Investor-Update-April2025.pdf"
+    },
+    {
+      "url": "https://www.ironcladamc.com/202503-Ironclad-PMS-Investor-Update-March2025.pdf",
+      "out": "public/docs/202503-Ironclad-PMS-Investor-Update-March2025.pdf"
+    }
   ]
 }

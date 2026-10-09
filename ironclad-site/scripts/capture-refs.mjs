@@ -7,7 +7,7 @@ import { chromium } from 'playwright';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dir = path.join(root, 'design/refs');
-const { pages } = JSON.parse(await fs.readFile(path.join(dir, 'targets.json'), 'utf8'));
+const { pages, files = [] } = JSON.parse(await fs.readFile(path.join(dir, 'targets.json'), 'utf8'));
 const browser = await chromium.launch();
 for (const t of pages) {
   for (const [label, viewport, mobile] of [['desktop', { width: 1440, height: 900 }, false], ['mobile', { width: 390, height: 844 }, true]]) {
@@ -34,3 +34,16 @@ for (const t of pages) {
   }
 }
 await browser.close();
+
+// Copy documents from the live site into public/ (same names), skipping ones already present.
+for (const f of files) {
+  const out = path.join(root, f.out);
+  if (await fs.stat(out).catch(() => null)) { console.log(`✓ ${f.out} (exists)`); continue; }
+  try {
+    const res = await fetch(f.url, { headers: { 'user-agent': 'Mozilla/5.0 (Macintosh) Chrome/124.0' } });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    await fs.mkdir(path.dirname(out), { recursive: true });
+    await fs.writeFile(out, Buffer.from(await res.arrayBuffer()));
+    console.log(`✓ ${f.out}`);
+  } catch (e) { console.warn(`✗ ${f.out}: ${e.message}`); }
+}
