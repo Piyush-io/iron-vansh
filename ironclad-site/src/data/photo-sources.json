@@ -25,5 +25,10 @@
     "pexels": "946688",
     "page": "https://www.pexels.com/photo/central-park-new-york-946688/",
     "alt": "Central Park and the Manhattan skyline from above"
+  },
+  "harbour": {
+    "file": "design/assets/hero-harbour.jpg",
+    "page": "https://www.ironcladamc.com/",
+    "alt": "A city waterfront at sunset, the hero image of the Ironclad website"
   }
 }

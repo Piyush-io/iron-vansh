@@ -12,7 +12,7 @@ const inProducts = is('/products');
 <header class="site-header" id="header">
   <div class="wrap bar">
     <a class="brand" href="/" aria-label="Ironclad Asset Management, home">
-      <img src="/images/logo-navy.png" alt="" width="200" height="58">
+      <img src="/images/logo-white.png" alt="" width="200" height="58">
     </a>
     <nav class="primary" aria-label="Primary">
       <div class:list={['dd', { 'is-current': inProducts }]} id="dd">
@@ -29,7 +29,7 @@ const inProducts = is('/products');
       <a href="/blogs" aria-current={cur('/blogs')}>Insights</a>
       <a href="/contact" aria-current={cur('/contact')}>Contact</a>
     </nav>
-    <a class="btn login" href={site.investorLoginUrl} rel="noopener" target="_blank">Investor login</a>
+    <a class="btn btn-invert login" href={site.investorLoginUrl} rel="noopener" target="_blank">Investor login</a>
     <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer" id="open"><i></i></button>
   </div>
 </header>
@@ -49,5 +49,5 @@ const inProducts = is('/products');
     <a href="/blogs" aria-current={cur('/blogs')}>Insights</a>
     <a href="/contact" aria-current={cur('/contact')}>Contact</a>
   </nav>
-  <a class="btn login" href={site.investorLoginUrl} rel="noopener" target="_blank">Investor login</a>
+  <a class="btn btn-invert login" href={site.investorLoginUrl} rel="noopener" target="_blank">Investor login</a>
 </div>
