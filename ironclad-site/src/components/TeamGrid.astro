@@ -1,28 +1,38 @@
 ---
-import { team } from '../data/team';
+import { founders, associates, type Person } from '../data/team';
 interface Props { full?: boolean }
 const { full = false } = Astro.props;
-const [lead, ...rest] = team;
+const Portrait = ({ p }: { p: Person }) => p.image
+  ? `<img src="${p.image}" alt="${p.name}" width="900" height="1200" loading="lazy" />`
+  : `<span class="monogram" role="img" aria-label="${p.name}">${p.initials}</span>`;
 ---
 <div class:list={['people', { page: full }]}>
-  <article class="person person-lead" data-reveal>
-    <figure><img src={lead.image} alt={lead.name} width="900" height="1202" loading="lazy" /></figure>
-    <div>
-      <p class="eyebrow"><span class="dot"></span>Founder</p>
-      <h3>{lead.name}</h3>
-      <p class="role">{lead.title}</p>
-      <p class="bio">{full ? lead.bio : lead.shortBio}</p>
-      <a class="textlink" href={lead.linkedin} rel="noopener" target="_blank">LinkedIn</a>
-    </div>
-  </article>
-  <div class="people-row">
-    {rest.map((p, i) => (
-      <article class="person" data-reveal style={`--d:${i * 70}ms`}>
-        <figure><img src={p.image} alt={p.name} width="900" height="1200" loading="lazy" /></figure>
-        <h3>{p.name}</h3>
-        {p.title && <p class="role">{p.title}</p>}
-        <a class="textlink" href={p.linkedin} rel="noopener" target="_blank">LinkedIn</a>
+  <div class="founders">
+    {founders.map((p, i) => (
+      <article class="founder" data-reveal style={`--d:${i * 90}ms`}>
+        <figure set:html={Portrait({ p })} />
+        <div class="founder-body">
+          <h3>{p.name}</h3>
+          <p class="role">{p.title}</p>
+          <p class="bio" set:html={p.bio} />
+          {p.linkedin && <a class="textlink" href={p.linkedin} rel="noopener" target="_blank">LinkedIn</a>}
+        </div>
       </article>
     ))}
+  </div>
+
+  <div class="team-block">
+    <h3 class="team-title" data-reveal>Investment Team</h3>
+    <div class="associates">
+      {associates.map((p, i) => (
+        <article class="associate" data-reveal style={`--d:${i * 80}ms`}>
+          <figure set:html={Portrait({ p })} />
+          <h4>{p.name}</h4>
+          <p class="role">{p.title}</p>
+          <p class="bio" set:html={p.bio} />
+          {p.linkedin && <a class="textlink" href={p.linkedin} rel="noopener" target="_blank">LinkedIn</a>}
+        </article>
+      ))}
+    </div>
   </div>
 </div>

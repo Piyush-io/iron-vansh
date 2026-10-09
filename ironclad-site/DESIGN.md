@@ -38,15 +38,12 @@ Allocation bars: Compounders `--navy`, Special situations `#6F93B6`, Seed `--gol
 
 ## 3. Typography
 
-Blackstone-style pairing: a sharp, institutional serif for everything that is a title or a figure; a neutral grotesk for reading and UI. The serif also echoes the Ironclad wordmark.
+One serif family across the whole site, as requested: **Mongolian Baiti**, whose Latin letters are a Times New Roman design.
 
-- **Source Serif 4** (variable, optical sizes 8–60, weights 300–600), self-hosted. Headlines, section titles, the statement, strategy names, numbers. Chosen over softer book serifs, which read as literary rather than financial.
-- **Geist** (300–700) for body, navigation, buttons. **Geist Mono** (400–500) for labels and registration numbers.
-- Display (`h1`, page titles): Source Serif 4 400, tracking `-0.022em`, leading 1.
-- Section titles (`h2`): Source Serif 4 400, tracking `-0.02em`, leading 1.04. Card and row titles: same face, 400.
-- Numbers: Source Serif 4 300, tabular, with the separator (`/`, `+`) in `--gold`.
-- Body 17/1.65 Geist. Lead 20–22/1.5, `--text-2`. Measure ≤ 62ch.
-- Labels: Geist 14–15px, sentence case, `--text-3`. No uppercase mono "title tags" above headlines; section labels get a short hairline before them. Geist Mono only for registration codes.
+- Stack: `'Mongolian Baiti', 'Tinos', 'Times New Roman', Times, serif`. Mongolian Baiti is a Microsoft system font (all rights reserved, Windows only), so it is never served from the site. Visitors who have it installed get it; everyone else gets **Tinos** (self-hosted, Apache 2.0), which is metric-identical to Times New Roman and so visually the same.
+- Weights available: 400, 700, italic 400. Headlines use 400; emphasis in body copy uses 700.
+- **Geist Mono** only for registration codes.
+- Body 18/1.6. Labels: 14–15px sentence case, `--text-3`. Kickers in italic.
 
 **Title placement.** Section headers are split rows: eyebrow across the top, the serif title on the left (7 cols), a short intro on the right (4 cols) aligned to the title's last line. The hero follows the same rule: title left, lead and actions bottom-right. Titles are always left-aligned, never centred.
 
