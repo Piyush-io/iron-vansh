@@ -6,14 +6,14 @@ const { title, summary, where, reg, status, photo, position } = Astro.props;
 ---
 <section class:list={['ph', { 'ph-plain': !photo }]}>
   <div class="wrap">
-    {where && <p class="eyebrow ph-where" data-reveal><span class="dot"></span>{where}</p>}
-    <h1 class="ph-title" data-reveal>{title.replace(/\.$/, '')}</h1>
+    {where && <p class="label ph-where">{where}</p>}
+    <h1 class="ph-title">{title.replace(/\.$/, '')}</h1>
     {(summary || reg || status) && (
-      <div class="ph-sub" data-reveal style="--d:80ms">
+      <div class="ph-sub">
         {summary && <p class="ph-summary">{summary}</p>}
         {(reg || status) && <div class="ph-meta">{reg && <p>{reg}</p>}{status && <p class="status">{status}</p>}</div>}
       </div>
     )}
-    {photo && <figure class="ph-img" data-reveal style="--d:140ms"><Photo name={photo} eager decorative sizes="(max-width: 1440px) 100vw, 1440px" position={position} /></figure>}
+    {photo && <figure class="ph-img"><Photo name={photo} eager decorative sizes="(max-width: 1440px) 100vw, 1440px" position={position} /></figure>}
   </div>
 </section>

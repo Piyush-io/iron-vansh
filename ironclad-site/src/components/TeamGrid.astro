@@ -9,7 +9,7 @@ const Portrait = ({ p }: { p: Person }) => p.image
 <div class:list={['people', { page: full }]}>
   <div class="founders">
     {founders.map((p, i) => (
-      <article class="founder" data-reveal style={`--d:${i * 90}ms`}>
+      <article class="founder">
         <figure set:html={Portrait({ p })} />
         <div class="founder-body">
           <h3>{p.name}</h3>
@@ -22,10 +22,10 @@ const Portrait = ({ p }: { p: Person }) => p.image
   </div>
 
   <div class="team-block">
-    <h3 class="team-title" data-reveal>Investment Team</h3>
+    <h3 class="team-title">Investment Team</h3>
     <div class="associates">
       {associates.map((p, i) => (
-        <article class="associate" data-reveal style={`--d:${i * 80}ms`}>
+        <article class="associate">
           <figure set:html={Portrait({ p })} />
           <h4>{p.name}</h4>
           <p class="role">{p.title}</p>

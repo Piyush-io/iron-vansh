@@ -12,7 +12,7 @@ export function getStaticPaths() {
 }
 const { product: p } = Astro.props;
 const others = products.filter((o) => o.slug !== p.slug);
-const position = p.slug === 'pms' ? '50% 64%' : p.slug === 'latius' ? '50% 42%' : '50% 50%';
+const position = p.slug === 'pms' ? '50% 64%' : p.slug === 'latius' ? '50% 42%' : '50% 70%';
 const portfolioTitle = p.alloc?.title ?? p.construction?.title ?? 'Portfolio';
 ---
 <Base title={p.name} description={p.metaDescription}>
@@ -20,18 +20,18 @@ const portfolioTitle = p.alloc?.title ?? p.construction?.title ?? 'Portfolio';
 
   <section class="section" aria-labelledby="intro-title">
     <div class="wrap head">
-      <h2 class="d2" id="intro-title" data-reveal>{p.intro.title}</h2>
-      <div class="prose" data-reveal style="--d:80ms">{p.intro.paras.map((t) => <p class="lede">{t}</p>)}</div>
+      <h2 class="d2" id="intro-title">{p.intro.title}</h2>
+      <div class="prose">{p.intro.paras.map((t) => <p class="lede">{t}</p>)}</div>
     </div>
   </section>
 
   {p.sections.map((sec, i) => (
     <section class="section rule" aria-labelledby={`sec-${i}`}>
       <div class="wrap">
-        <div class="sec-head"><h2 id={`sec-${i}`} data-reveal>{sec.title}</h2></div>
+        <div class="sec-head"><h2 id={`sec-${i}`}>{sec.title}</h2></div>
         <div class="keypoints">
           {sec.items.map((k, j) => (
-            <div class="kp" data-reveal style={`--d:${(j % 2) * 80}ms`}>
+            <div class="kp">
               <h3>{k.title}</h3>
               {k.text && <p>{k.text}</p>}
               {k.bullets && <ul class="bullets">{k.bullets.map((b) => <li>{b}</li>)}</ul>}
@@ -45,8 +45,8 @@ const portfolioTitle = p.alloc?.title ?? p.construction?.title ?? 'Portfolio';
   {(p.alloc || p.construction || p.chips) && (
     <section class="section alt" aria-labelledby="build-title">
       <div class="wrap head">
-        <h2 class="d2" id="build-title" data-reveal>{portfolioTitle}</h2>
-        <div class="build" data-reveal style="--d:80ms">
+        <h2 class="d2" id="build-title">{portfolioTitle}</h2>
+        <div class="build">
           {p.alloc && <AllocationBars alloc={p.alloc} />}
           {p.construction && <ul class="bullets bullets-lg">{p.construction.bullets.map((b) => <li>{b}</li>)}</ul>}
           {p.chips && (
@@ -62,16 +62,16 @@ const portfolioTitle = p.alloc?.title ?? p.construction?.title ?? 'Portfolio';
 
   <section class="section" aria-labelledby="why-title">
     <div class="wrap head">
-      <h2 class="d2" id="why-title" data-reveal>{p.why.title}</h2>
-      <ul class="checklist" data-reveal style="--d:80ms">{p.why.bullets.map((b) => <li>{b}</li>)}</ul>
+      <h2 class="d2" id="why-title">{p.why.title}</h2>
+      <ul class="checklist">{p.why.bullets.map((b) => <li>{b}</li>)}</ul>
     </div>
   </section>
 
   <section class="philosophy" aria-labelledby="philo-title">
     <div class="wrap">
-      <p class="eyebrow" id="philo-title" data-reveal>Our philosophy</p>
-      <blockquote class="philosophy-line" data-reveal style="--d:80ms">{p.philosophy}</blockquote>
-      <p class="philosophy-by" data-reveal style="--d:140ms">Ironclad Asset Management</p>
+      <p class="label" id="philo-title">Our philosophy</p>
+      <blockquote class="philosophy-line">{p.philosophy}</blockquote>
+      <p class="philosophy-by">Ironclad Asset Management</p>
     </div>
   </section>
 

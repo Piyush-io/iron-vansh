@@ -2,43 +2,52 @@
 import { products } from '../data/products';
 import { site } from '../data/site';
 const year = 2026;
+// Investor resources: the same documents and portals as the footer of the current ironcladamc.com.
+const doc = (name: string) => `/docs/${encodeURIComponent(name)}`;
+const resources = [
+  { label: 'Disclosure', href: doc('Disclosure-Document-2026-Ironclad-Signed.pdf') },
+  { label: 'SEBI Certificate', href: doc('01 SEBI Reg Certificate.pdf') },
+  { label: 'Investor Charter', href: doc('03 Investor Charter.pdf') },
+  { label: 'Investor Grievance', href: doc('Investor-Grevience-Sept-2026.pdf') },
+  { label: 'Complaints Data PMS', href: doc('PMS-Investor-Complains-Sept-2026.pdf') },
+  { label: 'Complaints Data AIF', href: doc('AIF-Investor-Complains-Sept-2026.pdf') },
+  { label: 'Investor Update', href: '/investor-update' },
+  { label: 'Media', href: '/media' },
+  { label: 'Privacy Policy', href: '/privacy-policy' },
+  { label: 'Smart ODR Portal', href: 'https://smartodr.in/login', ext: true },
+  { label: 'Scores Portal', href: 'https://scores.sebi.gov.in/', ext: true },
+];
 ---
 <footer class="site-footer">
   <div class="wrap">
-    <div class="cols">
-      <div class="f-brand">
-        <img src="/images/logo-navy.png" alt="Ironclad Asset Management" width="230" height="66">
-        <p>{site.tagline}</p>
-      </div>
-      <nav aria-label="Products"><h2 class="mono">Products</h2><ul>
-        {products.map((p) => <li><a href={`/products/${p.slug}`}>{p.name}</a></li>)}
-      </ul></nav>
-      <nav aria-label="Company"><h2 class="mono">Company</h2><ul>
-        <li><a href="/team">The firm</a></li>
-        <li><a href="/blogs">Insights</a></li>
-        <li><a href="/contact">Contact</a></li>
-        <li><a href="/disclosures">SEBI disclosures</a></li>
-        <li><a href="/disclosures#investor-charter">Investor charter</a></li>
-        <li><a href="/disclosures#grievance">Grievance redressal</a></li>
-      </ul></nav>
-      <div><h2 class="mono">Contact</h2><ul>
-        <li>{site.addressShort[0]}<br>{site.addressShort[1]}</li>
-        <li><a href={site.phoneHref}>{site.phone}</a></li>
-        <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
-        <li><a href={site.investorLoginUrl} rel="noopener" target="_blank">Investor login</a></li>
-      </ul></div>
+    <div class="f-top">
+      <a class="f-logo" href="/" aria-label="Ironclad Asset Management, home"><img src="/images/logo-white.png" alt="" width="230" height="66"></a>
+      <nav class="f-main" aria-label="Footer">
+        {products.map((p) => <a href={`/products/${p.slug}`}>{p.name}</a>)}
+        <a href="/team">The firm</a>
+        <a href="/contact">Contact</a>
+      </nav>
     </div>
-    <dl class="regs">
-      <div><dt>Entity</dt><dd>{site.legalName}</dd></div>
-      <div><dt>SEBI PMS registration</dt><dd>{site.registrations.pms}</dd></div>
-      <div><dt>SEBI AIF registration</dt><dd>{site.registrations.aif}</dd></div>
-      <div><dt>GST</dt><dd>{site.registrations.gst}</dd></div>
-      <div><dt>PAN</dt><dd>{site.registrations.pan}</dd></div>
-    </dl>
+    <div class="f-grid">
+      <nav aria-label="Investor resources">
+        <h2 class="label">Investor resources</h2>
+        <ul class="f-res">
+          {resources.map((r) => <li><a href={r.href} {...(r.ext ? { rel: 'noopener', target: '_blank' } : {})}>{r.label}</a></li>)}
+        </ul>
+      </nav>
+      <div>
+        <h2 class="label">Office</h2>
+        <ul class="f-res f-contact">
+          <li>{site.addressShort[0]}, {site.addressShort[1]}</li>
+          <li><a href={site.phoneHref}>{site.phone}</a></li>
+          <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+          <li><a href={site.investorLoginUrl} rel="noopener" target="_blank">Investor login</a></li>
+        </ul>
+      </div>
+    </div>
     <div class="legal">
       <p>{site.sebiLine}</p>
-      <p>© {year} {site.legalName}.</p>
+      <p class="f-copy"><span>Copyright © {year} {site.legalName}. All rights reserved.</span><span>SEBI Regd. Number: {site.registrations.pms}</span><span>SEBI AIF Regd. Number: {site.registrations.aif}</span></p>
     </div>
   </div>
-  <div class="wordmark" aria-hidden="true">Ironclad</div>
 </footer>

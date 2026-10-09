@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+// Monthly notes for Ironclad PMS investors, carried over from the current ironcladamc.com/investor-update.html.
+const updates: { title: string; summary: string; file: string }[] = [
+  {
+    "title": "September Investor Update",
+    "summary": "In a month when broader markets corrected— with the NSE 500 down -2.0% and the Nifty Midcap lower by -2.9% — Ironclad PMS declined just -0.2%. For YTD 2025, the portfolio has compounded +16.5%, delivering a 9.1% alpha over the NSE 500 and reinforcing the strength of our investment framework.",
+    "file": "202509-Ironclad PMS-Investor Update-September2025.pdf"
+  },
+  {
+    "title": "August Investor Update",
+    "summary": "Markets corrected in July (NSE 500: -3.0%), but our portfolio declined -1.1%, continuing to deliver alpha even in a risk-off environment. In this month’s note: • Why we’ve fully exited the limited exposure we had to IT Services • Why product-based tech firms stand to gain from AI • Our view on Trump’s 25% tariffs on Indian exports • Continued strength in financials and branded consumer names Our portfolio remains focused across three themes: financials, brands, and tech products — with the aim of compounding through cycles.",
+    "file": "202507-Ironclad-PMS-Investor-Update-August2025.pdf"
+  },
+  {
+    "title": "June Investor Update",
+    "summary": "March 2025 marked a strong rebound from earlier drawdowns, with the Nifty 500 gaining 7.3%. Ironclad Asset Management delivered a return of 6.2% during the month. Over the past three months combined, Ironclad has generated a 7.4% return, significantly outperforming the 1.9% gain in the Nifty 500 and 0.5% in the Nifty Midcap. This outperformance underscores our ability to mitigate downside risk and reflects the strength of our robust investment strategy and active portfolio management. Generating positive returns in a challenging market environment highlights the effectiveness of our stock selection process and our disciplined risk management framework.",
+    "file": "202506-Ironclad-PMS-Investor-Update-june2025.pdf"
+  },
+  {
+    "title": "April Investor Update",
+    "summary": "Over the past three months combined, Ironclad has generated a 7.4% return, significantly outperforming the 1.9% gain in the Nifty 500 and 0.5% in the Nifty Midcap.March 2025 marked a strong rebound from earlier drawdowns, with the Nifty 500 gaining 7.3%. Ironclad Asset Management delivered a return of 6.2% during the month. This outperformance underscores our ability to mitigate downside risk and reflects the strength of our robust investment strategy and active portfolio management. Generating positive returns in a challenging market environment highlights the effectiveness of our stock selection process and our disciplined risk management framework. In this update, we also discuss 2 of our portfolio allocations – Abbott India and Prudent Corporate.",
+    "file": "202504-Ironclad-PMS-Investor-Update-April2025.pdf"
+  },
+  {
+    "title": "March Investor Update",
+    "summary": "February 2025 saw significant market drawdowns, with the Nifty 500 declining 7.9%. Despite this downturn, Ironclad Asset Management delivered -3.9%, significantly outperforming the broader market. Our ability to mitigate downside risk is a testament to our robust investment strategy and active portfolio management. This follows our strong performance in January 2025, where we posted a 5.14% gain. We remained in cash for most of January and started deploying only towards the end of the month. The ability to generate positive returns in difficult market conditions highlights the strength of our stock selection and risk management framework.",
+    "file": "202503-Ironclad-PMS-Investor-Update-March2025.pdf"
+  }
+];
+const href = (f: string) => `/docs/${encodeURIComponent(f)}`;
+---
+<Base title="Investor Update" description="Monthly investor updates for Ironclad PMS.">
+  <PageHero title="Investor Update." summary="Monthly notes to Ironclad PMS investors on markets, the portfolio and our thinking." />
+  <section class="section rule">
+    <div class="wrap">
+      <ul class="doclist">
+        {updates.map((u) => (
+          <li><a href={href(u.file)} target="_blank" rel="noopener">
+            <span class="label">PDF</span>
+            <div><h3>{u.title}</h3><p>{u.summary}</p></div>
+            <span class="go">Read</span>
+          </a></li>
+        ))}
+      </ul>
+      <p class="small note">Past performance does not indicate future results. Investments in securities markets are subject to market risks.</p>
+    </div>
+  </section>
+</Base>

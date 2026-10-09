@@ -4,15 +4,16 @@ interface Props { heading?: string; lede?: string }
 const { heading = 'Talk to our investment team.', lede = 'We can walk you through the mandates, the investment process, and the risks of each product.' } = Astro.props;
 ---
 <section class="contact-band" id="contact" aria-labelledby="contact-title">
-  <div class="wrap">
-    <div class="cta" data-reveal>
-      <div class="cta-copy">
-        <p class="eyebrow"><span class="dot"></span>Contact</p>
-        <h2 id="contact-title">{heading}</h2>
-        <p class="lede">{lede}</p>
-        <div class="actions"><a class="btn btn-primary" href="/contact">Contact the team</a><a class="btn btn-secondary" href={`mailto:${site.email}`}>{site.email}</a></div>
-      </div>
-      <dl class="cta-direct"><div><dt>Phone</dt><dd><a href={site.phoneHref}>{site.phone}</a></dd></div><div><dt>Office</dt><dd>Noida, India</dd></div></dl>
+  <div class="wrap cta">
+    <div class="cta-copy">
+      <h2 id="contact-title">{heading}</h2>
+      <p class="lede">{lede}</p>
+      <div class="actions"><a class="btn" href="/contact">Contact the team</a></div>
     </div>
+    <dl class="cta-direct">
+      <div><dt class="label">Email</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>
+      <div><dt class="label">Phone</dt><dd><a href={site.phoneHref}>{site.phone}</a></dd></div>
+      <div><dt class="label">Office</dt><dd>Noida, India</dd></div>
+    </dl>
   </div>
 </section>

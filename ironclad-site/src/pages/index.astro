@@ -10,24 +10,19 @@ import { site } from '../data/site';
 import { products } from '../data/products';
 const hasPosts = (await getCollection('blog')).length > 0;
 const panelTitle = { pms: 'Flexicap+', ventures: 'Ventures Fund', latius: 'Latius' } as const;
-// Fine flowing lines for the product panels (decorative, drawn as SVG strokes).
-const lines = Array.from({ length: 22 }, (_, i) => {
-  const y = 20 + i * 13;
-  return `M-40 ${y} C 90 ${y - 70 + i * 4}, 250 ${y + 90 - i * 5}, 440 ${y - 30 + i * 2}`;
-});
 const market = { pms: 'Indian listed equities', ventures: 'Venture-backed startups', latius: 'Global equities' } as const;
 ---
 <Base>
   <section class="hero hero-full" aria-labelledby="hero-title">
-    <div class="hero-bg" data-drift="0.08" aria-hidden="true"><Photo name="mumbai" eager decorative sizes="100vw" position="50% 68%" /></div>
+    <div class="hero-bg" aria-hidden="true"><Photo name="mumbai" eager decorative sizes="100vw" position="50% 68%" /></div>
     <div class="wrap hero-inner">
-      <p class="hero-kicker" data-reveal>Multi-Asset Investment Firm</p>
-      <h1 class="display" id="hero-title" data-reveal style="--d:70ms">Ironclad<br />Asset Management</h1>
-      <div class="actions" data-reveal style="--d:140ms"><a class="btn btn-light" href="#products">Explore our products</a><a class="btn btn-ghost" href="#people">The people behind Ironclad</a></div>
+      <p class="label hero-kicker intro" style="--i:0">Multi-Asset Investment Firm</p>
+      <h1 class="hero-title" id="hero-title"><span class="w" style="--i:0">Ironclad</span><br /><span class="w" style="--i:1">Asset</span> <span class="w" style="--i:2">Management</span></h1>
+      <div class="actions intro" style="--i:4"><a class="btn" href="#products">Our products</a><a class="btn" href="#people">Our people</a></div>
     </div>
   </section>
   <div class="wrap">
-    <dl class="reg-strip" data-reveal>
+    <dl class="reg-strip">
       <div><dt>SEBI PMS</dt><dd>{site.registrations.pms}</dd></div>
       <div><dt>SEBI Category I AIF</dt><dd>{site.registrations.aif}</dd></div>
       <div><dt>Ironclad Latius</dt><dd>IFSCA licence under application</dd></div>
@@ -36,47 +31,35 @@ const market = { pms: 'Indian listed equities', ventures: 'Venture-backed startu
 
   <section class="statement-section" aria-labelledby="belief-title">
     <div class="wrap belief">
-      <h2 class="belief-quote" id="belief-title" data-reveal><span class="q">“</span>Capital, Conviction <br />&amp; Compounding<span class="q">”</span></h2>
-      <p class="belief-body" data-reveal style="--d:100ms">Exceptional outcomes rarely emerge from conventional thinking. We combine <strong>Intellectual</strong> curiosity, <strong>Fundamental</strong> depth and <strong>Strategic</strong> oversight to identify mispriced possibilities, navigate complexity in capital markets and allocate capital where the risk-reward opportunity is the greatest.</p>
-    </div>
-  </section>
-
-  <section class="numbers-section" aria-label="Ironclad at a glance">
-    <div class="wrap">
-      <dl class="numbers">
-        <div class="num" data-reveal><dt class="mono">Mandates</dt><dd><b>3</b><span>Indian listed equities, venture-backed startups and global equities.</span></dd></div>
-        <div class="num" data-reveal style="--d:70ms"><dt class="mono">SEBI registrations</dt><dd><b>2</b><span>Portfolio Manager and Category I Alternative Investment Fund.</span></dd></div>
-        <div class="num" data-reveal style="--d:140ms"><dt class="mono">Flexicap+ portfolio</dt><dd><b>15<i>–</i>20</b><span>Carefully selected companies across large-, mid- and small-cap.</span></dd></div>
-        <div class="num" data-reveal style="--d:210ms"><dt class="mono">Fund managers</dt><dd><b>2</b><span>Founder and co-founder, from private equity and global capital markets.</span></dd></div>
-      </dl>
+      <h2 class="belief-quote" id="belief-title"><span class="q">“</span>Capital, Conviction <br />&amp; Compounding<span class="q">”</span></h2>
+      <p class="belief-body">Exceptional outcomes rarely emerge from conventional thinking. We combine <strong>Intellectual</strong> curiosity, <strong>Fundamental</strong> depth and <strong>Strategic</strong> oversight to identify mispriced possibilities, navigate complexity in capital markets and allocate capital where the risk-reward opportunity is the greatest.</p>
     </div>
   </section>
 
   <section class="strategy-section" id="products" aria-labelledby="strategy-title">
     <div class="wrap">
       <div class="sec-head">
-        <h2 id="strategy-title" data-reveal>Our Three Products</h2>
-        <p class="lede" data-reveal style="--d:100ms">Indian listed equities, India’s venture-backed startups and global equities through GIFT City. One research discipline across all three.</p>
+        <h2 id="strategy-title">Our Three Products</h2>
+        <p class="lede">Indian listed equities, India’s venture-backed startups and global equities through GIFT City. One research discipline across all three.</p>
       </div>
       <div class="products3">
         {products.map((p, i) => (
-          <a class="pp" href={`/products/${p.slug}`} data-reveal style={`--d:${i * 90}ms`}>
-            <svg class="pp-lines" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">{lines.map((d) => <path d={d} />)}</svg>
-            <span class="pp-kind">{p.kicker}</span>
+          <a class="pp" href={`/products/${p.slug}`}>
+            <span class="label pp-kind">{p.kicker}</span>
             <h3 class="pp-title"><span>Ironclad</span>{panelTitle[p.slug]}</h3>
-            <span class="pp-foot"><span>{p.compare.status === 'pending' ? 'IFSCA licence under application' : p.reg?.replace(/ \(.*\)$/, '')}</span><span class="pp-go"><Arrow /></span></span>
+            <span class="pp-foot"><span>{p.compare.status === 'pending' ? 'IFSCA licence under application' : p.reg?.replace(/ \(.*\)$/, '')}</span><span class="pp-go">View <Arrow /></span></span>
           </a>
         ))}
       </div>
 
-      <div class="mandates" data-reveal>
+      <div class="mandates">
         <div class="m-labels" aria-hidden="true"><span></span><span>Portfolio</span><span>Construction</span><span>Invests in</span><span></span></div>
         {products.map((p) => (
           <article class="m-col" aria-labelledby={`m-${p.slug}`}>
             <header class="m-head">
-              <span class="m-market">{market[p.slug]}</span>
+              <span class="label">{market[p.slug]}</span>
               <h3 id={`m-${p.slug}`}>{p.name}</h3>
-              <span class:list={['pill', p.compare.status]}>{p.compare.status === 'pending' ? 'Licence under application' : 'SEBI-registered'}</span>
+              <span class:list={['status-line', p.compare.status]}>{p.compare.status === 'pending' ? 'Licence under application' : 'SEBI-registered'}</span>
             </header>
             <div class="m-figure" data-label="Portfolio">
               <p><b>{p.compare.figure}</b> <span>{p.compare.figureLabel}</span></p>
@@ -106,43 +89,33 @@ const market = { pms: 'Indian listed equities', ventures: 'Venture-backed startu
   <section class="philosophy-section" id="approach" aria-labelledby="philosophy-title">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow" data-reveal>Our Investment Philosophy</p>
-        <h2 id="philosophy-title" data-reveal style="--d:70ms">Top-down perspective. <br />Bottom-up conviction.</h2>
+        <p class="label">Our Investment Philosophy</p>
+        <h2 id="philosophy-title">Top-down perspective. <br />Bottom-up conviction.</h2>
       </div>
       <div class="philo-body">
-        <p data-reveal>We believe exceptional investing begins with understanding the world around a business and then understanding the business itself. Our process combines <strong>top-down analysis of macroeconomic regimes, sector tailwinds and headwinds, structural shifts, industry dynamics and capital flows</strong> with <strong>bottom-up fundamental research</strong> into individual businesses. We study financial statements, earnings quality, cash flows, return on capital, competitive advantages, management quality, balance-sheet strength and valuation to determine what a business is truly worth.</p>
-        <p data-reveal style="--d:90ms">Our philosophy draws inspiration from the enduring principles of investors such as <strong>Warren Buffett, Charlie Munger, Seth Klarman and Chuck Akre</strong>: own exceptional businesses, understand intrinsic value, demand a margin of safety, and allow superior economics to compound over time. We look beyond headline growth to examine <strong>the quality, durability and reinvestment potential of that growth</strong>. We ask what can go right, what can go wrong, what the market is pricing in and where our differentiated understanding creates an edge.</p>
+        <p>We believe exceptional investing begins with understanding the world around a business and then understanding the business itself. Our process combines <strong>top-down analysis of macroeconomic regimes, sector tailwinds and headwinds, structural shifts, industry dynamics and capital flows</strong> with <strong>bottom-up fundamental research</strong> into individual businesses. We study financial statements, earnings quality, cash flows, return on capital, competitive advantages, management quality, balance-sheet strength and valuation to determine what a business is truly worth.</p>
+        <p>Our philosophy draws inspiration from the enduring principles of investors such as <strong>Warren Buffett, Charlie Munger, Seth Klarman and Chuck Akre</strong>: own exceptional businesses, understand intrinsic value, demand a margin of safety, and allow superior economics to compound over time. We look beyond headline growth to examine <strong>the quality, durability and reinvestment potential of that growth</strong>. We ask what can go right, what can go wrong, what the market is pricing in and where our differentiated understanding creates an edge.</p>
       </div>
       <ul class="tenets">
-        <li data-reveal><b>Fundamentals</b> inform the thesis.</li>
-        <li data-reveal style="--d:70ms"><b>Macro</b> shapes the context.</li>
-        <li data-reveal style="--d:140ms"><b>Valuation</b> determines the opportunity.</li>
-        <li data-reveal style="--d:210ms"><b>Discipline</b> determines the outcome.</li>
+        <li><b>Fundamentals</b> inform the thesis.</li>
+        <li><b>Macro</b> shapes the context.</li>
+        <li><b>Valuation</b> determines the opportunity.</li>
+        <li><b>Discipline</b> determines the outcome.</li>
       </ul>
-      <p class="philo-close" data-reveal>Markets are complex, adaptive and constantly evolving. We approach them with intellectual curiosity, rigorous research and a willingness to challenge consensus looking beyond the obvious to identify patterns, dislocations and emerging inflection points before they become widely understood.</p>
-    </div>
-  </section>
-
-  <section class="interlude" aria-label="India at our core">
-    <div class="interlude-media" data-drift="0.1" aria-hidden="true"><Photo name="centralpark" decorative sizes="100vw" position="50% 50%" class="interlude-img" /></div>
-    <div class="wrap">
-      <div class="interlude-card glass" data-reveal>
-        <p class="eyebrow"><span class="dot"></span>Geography</p>
-        <p class="interlude-line">India at our core.<br />The world in our view.</p>
-      </div>
+      <p class="philo-close">Markets are complex, adaptive and constantly evolving. We approach them with intellectual curiosity, rigorous research and a willingness to challenge consensus looking beyond the obvious to identify patterns, dislocations and emerging inflection points before they become widely understood.</p>
     </div>
   </section>
 
   <section class="people-section" id="people" aria-labelledby="team-title">
     <div class="wrap">
       <div class="sec-head">
-        <h2 id="team-title" data-reveal>The People Behind Ironclad</h2>
-        <p class="lede" data-reveal style="--d:100ms">Built by investors with experience across investing, entrepreneurship, strategy and global capital markets.</p>
+        <h2 id="team-title">The People Behind Ironclad</h2>
+        <p class="lede">Built by investors with experience across investing, entrepreneurship, strategy and global capital markets.</p>
       </div>
       <TeamGrid />
     </div>
   </section>
 
-  {hasPosts && <section class="writing-section"><div class="wrap"><div class="sec-head"><p class="eyebrow"><span class="dot"></span>Insights</p><h2>Investment perspectives</h2></div><BlogList limit={3} /><p class="people-more"><a class="btn btn-secondary" href="/blogs">Read all insights</a></p></div></section>}
+  {hasPosts && <section class="writing-section"><div class="wrap"><div class="sec-head"><p class="label">Insights</p><h2>Investment perspectives</h2></div><BlogList limit={3} /><p class="people-more"><a class="btn" href="/blogs">Read all insights</a></p></div></section>}
   <ContactBand />
 </Base>
