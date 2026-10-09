@@ -10,7 +10,7 @@ const year = 2026;
         <img src="/images/logo-navy.png" alt="Ironclad Asset Management" width="230" height="66">
         <p>{site.tagline}</p>
       </div>
-      <nav aria-label="Strategies"><h2 class="mono">Strategies</h2><ul>
+      <nav aria-label="Products"><h2 class="mono">Products</h2><ul>
         {products.map((p) => <li><a href={`/products/${p.slug}`}>{p.name}</a></li>)}
       </ul></nav>
       <nav aria-label="Company"><h2 class="mono">Company</h2><ul>
@@ -36,7 +36,7 @@ const year = 2026;
       <div><dt>PAN</dt><dd>{site.registrations.pan}</dd></div>
     </dl>
     <div class="legal">
-      <p>{site.sebiLine}<span class="tbc">Full disclosures to be supplied by compliance</span></p>
+      <p>{site.sebiLine}</p>
       <p>© {year} {site.legalName}.</p>
     </div>
   </div>

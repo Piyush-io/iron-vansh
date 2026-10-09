@@ -3,13 +3,7 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import { site } from '../data/site';
 const r = site.registrations;
-const sections = [
-  { id: 'disclaimer', title: 'Disclaimer' },
-  { id: 'risk-factors', title: 'Risk factors' },
-  { id: 'investor-charter', title: 'Investor charter' },
-  { id: 'grievance', title: 'Grievance redressal / SCORES' },
-  { id: 'latius-ifsca', title: 'Latius IFSCA status', status: 'IFSCA licence under application' },
-];
+const charterUrl = 'https://investor.sebi.gov.in/pdf/investor-charter/Registered%20Portfolio%20Manager.pdf';
 ---
 <Base title="SEBI disclosures" description="Registrations and regulatory disclosures for Ironclad Asset Management LLP.">
   <PageHero title="SEBI disclosures." />
@@ -31,13 +25,25 @@ const sections = [
 
   <section class="section alt">
     <div class="wrap">
-      {sections.map((s) => (
-        <div class="disc" id={s.id}>
-          <h2>{s.title}</h2>
-          {s.status && <span class="status">{s.status}</span>}
-          <p><span class="tbc">To be supplied by compliance</span></p>
-        </div>
-      ))}
+      <div class="disc" id="disclaimer">
+        <h2>Disclaimer</h2>
+        <p>{site.sebiLine}</p>
+      </div>
+      <div class="disc" id="investor-charter">
+        <h2>Investor charter</h2>
+        <p>SEBI publishes the investor charter for portfolio managers, setting out the services investors can expect, their rights and responsibilities, and timelines.</p>
+        <p><a class="textlink" href={charterUrl} rel="noopener" target="_blank">Investor Charter for Portfolio Managers (SEBI)</a></p>
+      </div>
+      <div class="disc" id="grievance">
+        <h2>Grievance redressal</h2>
+        <p>Write to us first at <a class="textlink" href={`mailto:${site.email}`}>{site.email}</a>. If your complaint is not resolved, you can lodge it with SEBI through SCORES, and then pursue online dispute resolution through the Smart ODR portal.</p>
+        <p><a class="textlink" href="https://scores.sebi.gov.in/" rel="noopener" target="_blank">SEBI SCORES</a> · <a class="textlink" href="https://smartodr.in/login" rel="noopener" target="_blank">Smart ODR</a></p>
+      </div>
+      <div class="disc" id="latius-ifsca">
+        <h2>Ironclad Latius</h2>
+        <span class="status">IFSCA licence under application</span>
+        <p>Ironclad Latius has applied for a licence from the International Financial Services Centres Authority (IFSCA). The application is pending.</p>
+      </div>
     </div>
   </section>
 </Base>
