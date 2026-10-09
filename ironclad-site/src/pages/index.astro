@@ -11,7 +11,7 @@ import { products } from '../data/products';
 import { productPhoto } from '../data/photos';
 const hasPosts = (await getCollection('blog')).length > 0;
 const cardPos = { pms: '50% 50%', ventures: '50% 40%', latius: '50% 50%' } as const;
-const market = { pms: 'Indian listed equities', ventures: 'Indian private companies', latius: 'Global equities' } as const;
+const market = { pms: 'Indian listed equities', ventures: 'Venture-backed startups', latius: 'Global equities' } as const;
 ---
 <Base>
   <section class="hero" aria-labelledby="hero-title">
@@ -51,9 +51,9 @@ const market = { pms: 'Indian listed equities', ventures: 'Indian private compan
   <section class="numbers-section" aria-label="Ironclad at a glance">
     <div class="wrap">
       <dl class="numbers">
-        <div class="num" data-reveal><dt class="mono">Mandates</dt><dd><b>3</b><span>Listed Indian equities, Indian private companies and global equities.</span></dd></div>
+        <div class="num" data-reveal><dt class="mono">Mandates</dt><dd><b>3</b><span>Indian listed equities, venture-backed startups and global equities.</span></dd></div>
         <div class="num" data-reveal style="--d:70ms"><dt class="mono">SEBI registrations</dt><dd><b>2</b><span>Portfolio Manager and Category I Alternative Investment Fund.</span></dd></div>
-        <div class="num" data-reveal style="--d:140ms"><dt class="mono">PMS construction</dt><dd><b>70<i>/</i>30</b><span>Approximately 70% compounders and 30% special situations.</span></dd></div>
+        <div class="num" data-reveal style="--d:140ms"><dt class="mono">Flexicap+ portfolio</dt><dd><b>15<i>–</i>20</b><span>Carefully selected companies across large-, mid- and small-cap.</span></dd></div>
         <div class="num" data-reveal style="--d:210ms"><dt class="mono">Founder experience</dt><dd><b>15<i>+</i></b><span>Years across private equity, consulting and entrepreneurship.</span></dd></div>
       </dl>
     </div>
@@ -64,7 +64,7 @@ const market = { pms: 'Indian listed equities', ventures: 'Indian private compan
       <div class="sec-head">
         <p class="eyebrow" data-reveal><span class="dot"></span>Strategies</p>
         <h2 id="strategy-title" data-reveal style="--d:70ms">One philosophy.<br />Three distinct mandates.</h2>
-        <p class="lede" data-reveal style="--d:140ms">Three regulated strategies with clear investment mandates: Indian listed equities, Indian private companies, and global equities.</p>
+        <p class="lede" data-reveal style="--d:140ms">Three strategies with clear mandates: Indian listed equities, India’s venture-backed startups, and global equities through GIFT City.</p>
       </div>
       <div class="strategy-grid">
         {products.map((p, i) => (
@@ -89,8 +89,9 @@ const market = { pms: 'Indian listed equities', ventures: 'Indian private compan
             <span role="cell" class="c-name" data-label="Strategy">{p.name}</span>
             <span role="cell" data-label="Invests in">{p.where}</span>
             <span role="cell" class="c-alloc" data-label="Portfolio construction">
-              <span class="alloc-bar" role="img" aria-label={p.alloc.aria}>{p.alloc.segs.map((s) => <span class={`seg ${s.cls}`} style={`flex:${s.flex}`}></span>)}</span>
-              <span class="alloc-legend" aria-hidden="true">{p.alloc.segs.map((s) => <span><i class={`sw ${s.cls}`}></i>{s.label} <b>{s.strong}</b></span>)}</span>
+              <span class="c-summary">{p.portfolioSummary}</span>
+              {p.alloc && <span class="alloc-bar" role="img" aria-label={p.alloc.aria}>{p.alloc.segs.map((s) => <span class={`seg ${s.cls}`} style={`flex:${s.flex}`}></span>)}</span>}
+              {p.alloc && <span class="alloc-legend" aria-hidden="true">{p.alloc.segs.map((s) => <span><i class={`sw ${s.cls}`}></i>{s.label} <b>{s.strong}</b></span>)}</span>}
             </span>
             <span role="cell" data-label="Regulation">{p.status ?? p.reg?.replace(/ \(.*\)$/, '')}</span>
           </a>

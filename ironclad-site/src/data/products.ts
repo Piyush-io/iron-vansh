@@ -1,3 +1,5 @@
+// Product page content. Copy supplied by Ironclad (Vansh Agarwala, 10 Sep 2026); keep wording as given.
+
 export interface Seg {
   cls: 'c' | 's' | 'e' | 'l';
   flex: number;
@@ -5,25 +7,33 @@ export interface Seg {
   label: string;
 }
 
+export interface Item { title: string; text?: string; bullets?: string[] }
+export interface ItemSection { title: string; items: Item[] }
+
 export interface Product {
   slug: 'pms' | 'ventures' | 'latius';
   name: string;
   navSub: string;
+  /** Line under the name, e.g. "Indian Equity Portfolio Management Services". */
+  kicker: string;
+  /** Hero sub-headline. */
+  headline: string;
   where: string;
   reg?: string;
   status?: string;
-  image?: string;
-  imagePos?: string;
   metaDescription: string;
-  heroSummary: string;
   panelBlurb: string;
-  tags: string[];
-  invest: string[];
-  focusHeading: string;
-  focus: string[];
-  buildIntro: string;
-  alloc: { sub: string; aria: string; segs: Seg[] };
-  keyPoints: { title: string; text: string }[];
+  intro: { title: string; paras: string[] };
+  /** One or more titled groups of points ("Our investment approach", "Why global investing?"). */
+  sections: ItemSection[];
+  /** Short facts for the comparison table on the homepage. */
+  portfolioSummary: string;
+  alloc?: { title: string; sub: string; aria: string; segs: Seg[]; note?: string };
+  construction?: { title: string; bullets: string[] };
+  chips?: { title: string; items: string[] };
+  why: { title: string; bullets: string[] };
+  philosophy: string;
+  risk: string;
   /** Performance / return claims. Rendered only by PerformanceNote, and only when SHOW_PERFORMANCE_CLAIMS is true. */
   claims: string[];
 }
@@ -31,169 +41,187 @@ export interface Product {
 export const products: Product[] = [
   {
     slug: 'pms',
-    name: 'Ironclad PMS',
-    navSub: 'Listed Indian equities, flexicap',
-    where: 'India, listed equities',
+    name: 'Ironclad Flexicap+',
+    navSub: 'Indian listed equities, PMS',
+    kicker: 'Indian Equity Portfolio Management Services',
+    headline: 'Disciplined investing. Long-term wealth creation.',
+    where: 'Indian listed equities',
     reg: 'SEBI Portfolio Management Service (INP000009074)',
-    image: '/images/g-pms.jpg',
-    imagePos: 'center 40%',
     metaDescription:
-      'Ironclad PMS is a SEBI-registered Portfolio Management Service following a flexicap strategy across small-, mid- and large-cap Indian companies.',
-    heroSummary:
-      'A flexicap strategy investing across small-, mid- and large-cap companies positioned to benefit from India’s long-term economic growth.',
+      'Ironclad Flexicap+ is a SEBI-registered Portfolio Management Service investing in a concentrated portfolio of high-quality Indian listed businesses across market capitalisations.',
     panelBlurb:
-      'A flexicap portfolio of small-, mid- and large-cap companies positioned to benefit from India’s long-term growth.',
-    tags: ['Financial services', 'Branded consumer', 'Technology and IP-led', 'Niche manufacturing'],
-    invest: [
-      'We concentrate on four areas where we see long runways for growth: financial services, branded consumer businesses, technology and IP-led businesses, and niche manufacturing.',
-      'We look for businesses we would be glad to own for a decade, and we size positions as if the money were ours.',
-    ],
-    focusHeading: 'Focus areas',
-    focus: ['Financial services', 'Branded consumer businesses', 'Technology and IP-led businesses', 'Niche manufacturing'],
-    buildIntro:
-      'Approximately 70% of the portfolio is allocated to compounders, while around 30% is allocated to special situations.',
-    alloc: {
-      sub: 'Listed Indian equities',
-      aria: 'About 70 percent compounders, 30 percent special situations',
-      segs: [
-        { cls: 'c', flex: 70, strong: '~70%', label: 'Compounders' },
-        { cls: 's', flex: 30, strong: '~30%', label: 'Special situations' },
+      'A concentrated portfolio of high-quality Indian listed businesses across market capitalisations, combining long-term compounders with special situations.',
+    intro: {
+      title: 'Invest in India’s growth story',
+      paras: [
+        'Ironclad Flexicap+ is a SEBI-registered Portfolio Management Service focused on long-term wealth creation through a concentrated portfolio of high-quality Indian listed businesses across market capitalisations.',
+        'Our investment philosophy combines long-term compounders with carefully selected special situations, seeking to identify businesses with sustainable earnings growth and opportunities where market perceptions diverge from underlying fundamentals.',
       ],
     },
-    keyPoints: [
+    sections: [
       {
-        title: 'A flexicap mandate',
-        text: 'The portfolio can move across small-, mid- and large-cap companies, so capital goes where we find the best businesses rather than into a fixed size band.',
-      },
-      {
-        title: 'Compounders and special situations',
-        text: 'Most of the portfolio sits in businesses that can compound for years. A smaller share goes to specific situations where a catalyst can unlock value.',
-      },
-      {
-        title: 'Four focus areas',
-        text: 'Financial services, branded consumer businesses, technology and IP-led businesses, and niche manufacturing.',
-      },
-      {
-        title: 'Regulated by SEBI',
-        text: 'Ironclad PMS is a SEBI Portfolio Management Service, registration INP000009074.',
+        title: 'Our investment approach',
+        items: [
+          { title: 'Fundamental Research', text: 'We evaluate business quality, industry structure, revenue and earnings growth, competitive positioning, management quality, promoter track record and valuations before investing.' },
+          { title: 'Concentrated Portfolio Construction', text: 'We typically invest in 15–20 carefully selected companies across large-, mid- and small-cap segments, with an emphasis on attractive entry valuations and a margin of safety.' },
+          {
+            title: 'Compounders + Special Situations',
+            bullets: [
+              '60–70% Compounders: Businesses with durable competitive advantages, strong fundamentals and the potential to compound earnings over the long term.',
+              '20–30% Special Situations: Opportunities arising from temporary concerns, market mispricing or changing business perceptions that may create attractive risk-reward opportunities.',
+            ],
+          },
+          { title: 'Continuous Portfolio Monitoring', text: 'We regularly monitor company performance, financial results, management commentary, valuations and developments affecting the original investment thesis.' },
+        ],
       },
     ],
-    claims: [
-      'Compounders: businesses with the potential to compound earnings at approximately 18–25% over the long term.',
-      'Special situations: opportunities with the potential to generate 2x+ returns over a 2–3 year period.',
-      'The strategy aims to generate approximately 3–5% annualised outperformance over the broader market over the long term.',
-    ],
+    portfolioSummary: '15–20 companies across large-, mid- and small-cap',
+    alloc: {
+      title: 'Portfolio construction',
+      sub: 'Indicative allocation',
+      aria: '60 to 70 percent compounders, 20 to 30 percent special situations',
+      segs: [
+        { cls: 'c', flex: 65, strong: '60–70%', label: 'Compounders' },
+        { cls: 's', flex: 25, strong: '20–30%', label: 'Special situations' },
+      ],
+    },
+    chips: {
+      title: 'Investment universe',
+      items: ['Financial Services', 'Consumer & Healthcare', 'Pharmaceuticals', 'Technology & New-Age Businesses', 'Niche Manufacturing'],
+    },
+    why: {
+      title: 'Why Ironclad Flexicap+?',
+      bullets: [
+        'Research-led stock selection grounded in business fundamentals.',
+        'Flexibility to invest across market capitalisations and sectors.',
+        'A concentrated portfolio designed to participate in long-term business growth.',
+        'A combination of structural growth opportunities and special situations.',
+        'A disciplined focus on valuation, risk assessment and continuous monitoring.',
+      ],
+    },
+    philosophy: 'Own quality businesses, invest with a margin of safety and remain focused on long-term compounding.',
+    risk: 'Equity investments are subject to market risks, including the possible loss of capital. Returns are not guaranteed. Please refer to the applicable scheme and regulatory disclosures.',
+    claims: [],
   },
   {
     slug: 'ventures',
-    name: 'Ironclad Ventures',
-    navSub: 'Indian private companies',
-    where: 'India, unlisted and venture investments',
+    name: 'Ironclad Ventures Fund',
+    navSub: 'Early-stage secondaries, Category I AIF',
+    kicker: 'Early-Stage Secondaries | Category I AIF',
+    headline: 'Access to venture-backed startups through a differentiated investment strategy.',
+    where: 'Indian venture-backed startups',
     reg: 'SEBI Category I AIF (IN/AIF/25-26/1899)',
-    image: '/images/g-ventures.jpg',
-    imagePos: 'center 45%',
     metaDescription:
-      'Ironclad Ventures is a SEBI Category I AIF investing mainly in secondary stakes in venture-backed Indian companies with proven product-market fit.',
-    heroSummary:
-      'A Category I AIF investing in high-growth, privately held Indian companies that already have the backing of leading venture capital funds.',
+      'Ironclad Ventures Fund is a SEBI Category I AIF giving investors exposure to India’s venture-backed startups through early-stage secondary transactions and selective primary co-investments.',
     panelBlurb:
-      'Mostly secondary stakes in VC-backed companies with proven product-market fit, offering partial liquidity to angels, founders and ESOP holders.',
-    tags: ['Fintech', 'Consumer', 'AI and deeptech', 'Defence'],
-    invest: [
-      'We back companies that have already demonstrated meaningful product-market fit, mostly at Series A, alongside selective Seed and Series B investments.',
-      'The fund predominantly participates as a secondary investor, providing partial liquidity to early angel investors, founders, or ESOP holders while gaining exposure to established, high-potential businesses.',
-    ],
-    focusHeading: 'Focus sectors',
-    focus: ['Fintech', 'Consumer', 'AI and deeptech', 'Defence'],
-    buildIntro:
-      'The portfolio is primarily Series A, with approximately 15–20% in earlier-stage Seed and another 15–20% in later-stage Series B.',
-    alloc: {
-      sub: 'Indian private companies',
-      aria: 'About 15 to 20 percent seed, the majority Series A, 15 to 20 percent Series B',
-      segs: [
-        { cls: 'e', flex: 17.5, strong: '15–20%', label: 'Seed' },
-        { cls: 'c', flex: 65, strong: 'Majority', label: 'Series A' },
-        { cls: 'l', flex: 17.5, strong: '15–20%', label: 'Series B' },
+      'Exposure to India’s venture-backed startups through early-stage secondaries and selective primary co-investments.',
+    intro: {
+      title: 'Access the next generation of Indian businesses',
+      paras: [
+        'Ironclad Ventures Fund provides investors with exposure to India’s venture-backed startup ecosystem through early-stage secondary transactions and selective primary co-investments.',
+        'The fund focuses on startups that have already attracted institutional venture capital, seeking opportunities to participate in their growth while addressing the liquidity needs of early employees and investors.',
       ],
     },
-    keyPoints: [
+    sections: [
       {
-        title: 'Backed by leading funds',
-        text: 'We invest in companies that have already attracted backing from leading Indian venture capital funds and shown meaningful product-market fit.',
-      },
-      {
-        title: 'Mostly secondary',
-        text: 'The fund predominantly participates as a secondary investor, giving partial liquidity to early angel investors, founders or ESOP holders.',
-      },
-      {
-        title: 'Mainly Series A',
-        text: 'Primarily Series A, with some earlier-stage Seed and some later-stage Series B.',
-      },
-      {
-        title: 'Sector-agnostic',
-        text: 'Focus areas are fintech, consumer, AI and deeptech, and defence. The fund is sector-agnostic and may invest opportunistically elsewhere.',
-      },
-      {
-        title: 'Regulated by SEBI',
-        text: 'Ironclad Ventures is a SEBI Category I AIF, registration IN/AIF/25-26/1899.',
+        title: 'A different approach to venture investing',
+        items: [
+          { title: 'Early-Stage Secondary Opportunities', text: 'We acquire selected stakes from employees holding vested ESOPs, angel investors and other early stakeholders, providing partial liquidity before a conventional exit event.' },
+          { title: 'Institutionally Backed Startups', text: 'The strategy targets companies backed by established venture capital funds, with a stated focus on approximately 10–15 leading VC ecosystems and an objective of allocating more than 80% of the portfolio to startups backed by top-tier VCs.' },
+          { title: 'Selective Investment Underwriting', text: 'Each opportunity is evaluated on segment leadership, product-market fit, business traction, post-funding growth, founder quality, valuation and risk-adjusted entry price.' },
+          { title: 'Defined Exit Orientation', text: 'The fund seeks liquidity through subsequent funding rounds, later-stage secondary transactions, pre-IPO opportunities, public listings and strategic acquisitions. It aims to exit investments earlier than the traditional venture capital cycle where market conditions permit.' },
+        ],
       },
     ],
-    claims: ['The strategy targets 25–30%+ IRRs over the long term.'],
+    portfolioSummary: '25–40 companies, mainly Series A and early Series B',
+    construction: {
+      title: 'Portfolio construction',
+      bullets: [
+        'Target portfolio of approximately 25–40 companies.',
+        'Typical focus on Series A and early Series B opportunities, with selective seed-stage investments.',
+        'Exposure across fintech, consumer technology, D2C, AI/SaaS, deeptech and defence.',
+        'Diversification across multiple businesses to reduce dependence on any single startup outcome.',
+      ],
+    },
+    chips: { title: 'Sectors', items: ['Fintech', 'Consumer technology', 'D2C', 'AI/SaaS', 'Deeptech', 'Defence'] },
+    why: {
+      title: 'Why Ironclad Ventures?',
+      bullets: [
+        'Access to venture-backed businesses through secondary transactions.',
+        'Exposure to private-market opportunities that may otherwise be difficult to access directly.',
+        'A strategy addressing liquidity needs of early employees and investors.',
+        'Institutional VC backing as one input into investment selection, alongside independent diligence.',
+        'An exit-oriented approach designed around the potential for earlier liquidity.',
+      ],
+    },
+    philosophy: 'Access promising private businesses through differentiated entry routes, disciplined underwriting and a clear focus on value realisation.',
+    risk: 'Private-market investments are high risk and illiquid. Investors may lose some or all of their capital, and exits may take longer than anticipated. Target returns are not assured. Please refer to the fund’s offering documents and regulatory disclosures.',
+    claims: [],
   },
   {
     slug: 'latius',
     name: 'Ironclad Latius',
-    navSub: 'Global equities from GIFT City',
+    navSub: 'Global investments, GIFT City',
+    kicker: 'Global Investments | GIFT City',
+    headline: 'Global opportunities. Broader diversification. Long-term growth.',
     where: 'Global equities, from GIFT City',
     status: 'IFSCA licence under application',
     metaDescription:
-      'Ironclad Latius is a GIFT City-based global investment strategy for diversification beyond Indian markets. IFSCA licence under application.',
-    heroSummary:
-      'A GIFT City–based global investment strategy designed to provide diversification beyond Indian markets and access to global growth opportunities.',
+      'Ironclad Latius offers a route to international equity markets through GIFT City, focusing on globally competitive businesses and long-term structural growth themes. IFSCA licence under application.',
     panelBlurb:
-      'A global portfolio that diversifies beyond India: access to the world’s leading companies, exposure to the US dollar, and less concentration in India-specific risk.',
-    tags: ['Global compounders', 'Special situations', 'Dollar exposure'],
-    invest: [
-      'The portfolio invests in the world’s leading companies, giving Indian investors exposure to global growth and to the US dollar.',
-      'Compounders are businesses with strong fundamentals and the potential for sustained growth. Special situations seek to capture value-creation opportunities arising from specific catalysts or corporate developments.',
-    ],
-    focusHeading: 'Portfolio sleeves',
-    focus: ['Global compounders', 'Special situations'],
-    buildIntro: 'The portfolio follows a 70:30 allocation between compounders and special situations.',
-    alloc: {
-      sub: 'Global equities, IFSCA licence under application',
-      aria: 'About 70 percent compounders, 30 percent special situations',
-      segs: [
-        { cls: 'c', flex: 70, strong: '~70%', label: 'Compounders' },
-        { cls: 's', flex: 30, strong: '~30%', label: 'Special situations' },
+      'A route to international equity markets through GIFT City: global industry leaders, technology-led innovation and long-term structural growth themes.',
+    intro: {
+      title: 'Invest beyond borders',
+      paras: [
+        'Ironclad Latius provides investors with a route to international equity markets, focusing on globally competitive businesses, technology-led innovation and long-term structural growth themes.',
+        'The strategy seeks to complement domestic portfolios with exposure to international markets, global industry leaders and businesses operating at the forefront of innovation.',
       ],
     },
-    keyPoints: [
+    sections: [
       {
-        title: 'Global growth potential',
-        text: 'Global markets, particularly the US, give access to growth opportunities beyond those available in India.',
+        title: 'Why global investing?',
+        items: [
+          { title: 'Participate in Global Innovation', text: 'Gain exposure to businesses operating across artificial intelligence, cloud computing, semiconductors, cybersecurity, biotechnology and other evolving industries.' },
+          { title: 'Diversify Across Geographies', text: 'Build exposure beyond the Indian market, with a primary focus on the United States and opportunities across Europe, Japan and selected Asian markets.' },
+          { title: 'Access Global Market Leaders', text: 'The investment universe spans technology platforms, semiconductor infrastructure, consumer and luxury brands, healthcare, defence and other globally competitive sectors.' },
+          { title: 'Add Foreign-Currency Exposure', text: 'International investments provide exposure to foreign-currency movements alongside underlying equity returns. Currency movements can enhance or reduce returns measured in Indian rupees.' },
+        ],
       },
       {
-        title: 'Currency diversification',
-        text: 'Exposure to global assets provides a natural hedge against the long-term depreciation of the Indian Rupee against the US Dollar, historically around 4% annually.',
-      },
-      {
-        title: 'Reduced India-specific risk',
-        text: 'Global diversification can help reduce concentration in India-specific events such as demonetisation (2016), the IL&FS crisis (2018–19), and periods of significant FII selling.',
-      },
-      {
-        title: 'Asset-liability matching',
-        text: 'Dollar exposure can help offset future expenses that are effectively dollar-linked, including international travel and imported goods.',
-      },
-      {
-        title: 'Status',
-        text: 'IFSCA licence under application.',
+        title: 'Our investment approach',
+        items: [
+          { title: 'Geographic Allocation', text: 'Indicative allocation of 50–70% to the United States, 10–20% to Europe and 5–20% to other Asian markets excluding India. Actual allocations may vary with market conditions.' },
+          { title: 'Thematic Investing', text: 'Focus on global technology, AI, semiconductors, cybersecurity, luxury, healthcare and other selected long-term growth themes.' },
+          { title: 'Flexible Portfolio Implementation', text: 'A combination of direct equities and exchange-traded funds may be used to achieve appropriate geographic, sectoral and thematic exposure.' },
+          { title: 'Long-Term Orientation', text: 'A suggested investment horizon of 3–5 years, allowing investors to participate in the potential of global business growth while recognising market volatility.' },
+        ],
       },
     ],
-    claims: [
-      'Over 15 years, ₹1 crore invested in Indian equities would have grown to approximately ₹6 crore, versus approximately ₹11 crore in US equities.',
-      'The strategy aims to outperform its relevant global benchmark, which has delivered approximately 16% p.a. in INR terms over the past 15 years.',
-    ],
+    portfolioSummary: 'US-led global equities and ETFs, 3–5 year horizon',
+    alloc: {
+      title: 'Geographic allocation',
+      sub: 'Indicative; actual allocations may vary with market conditions',
+      aria: '50 to 70 percent United States, 10 to 20 percent Europe, 5 to 20 percent other Asian markets excluding India',
+      segs: [
+        { cls: 'c', flex: 60, strong: '50–70%', label: 'United States' },
+        { cls: 's', flex: 15, strong: '10–20%', label: 'Europe' },
+        { cls: 'e', flex: 12.5, strong: '5–20%', label: 'Asia ex-India' },
+      ],
+    },
+    chips: { title: 'Themes', items: ['Global technology', 'AI', 'Semiconductors', 'Cybersecurity', 'Luxury', 'Healthcare'] },
+    why: {
+      title: 'Why Ironclad Latius?',
+      bullets: [
+        'Access to international equity markets through a GIFT City investment structure.',
+        'Geographic diversification beyond domestic equities.',
+        'Exposure to global innovation and structural growth themes.',
+        'Flexible allocation across markets, sectors and investment instruments.',
+        'A long-term approach to global portfolio construction.',
+      ],
+    },
+    philosophy: 'Complement your Indian portfolio with exposure to global businesses, international markets and the next wave of innovation.',
+    risk: 'International investments involve market, currency, geopolitical, liquidity and tax risks. Returns in Indian rupees may be affected by exchange-rate movements. Investments are subject to applicable regulatory requirements and market risks. Returns are not guaranteed.',
+    claims: [],
   },
 ];
 

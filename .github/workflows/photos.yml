@@ -1,0 +1,47 @@
+# Downloads the site's photography (ironclad-site/src/data/photo-sources.json) at 4K on GitHub's
+# runners and commits it to public/images/photos/, so the site never fetches images at runtime.
+# Also saves the review shortlist (photo-candidates.json) to design/photo-scout/.
+name: Fetch photos
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'ironclad-site/src/data/photo-sources.json'
+      - 'ironclad-site/src/data/photo-candidates.json'
+      - 'ironclad-site/scripts/fetch-photos.mjs'
+      - '.github/workflows/photos.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: photos-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ironclad-site
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: ironclad-site/package-lock.json
+      - run: npm ci
+      - name: Download photos at 3840px
+        run: node scripts/fetch-photos.mjs --soft
+      - name: Download review shortlist
+        run: node scripts/fetch-photos.mjs --scout
+      - name: Commit photos
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/images/photos design/photo-scout
+          if git diff --cached --quiet; then echo "No new photos."; exit 0; fi
+          git commit -m "Add fetched photos [skip ci]"
+          git push

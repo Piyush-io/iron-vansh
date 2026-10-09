@@ -1,0 +1,12 @@
+{
+  "_readme": "Shortlist for review only. `npm run photos -- --scout` saves each at 1280px into design/photo-scout/ so they can be compared before one is promoted into photo-sources.json.",
+  "hero-sealink": { "id": "B_ufwLFEZPE", "page": "https://unsplash.com/photos/bandra-worli-sea-link-bridge-in-mumbai-B_ufwLFEZPE" },
+  "hero-skyline-water": { "id": "Z2SFnEVfqUE", "page": "https://unsplash.com/photos/city-skyline-is-seen-across-a-body-of-water-Z2SFnEVfqUE" },
+  "hero-skyline-sunset": { "id": "bAwT-vSd46Y", "page": "https://unsplash.com/photos/a-city-skyline-at-sunset-bAwT-vSd46Y" },
+  "hero-towers": { "id": "qrj4LiT9NRQ", "page": "https://unsplash.com/photos/a-city-skyline-with-tall-buildings-and-skyscrapers-qrj4LiT9NRQ" },
+  "hero-aerial-water": { "id": "4nnSccVq5rw", "page": "https://unsplash.com/photos/an-aerial-view-of-a-city-and-a-body-of-water-4nnSccVq5rw" },
+  "hero-aerial-day": { "id": "eecHMV01S9o", "page": "https://unsplash.com/photos/eecHMV01S9o" },
+  "latius-wafer": { "id": "qOx9KsvpqcM", "page": "https://unsplash.com/photos/silicon-wafer-with-iridescent-microchip-grid-qOx9KsvpqcM" },
+  "latius-wafer-2": { "id": "0Gw_p-RQq8k", "page": "https://unsplash.com/photos/a-close-up-of-a-metal-plate-with-squares-on-it-0Gw_p-RQq8k" },
+  "ventures-team": { "id": "SHJYMYUGSNY", "page": "https://unsplash.com/photos/business-people-working-office-corporate-meeting-team-startup-concept-SHJYMYUGSNY" }
+}

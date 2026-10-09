@@ -1,15 +1,14 @@
 ---
 import type { Product } from '../data/products';
-interface Props { items: Product[] }
-const { items } = Astro.props;
+interface Props { alloc: NonNullable<Product['alloc']> }
+const { alloc } = Astro.props;
 ---
-{items.map((p) => (
-  <div class="alloc">
-    <h3>{p.name}<small>{p.alloc.sub}</small></h3>
-    <div class="alloc-bar" role="img" aria-label={p.alloc.aria}>
-      {p.alloc.segs.map((s) => (
-        <div class={`seg ${s.cls}`} style={`flex:${s.flex}`}><span><b>{s.strong}</b>{s.label}</span></div>
-      ))}
-    </div>
+<div class="alloc">
+  <p class="alloc-sub">{alloc.sub}</p>
+  <div class="alloc-bar" role="img" aria-label={alloc.aria}>
+    {alloc.segs.map((s) => (
+      <div class={`seg ${s.cls}`} style={`flex:${s.flex}`}><span><b>{s.strong}</b>{s.label}</span></div>
+    ))}
   </div>
-))}
+  <ul class="alloc-legend alloc-legend-sm" aria-hidden="true">{alloc.segs.map((s) => <li><i class={`sw ${s.cls}`}></i>{s.label} <b>{s.strong}</b></li>)}</ul>
+</div>
