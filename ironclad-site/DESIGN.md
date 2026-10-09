@@ -28,9 +28,9 @@ Blackstone's design system, applied to Ironclad's own content and photography.
 
 ## 3. Typography
 
-Fontshare's **Gambetta + General Sans** pairing (Indian Type Foundry, ITF Free Font License: free for commercial use and web embedding). Files are self-hosted in `public/fonts/`; candidates are kept in `design/font-candidates/`.
+Fontshare's **Erode + General Sans** (Indian Type Foundry, ITF Free Font License: free for commercial use and web embedding). Files are self-hosted in `public/fonts/`; candidates are kept in `design/font-candidates/`.
 
-- Headings: Gambetta 300 (light), with 600 for the bold first word of the hero.
+- Headings: Erode 300 (light), one weight everywhere, including the hero. Italic for emphasis (ticker).
 - Body and UI: General Sans 400, with 500/600 for emphasis.
 - Geist Mono only for registration codes.
 

@@ -1,15 +1,14 @@
 /* Ironclad — design system. Spec: ../../DESIGN.md
    A one-to-one port of blackstone.com's system (stylesheet captured Oct 2026, design/refs/bx-home.css):
    container widths, 16-column grid, type scale, section spacing, circled-arrow links, header and footer.
-   Type: Fontshare's Gambetta + General Sans pairing (ITF Free Font License, free for commercial web use).
+   Type: Fontshare's Erode (light, one weight for display) + General Sans (ITF Free Font License, free for commercial web use).
    Breakpoints: 48em (768) · 80em (1280) · 90em (1440) · 120em (1920). */
 
-@font-face { font-family: 'Gambetta'; src: url('/fonts/gambetta-300.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Gambetta'; src: url('/fonts/gambetta-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Gambetta'; src: url('/fonts/gambetta-500.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Gambetta'; src: url('/fonts/gambetta-700.woff2') format('woff2'); font-weight: 600 700; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Gambetta'; src: url('/fonts/gambetta-300-italic.woff2') format('woff2'); font-weight: 300; font-style: italic; font-display: swap; }
-@font-face { font-family: 'Gambetta'; src: url('/fonts/gambetta-400-italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Erode'; src: url('/fonts/erode-300.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Erode'; src: url('/fonts/erode-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Erode'; src: url('/fonts/erode-500.woff2') format('woff2'); font-weight: 500 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Erode'; src: url('/fonts/erode-300-italic.woff2') format('woff2'); font-weight: 300; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Erode'; src: url('/fonts/erode-400-italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
 @font-face { font-family: 'General Sans'; src: url('/fonts/general-sans-300.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
 @font-face { font-family: 'General Sans'; src: url('/fonts/general-sans-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: 'General Sans'; src: url('/fonts/general-sans-500.woff2') format('woff2'); font-weight: 500 700; font-style: normal; font-display: swap; }
@@ -28,7 +27,7 @@
   --c-muted: #515256;
   --focus: #fdf147;
 
-  --f-serif: 'Gambetta', Georgia, serif;
+  --f-serif: 'Erode', Georgia, serif;
   --f-sans: 'General Sans', 'Helvetica Neue', Arial, sans-serif;
   --f-mono: 'Geist Mono', ui-monospace, Menlo, monospace;
 
@@ -147,7 +146,7 @@ a:hover > .bx-icon .bx-icon__arrow, button:hover > .bx-icon .bx-icon__arrow { op
 .promo-header { padding-block: 2.5rem 4.5rem; }
 .promo-header__inner { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); column-gap: var(--gap); }
 .promo-header__title { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); column-gap: var(--gap); row-gap: 1rem; font-size: 3rem; line-height: 1.1; }
-.promo-header__title strong { font-weight: 600; }
+.promo-header__title strong { font-weight: 300; }
 .promo-header__t1 { grid-column: 1 / -1; }
 .promo-header__t2 { grid-column: 3 / -1; }
 .promo-header__desc { grid-column: 1 / -1; margin-top: 2rem; font-size: 1.25rem; line-height: 1.5; letter-spacing: .02rem; }
@@ -293,7 +292,7 @@ a:hover > .bx-icon .bx-icon__arrow, button:hover > .bx-icon .bx-icon__arrow { op
 .ticker__inner { overflow: hidden; }
 .ticker__track { display: flex; width: max-content; animation: ticker 50s linear infinite; }
 .ticker__title { flex: none; padding-right: 7.5rem; font: 300 4rem/1.3 var(--f-serif); white-space: nowrap; }
-.ticker__title strong { font-weight: 600; }
+.ticker__title strong { font-weight: 300; font-style: italic; }
 .ticker__disclaimer { margin-top: 3.5rem; font-size: .875rem; }
 @keyframes ticker { to { transform: translateX(-50%); } }
 @media (min-width: 48em) { .ticker__title { font-size: 6.5rem; padding-right: 8.5rem; } .ticker__disclaimer { margin-top: 4.5rem; } }
@@ -335,25 +334,23 @@ a:hover > .bx-icon .bx-icon__arrow, button:hover > .bx-icon .bx-icon__arrow { op
 }
 @media (min-width: 90em) { .cmp { gap: 1.5rem; } .cmp__card { padding: 3rem 2.5rem 2.5rem; } .cmp__num { font-size: 4.5rem; } .cmp__head h3 { font-size: 2.25rem; } }
 
-/* ───── vertical list (statement, image left, items right) ───── */
+/* ───── philosophy: statement left (sticky), items right ───── */
 .vlist { padding-block: var(--pad); }
-.vlist__statement { font-size: 2rem; line-height: 1.5; max-width: 52rem; }
-.vlist__inner { margin-top: 3rem; display: grid; gap: 3rem; }
-.vlist__image { aspect-ratio: 3 / 4; overflow: hidden; }
-.vlist__item + .vlist__item { margin-top: 3.5rem; }
-.vlist__item h3 { font-size: 1.75rem; line-height: 1.4; padding-bottom: 1.5rem; }
-.vlist__item p { font-size: 1.125rem; line-height: 1.5; }
+.vlist__statement { font-size: 2rem; line-height: 1.4; }
+.vlist__inner { display: grid; gap: 3rem; }
+.vlist__item + .vlist__item { margin-top: 3.5rem; padding-top: 3.5rem; border-top: 1px solid var(--c-slate-2); }
+.vlist__item h3 { font-size: 1.75rem; line-height: 1.4; padding-bottom: 1.25rem; }
+.vlist__item p { font-size: 1.125rem; line-height: 1.6; }
 .tenets { margin-top: 2.5rem; border-top: 1px solid currentColor; }
 .tenets li { padding: 1rem 0; border-bottom: 1px solid var(--c-slate-2); font-size: 1.125rem; }
 .tenets b { font: 400 1.375rem/1.3 var(--f-serif); margin-right: .25rem; }
-@media (min-width: 48em) { .vlist__statement { font-size: 2.5rem; } .vlist__inner { margin-top: 4.5rem; } }
+@media (min-width: 48em) { .vlist__statement { font-size: 2.5rem; } }
 @media (min-width: 80em) {
-  .vlist__inner { grid-template-columns: repeat(16, minmax(0, 1fr)); column-gap: var(--gap); margin-top: 5rem; }
-  .vlist__image { grid-column: 1 / 9; align-self: start; position: sticky; top: calc(var(--h-header-fixed) + 2rem); }
-  .vlist__content { grid-column: 11 / -1; }
-  .vlist__item h3 { padding-bottom: 1rem; }
+  .vlist__inner { grid-template-columns: repeat(16, minmax(0, 1fr)); column-gap: var(--gap); }
+  .vlist__statement { grid-column: 1 / 8; align-self: start; position: sticky; top: calc(var(--h-header-fixed) + 2rem); }
+  .vlist__content { grid-column: 9 / -1; }
 }
-@media (min-width: 90em) { .vlist__statement { font-size: 3rem; } .vlist__inner { margin-top: 6rem; } .vlist__item h3 { font-size: 2rem; padding-bottom: 1.5rem; } }
+@media (min-width: 90em) { .vlist__statement { font-size: 3rem; } .vlist__item h3 { font-size: 2rem; } }
 
 /* ───── split heading (title left, description right) ───── */
 .split-head { display: grid; gap: 2rem; margin-bottom: 4rem; }
