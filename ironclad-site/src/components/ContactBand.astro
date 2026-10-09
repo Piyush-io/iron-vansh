@@ -1,22 +1,21 @@
 ---
 import { site } from '../data/site';
+import Go from './Go.astro';
 interface Props { heading?: string; lede?: string }
 const { heading = 'Talk to our investment team.', lede = 'We can walk you through the mandates, the investment process, and the risks of each product.' } = Astro.props;
 ---
-<section class="contact-band" id="contact" aria-labelledby="contact-title">
-  <div class="wrap">
-    <p class="eyebrow">Get in touch</p>
-    <div class="cta">
-      <div class="cta-copy">
-        <h2 id="contact-title">{heading}</h2>
-        <p class="lede">{lede}</p>
-        <a class="btn" href="/contact">Contact the team</a>
-      </div>
-      <dl class="cta-direct">
-        <div><dt>Email</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>
-        <div><dt>Phone</dt><dd><a href={site.phoneHref}>{site.phone}</a></dd></div>
-        <div><dt>Office</dt><dd>Noida, India</dd></div>
-      </dl>
+<section class="capture is-dark" id="contact" aria-labelledby="contact-title">
+  <div class="wrap capture__inner">
+    <p class="eyebrow capture__eyebrow">Get in touch</p>
+    <div class="capture__copy">
+      <h2 class="capture__title" id="contact-title">{heading}</h2>
+      <p class="capture__lede">{lede}</p>
+      <Go href="/contact" label="Contact the Team" />
     </div>
+    <dl class="capture__fields">
+      <div><dt>Email</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>
+      <div><dt>Phone</dt><dd><a href={site.phoneHref}>{site.phone}</a></dd></div>
+      <div><dt>Office</dt><dd>{site.addressShort[0]}, {site.addressShort[1]}</dd></div>
+    </dl>
   </div>
 </section>

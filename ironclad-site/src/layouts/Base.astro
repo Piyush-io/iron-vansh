@@ -2,11 +2,10 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import InvestorAwareness from '../components/InvestorAwareness.astro';
 import { site } from '../data/site';
 
-interface Props { title?: string; description?: string; darkHero?: boolean }
-const { title, description = site.description } = Astro.props;
+interface Props { title?: string; description?: string; dark?: boolean }
+const { title, description = site.description, dark = false } = Astro.props;
 const fullTitle = title ? `${title} | ${site.name}` : site.name;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const isHome = Astro.url.pathname === '/';
@@ -25,18 +24,17 @@ const isHome = Astro.url.pathname === '/';
   <meta property="og:type" content="website">
   <meta property="og:image" content={new URL('/images/og.jpg', Astro.site)}>
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" content={dark ? '#000000' : '#ffffff'}>
   <link rel="preload" href="/fonts/caslon-display-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/public-sans-300.woff2" as="font" type="font/woff2" crossorigin>
   <script is:inline>document.documentElement.classList.add('js');try{if(sessionStorage.getItem('seen'))document.documentElement.classList.add('seen');else sessionStorage.setItem('seen','1')}catch(e){}</script>
 </head>
-<body class:list={{ home: isHome }}>
+<body class:list={{ home: isHome, 'theme-dark': dark }}>
   <a class="skip" href="#main">Skip to content</a>
-  <Header pathname={Astro.url.pathname} />
+  <Header pathname={Astro.url.pathname} dark={dark} />
   <main id="main">
     <slot />
   </main>
-  <InvestorAwareness />
   <Footer />
   <script is:inline>
     (() => {
@@ -54,7 +52,7 @@ const isHome = Astro.url.pathname === '/';
 
       // Mobile drawer
       const drawer = document.getElementById('drawer'), openBtn = document.getElementById('open'), closeBtn = document.getElementById('close');
-      const background = [header, document.getElementById('main'), document.querySelector('.awareness'), document.querySelector('.site-footer')];
+      const background = [header, document.getElementById('main'), document.querySelector('.site-footer')];
       const setDrawer = open => {
         drawer.toggleAttribute('data-open', open);
         drawer.inert = !open;
@@ -81,10 +79,38 @@ const isHome = Astro.url.pathname === '/';
       });
       matchMedia('(min-width:901px)').addEventListener('change', e => { if (e.matches && drawer.hasAttribute('data-open')) setDrawer(false); });
 
-      // Header state on scroll
-      const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
+      // Header: sits in the page; once scrolled past, it slides back in (fixed) whenever you scroll up.
+      const bar = document.getElementById('header-bar');
+      let lastY = scrollY;
+      const onScroll = () => {
+        const y = scrollY, past = y > header.offsetHeight;
+        bar.classList.toggle('is-fixed', past);
+        bar.classList.toggle('is-shown', past && y < lastY);
+        lastY = y;
+      };
       addEventListener('scroll', onScroll, { passive: true });
       onScroll();
+
+      // Carousels: prev/next buttons and dots; inactive slides are inert.
+      document.querySelectorAll('[data-carousel]').forEach((root) => {
+        const track = root.querySelector('.carousel__track');
+        const slides = [...root.querySelectorAll('.carousel__slide')];
+        let i = 0;
+        const go = (n) => {
+          i = (n + slides.length) % slides.length;
+          track.style.transform = `translateX(${-100 * i}%)`;
+          slides.forEach((s, k) => { s.inert = k !== i; s.setAttribute('aria-hidden', String(k !== i)); });
+          root.querySelectorAll('.dots a').forEach((d) => d.toggleAttribute('aria-current', +d.dataset.i === i));
+        };
+        root.addEventListener('click', (e) => {
+          const b = e.target.closest('[data-go]');
+          if (!b) return;
+          e.preventDefault();
+          const v = b.dataset.go;
+          go(v === 'prev' ? i - 1 : v === 'next' ? i + 1 : +v);
+        });
+        go(0);
+      });
     })();
   </script>
 </body>

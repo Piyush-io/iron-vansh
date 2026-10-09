@@ -2,7 +2,7 @@
 
 Blackstone's design system, applied to Ironclad's own content and photography.
 
-> **Provenance.** Measured from blackstone.com (Wayback Machine capture of 7 Oct 2026, `design/refs/blackstone-wb-home-*`, including computed type in `blackstone-wb-home-type.json`).
+> **Provenance.** Ported from blackstone.com's own stylesheet and markup (Wayback Machine capture, 7 Oct 2026): `design/refs/bx-home.css`, `bx-*.html` and screenshots `bx-*-desktop.jpg`.
 
 ---
 
@@ -20,11 +20,11 @@ Blackstone's design system, applied to Ironclad's own content and photography.
 |---|---|---|
 | `--bg` | `#FFFFFF` | Page |
 | black | `#000000` | Header, dark sections, footer, headlines |
-| `--card` | `#15161A` | Link card and fields inside dark sections |
+| card | `#121317` | Link card and fields inside dark sections |
 | `--text` | `#1A1A1A` | Body |
 | `--text-2` | `#555555` | Secondary |
 | `--line` | `#D9D9D9` | Hairlines on white |
-| `--pending` | `#9A6A1C` | "Licence under application" only |
+| `--c-pending` | `#A95228` (Blackstone copper) | "Licence under application" only |
 
 ## 3. Typography
 
@@ -32,37 +32,40 @@ Blackstone uses **Sanomat 300** (serif) for headings and **Guardian Sans 300** f
 
 | Role | Font | Size |
 |---|---|---|
-| `h1` | serif 400 | `clamp(40px, 5vw, 72px)` / 1.1 |
-| `h2` | serif 400 | `clamp(34px, 3.9vw, 56px)` / 1.25 |
+| `h1` | serif 300 | 48 → 64 → 72px |
+| `h2` | serif 300 | 32 → 40 → 48px, line-height 1.5 |
 | `h3` | serif 400 | 24–44px |
-| Body | sans 300 | 18px / 1.5, letter-spacing .02em |
+| Body | sans 300 | 16px base, 18–20px in components, line-height 1.5 |
 | Eyebrow | sans 400 | 14px uppercase, .08em, plus a 48px rule |
 | Nav, links | sans 400 | 16–17px |
 
 Geist Mono is used only for registration codes.
 
-## 4. Layout
+## 4. Layout (Blackstone's values)
 
-- Max width `1440px`, side gutter `clamp(20px, 4vw, 56px)`. 12-col grid, `32px` gap.
-- Vertical rhythm: sections `clamp(88px, 12vw, 176px)` apart. Inside a section, heading → content gap `clamp(40px, 5vw, 72px)`.
-- Header: 88px (64px on mobile), fixed, solid black.
-- Breakpoints: 640 / 900 / 1200. Mobile is a first-class layout, not a collapse.
+- Container: 100% − 32px on phones, then 43rem from 48em, 71rem from 80em, 79rem from 90em and 103rem from 120em.
+- Grid: 8 columns from 48em and 16 columns from 80em, with a 16px gap. Components place content on column lines exactly as Blackstone's do.
+- Section padding: 5rem, then 6rem at 48em, 9rem at 80em and 10rem at 90em. A dark section that follows another dark section uses 2.5–3.5rem.
+- Header: sits in the page (7rem, 8.75rem at 48em, 12.75rem at 80em). Once you scroll past it, it slides back in, fixed, whenever you scroll up. It is black on the homepage and white with a black logo on inner pages.
 
 ## 5. Surfaces
 
-- Square corners everywhere. The only rounded shapes are the arrow circle and stage chips.
-- No shadows, glass or gradients.
+- Square corners. The only rounded shapes are the circled arrow, the carousel dots and the stage chips.
+- No shadows, glass or gradients. Dark cards use `#121317`.
 
-## 6. Components
+## 6. Components (homepage order is Blackstone's)
 
-- **Link (`.btn`).** 17px sans text followed by a 38px circle with an arrow. On hover the arrow moves 3px.
-- **Eyebrow (`.eyebrow`).** Uppercase label followed by a 48px rule. `.eyebrow-center` stacks the rule above a centred label.
-- **Hero.** Full-bleed photo in true colour, with the title on a solid black card at the bottom left.
-- **About.** Centred eyebrow and title, copy and link on the left, one large serif figure on the right.
-- **Dark split.** Black section with the heading on the left and a `--card` link list on the right (one row per product with a circled arrow).
-- **Marquee.** Oversized serif line scrolling across a black band, with the risk line underneath. It stops when reduced motion is set.
-- **Contact band.** Black section with the heading on the left and contact details in `--card` fields underlined in white on the right.
-- **Footer.** Logo on the left and four columns of links (Products, The Firm, Investor Resources, Get in Touch), then a rule, the copyright and portal links, then the SEBI text.
+1. **Promo header.** Black. Two-line serif title, with the first word bold and the second line indented ("**Ironclad** Asset / Management"), and a description on the right.
+2. **Promo carousel.** Contained true-colour photographs. Below each: title, ← dots → navigation, and a blurb with "Learn More".
+3. **Offerings.** Centred divider, eyebrow and title, then copy with a link on the left and one serif figure on the right.
+4. **Two-up.** Black. Eyebrow, title, indented copy and CTA on the left; a `#121317` card of links with circled arrows on the right.
+5. **Ticker tape.** A giant serif line scrolling across the page, with a risk disclaimer below.
+6. **Compare** (Ironclad-specific), then a **vertical list** (statement, sticky image on the left, titled items on the right), **people**, and an **email capture** used as the contact block (fields on `#121317` with a white underline).
+7. **Footer.** Logo and four link columns, then a rule, then copyright with secondary links, then the SEBI text and investor awareness notice.
+
+- **Link (`Go.astro`).** 18px label, then a 40px circled arrow (`ArrowIcon.astro`, Blackstone's SVG). On hover the label underlines from the left, the icon scales 1.2 and fills.
+- **Eyebrow.** 14/16px uppercase with .08em tracking, followed by a 2px rule (48, 56 or 64px).
+- **Inner page header.** Serif title on the left, description on the right, then a contained photograph.
 
 ## 7. Imagery
 

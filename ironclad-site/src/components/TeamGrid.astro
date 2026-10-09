@@ -1,5 +1,6 @@
 ---
 import { founders, associates, type Person } from '../data/team';
+import Go from './Go.astro';
 interface Props { full?: boolean }
 const { full = false } = Astro.props;
 const Portrait = ({ p }: { p: Person }) => p.image
@@ -15,7 +16,7 @@ const Portrait = ({ p }: { p: Person }) => p.image
           <h3>{p.name}</h3>
           <p class="role">{p.title}</p>
           <p class="bio" set:html={p.bio} />
-          {p.linkedin && <a class="textlink" href={p.linkedin} rel="noopener" target="_blank">LinkedIn</a>}
+          {p.linkedin && <Go href={p.linkedin} label="LinkedIn" external />}
         </div>
       </article>
     ))}
@@ -30,7 +31,7 @@ const Portrait = ({ p }: { p: Person }) => p.image
           <h4>{p.name}</h4>
           <p class="role">{p.title}</p>
           <p class="bio" set:html={p.bio} />
-          {p.linkedin && <a class="textlink" href={p.linkedin} rel="noopener" target="_blank">LinkedIn</a>}
+          {p.linkedin && <Go href={p.linkedin} label="LinkedIn" external />}
         </article>
       ))}
     </div>

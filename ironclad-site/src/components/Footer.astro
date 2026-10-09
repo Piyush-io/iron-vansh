@@ -5,61 +5,57 @@ const year = 2026;
 // Every document and portal from the footer of the current ironcladamc.com is linked below.
 const doc = (name: string) => `/docs/${encodeURIComponent(name)}`;
 const ext = { rel: 'noopener', target: '_blank' };
-const resources = [
-  { label: 'Disclosure', href: doc('Disclosure-Document-2026-Ironclad-Signed.pdf') },
-  { label: 'SEBI Certificate', href: doc('01 SEBI Reg Certificate.pdf') },
-  { label: 'Investor Charter', href: doc('03 Investor Charter.pdf') },
-  { label: 'Investor Grievance', href: doc('Investor-Grevience-Sept-2026.pdf') },
-  { label: 'Complaints Data PMS', href: doc('PMS-Investor-Complains-Sept-2026.pdf') },
-  { label: 'Complaints Data AIF', href: doc('AIF-Investor-Complains-Sept-2026.pdf') },
-];
-const firm = [
-  { label: 'Our People', href: '/team' },
-  { label: 'Insights', href: '/blogs' },
-  { label: 'Investor Update', href: '/investor-update' },
-  { label: 'Media', href: '/media' },
-  { label: 'SEBI Disclosures', href: '/disclosures' },
+const columns = [
+  { title: 'Products', links: products.map((p) => ({ label: p.name.replace('Ironclad ', ''), href: `/products/${p.slug}` })) },
+  { title: 'The Firm', links: [
+    { label: 'Our People', href: '/team' },
+    { label: 'Insights', href: '/blogs' },
+    { label: 'Investor Update', href: '/investor-update' },
+    { label: 'Media', href: '/media' },
+    { label: 'SEBI Disclosures', href: '/disclosures' },
+  ] },
+  { title: 'Investor Resources', links: [
+    { label: 'Disclosure', href: doc('Disclosure-Document-2026-Ironclad-Signed.pdf') },
+    { label: 'SEBI Certificate', href: doc('01 SEBI Reg Certificate.pdf') },
+    { label: 'Investor Charter', href: doc('03 Investor Charter.pdf') },
+    { label: 'Investor Grievance', href: doc('Investor-Grevience-Sept-2026.pdf') },
+    { label: 'Complaints Data PMS', href: doc('PMS-Investor-Complains-Sept-2026.pdf') },
+    { label: 'Complaints Data AIF', href: doc('AIF-Investor-Complains-Sept-2026.pdf') },
+  ] },
+  { title: 'Get in Touch', links: [
+    { label: 'Contact Us', href: '/contact' },
+    { label: site.phone, href: site.phoneHref },
+    { label: site.email, href: `mailto:${site.email}` },
+    { label: 'Investor Login', href: site.investorLoginUrl, ext: true },
+  ] },
 ];
 ---
-<footer class="site-footer">
+<footer class="site-footer is-dark">
   <div class="wrap">
-    <div class="f-top">
-      <a class="f-logo" href="/" aria-label="Ironclad Asset Management, home"><img src="/images/logo-white.png" alt="" width="230" height="66"></a>
-      <nav class="f-cols" aria-label="Footer">
-        <div>
-          <h2>Products</h2>
-          <ul>{products.map((p) => <li><a href={`/products/${p.slug}`}>{p.name.replace('Ironclad ', '')}</a></li>)}</ul>
-        </div>
-        <div>
-          <h2>The Firm</h2>
-          <ul>{firm.map((r) => <li><a href={r.href}>{r.label}</a></li>)}</ul>
-        </div>
-        <div>
-          <h2>Investor Resources</h2>
-          <ul>{resources.map((r) => <li><a href={r.href}>{r.label}</a></li>)}</ul>
-        </div>
-        <div>
-          <h2>Get in Touch</h2>
-          <ul>
-            <li><a href="/contact">Contact Us</a></li>
-            <li><a href={site.phoneHref}>{site.phone}</a></li>
-            <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
-            <li><a href={site.investorLoginUrl} {...ext}>Investor Login</a></li>
-          </ul>
-        </div>
+    <div class="site-footer__top">
+      <a class="site-footer__logo" href="/" aria-label="Ironclad Asset Management, home"><img src="/images/logo-white.png" alt="" width="230" height="66"></a>
+      <nav class="site-footer__nav" aria-label="Footer">
+        {columns.map((c) => (
+          <div class="site-footer__col">
+            <h2>{c.title}</h2>
+            <ul>{c.links.map((l) => <li><a href={l.href} {...(l.ext ? ext : {})}>{l.label}</a></li>)}</ul>
+          </div>
+        ))}
       </nav>
     </div>
-    <div class="f-bottom">
-      <p>© {year} {site.legalName}</p>
-      <ul>
+    <div class="site-footer__bottom">
+      <p class="site-footer__copyright">© {year} {site.legalName}</p>
+      <ul class="site-footer__secondary">
         <li><a href="/privacy-policy">Privacy Policy</a></li>
+        <li><a href="/disclosures">SEBI Disclosures</a></li>
         <li><a href="https://smartodr.in/login" {...ext}>Smart ODR Portal</a></li>
         <li><a href="https://scores.sebi.gov.in/" {...ext}>Scores Portal</a></li>
       </ul>
     </div>
-    <div class="legal">
+    <div class="site-footer__legal">
+      <p><b>Investor awareness.</b> Ironclad never offers or assures guaranteed returns, and never asks you to pay into a personal account. Invest only into accounts held in the name of the fund or scheme. If someone contacts you claiming to represent Ironclad, verify with us at {site.email} before you act.</p>
       <p>{site.sebiLine}</p>
-      <p class="f-copy"><span>SEBI Regd. Number: {site.registrations.pms}</span><span>SEBI AIF Regd. Number: {site.registrations.aif}</span><span>{site.addressShort[0]}, {site.addressShort[1]}</span></p>
+      <p class="site-footer__regs"><span>SEBI Regd. Number: {site.registrations.pms}</span><span>SEBI AIF Regd. Number: {site.registrations.aif}</span><span>{site.address}</span></p>
     </div>
   </div>
 </footer>

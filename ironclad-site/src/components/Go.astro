@@ -1,0 +1,7 @@
+---
+// Blackstone's "Learn More ⟶" link: label with a hover underline, then the circled arrow.
+import ArrowIcon from './ArrowIcon.astro';
+interface Props { href: string; label?: string; external?: boolean; class?: string }
+const { href, label = 'Learn More', external = false, class: className } = Astro.props;
+---
+<a class:list={['go', className]} href={href} {...(external ? { rel: 'noopener', target: '_blank' } : {})}><span class="go__label">{label}</span><ArrowIcon /></a>

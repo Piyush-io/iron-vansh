@@ -2,40 +2,44 @@
 import { products } from '../data/products';
 import { site } from '../data/site';
 
-interface Props { pathname: string }
-const { pathname } = Astro.props;
+interface Props { pathname: string; dark?: boolean }
+const { pathname, dark = false } = Astro.props;
 const path = pathname.replace(/\/+$/, '') || '/';
 const is = (p: string) => path === p || path.startsWith(p + '/');
 const cur = (p: string) => (is(p) ? 'page' : undefined);
 const inProducts = is('/products');
+const chevron = '<svg class="chev" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M1 1.5l5 5 5-5"/></svg>';
 ---
-<header class="site-header" id="header">
-  <div class="wrap bar">
-    <a class="brand" href="/" aria-label="Ironclad Asset Management, home">
-      <img src="/images/logo-white.png" alt="" width="200" height="58">
-    </a>
-    <nav class="primary" aria-label="Primary">
-      <div class:list={['dd', { 'is-current': inProducts }]} id="dd">
-        <button type="button" aria-expanded="false" aria-controls="dd-panel">Products
-          <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
-        </button>
-        <div class="dd-panel" id="dd-panel">
-          {products.map((p) => (
-            <a href={`/products/${p.slug}`} aria-current={cur(`/products/${p.slug}`)}><b>{p.name}</b><span>{p.navSub}</span></a>
-          ))}
-        </div>
-      </div>
-      <a href="/team" aria-current={cur('/team')}>The firm</a>
-      <a href="/blogs" aria-current={cur('/blogs')}>Insights</a>
-      <a href="/contact" aria-current={cur('/contact')}>Contact</a>
-    </nav>
-    <a class="login" href={site.investorLoginUrl} rel="noopener" target="_blank">Investor login</a>
-    <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer" id="open"><i></i></button>
+<header class:list={['site-header', { 'is-dark': dark }]} id="header">
+  <div class="site-header__container" id="header-bar">
+    <div class="wrap site-header__inner">
+      <a class="site-header__logo" href="/" aria-label="Ironclad Asset Management, home">
+        <img src="/images/logo-white.png" alt="" width="200" height="58">
+      </a>
+      <nav class="primary-nav" aria-label="Primary">
+        <ul>
+          <li class:list={['dd', { 'is-current': inProducts }]} id="dd">
+            <button type="button" aria-expanded="false" aria-controls="dd-panel">Products <Fragment set:html={chevron} /></button>
+            <div class="dd-panel" id="dd-panel">
+              {products.map((p) => (
+                <a href={`/products/${p.slug}`} aria-current={cur(`/products/${p.slug}`)}><b>{p.name}</b><span>{p.navSub}</span></a>
+              ))}
+            </div>
+          </li>
+          <li><a href="/team" aria-current={cur('/team')}>The Firm</a></li>
+          <li><a href="/blogs" aria-current={cur('/blogs')}>Insights</a></li>
+          <li><a href="/media" aria-current={cur('/media')}>Media</a></li>
+          <li><a href="/contact" aria-current={cur('/contact')}>Contact</a></li>
+          <li><a href={site.investorLoginUrl} rel="noopener" target="_blank">Investor Login</a></li>
+        </ul>
+      </nav>
+      <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer" id="open"><i></i></button>
+    </div>
   </div>
 </header>
 
 <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Navigation menu" aria-hidden="true" inert>
-  <div class="top">
+  <div class="drawer__top">
     <img src="/images/logo-white.png" alt="Ironclad Asset Management" width="200" height="58">
     <button class="menu-btn" type="button" aria-label="Close menu" id="close" style="display:flex">
       <svg width="20" height="20" viewBox="0 0 20 20" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 3l14 14M17 3L3 17"/></svg>
@@ -45,9 +49,10 @@ const inProducts = is('/products');
     {products.map((p) => (
       <a href={`/products/${p.slug}`} aria-current={cur(`/products/${p.slug}`)}>{p.name}<small>{p.navSub}</small></a>
     ))}
-    <a href="/team" aria-current={cur('/team')}>The firm</a>
+    <a href="/team" aria-current={cur('/team')}>The Firm</a>
     <a href="/blogs" aria-current={cur('/blogs')}>Insights</a>
+    <a href="/media" aria-current={cur('/media')}>Media</a>
     <a href="/contact" aria-current={cur('/contact')}>Contact</a>
+    <a href={site.investorLoginUrl} rel="noopener" target="_blank">Investor Login</a>
   </nav>
-  <a class="btn login" href={site.investorLoginUrl} rel="noopener" target="_blank">Investor login</a>
 </div>

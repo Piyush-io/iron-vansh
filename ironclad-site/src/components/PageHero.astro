@@ -1,19 +1,23 @@
 ---
+// Blackstone page header: serif title left, short description right, then a contained photograph.
 import Photo from './Photo.astro';
 import type { PhotoName } from '../data/photos';
 interface Props { title: string; summary?: string; where?: string; reg?: string; status?: string; photo?: PhotoName; position?: string }
 const { title, summary, where, reg, status, photo, position } = Astro.props;
 ---
-<section class:list={['ph', { 'ph-plain': !photo }]}>
-  <div class="wrap">
-    {where && <p class="eyebrow ph-where">{where}</p>}
-    <h1 class="ph-title">{title.replace(/\.$/, '')}</h1>
+<section class="page-header">
+  <div class="wrap page-header__inner">
+    <div class="page-header__title-col">
+      {where && <p class="eyebrow page-header__eyebrow">{where}</p>}
+      <h1 class="page-header__title">{title.replace(/\.$/, '')}</h1>
+    </div>
     {(summary || reg || status) && (
-      <div class="ph-sub">
-        {summary && <p class="ph-summary">{summary}</p>}
-        {(reg || status) && <div class="ph-meta">{reg && <p>{reg}</p>}{status && <p class="status">{status}</p>}</div>}
+      <div class="page-header__desc">
+        {summary && <p>{summary}</p>}
+        {reg && <p class="page-header__meta">{reg}</p>}
+        {status && <p class="status">{status}</p>}
       </div>
     )}
-    {photo && <figure class="ph-img"><Photo name={photo} eager decorative sizes="(max-width: 1440px) 100vw, 1440px" position={position} /></figure>}
   </div>
 </section>
+{photo && <div class="wrap hero-media"><Photo name={photo} eager decorative sizes="(max-width: 1440px) 100vw, 1264px" position={position} /></div>}
