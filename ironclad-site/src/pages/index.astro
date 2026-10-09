@@ -80,21 +80,35 @@ const market = { pms: 'Indian listed equities', ventures: 'Venture-backed startu
         ))}
       </div>
 
-      <div class="compare" role="table" aria-label="Strategy comparison" data-reveal>
-        <div class="compare-row compare-head" role="row">
-          <span role="columnheader" class="mono">Strategy</span><span role="columnheader" class="mono">Invests in</span><span role="columnheader" class="mono">Portfolio construction</span><span role="columnheader" class="mono">Regulation</span>
-        </div>
+      <div class="mandates" data-reveal>
+        <div class="m-labels" aria-hidden="true"><span></span><span>Portfolio</span><span>Construction</span><span>Invests in</span><span></span></div>
         {products.map((p) => (
-          <a class="compare-row" role="row" href={`/products/${p.slug}`}>
-            <span role="cell" class="c-name" data-label="Strategy">{p.name}</span>
-            <span role="cell" data-label="Invests in">{p.where}</span>
-            <span role="cell" class="c-alloc" data-label="Portfolio construction">
-              <span class="c-summary">{p.portfolioSummary}</span>
-              {p.alloc && <span class="alloc-bar" role="img" aria-label={p.alloc.aria}>{p.alloc.segs.map((s) => <span class={`seg ${s.cls}`} style={`flex:${s.flex}`}></span>)}</span>}
-              {p.alloc && <span class="alloc-legend" aria-hidden="true">{p.alloc.segs.map((s) => <span><i class={`sw ${s.cls}`}></i>{s.label} <b>{s.strong}</b></span>)}</span>}
-            </span>
-            <span role="cell" data-label="Regulation">{p.status ?? p.reg?.replace(/ \(.*\)$/, '')}</span>
-          </a>
+          <article class="m-col" aria-labelledby={`m-${p.slug}`}>
+            <header class="m-head">
+              <span class="m-market">{market[p.slug]}</span>
+              <h3 id={`m-${p.slug}`}>{p.name}</h3>
+              <span class:list={['pill', p.compare.status]}>{p.compare.status === 'pending' ? 'Licence under application' : 'SEBI-registered'}</span>
+            </header>
+            <div class="m-figure" data-label="Portfolio">
+              <p><b>{p.compare.figure}</b> <span>{p.compare.figureLabel}</span></p>
+              <p class="m-detail">{p.compare.detail}</p>
+            </div>
+            <div class="m-build" data-label="Construction">
+              {p.alloc ? (
+                <>
+                  <span class="alloc-bar" role="img" aria-label={p.alloc.aria}>{p.alloc.segs.map((s) => <span class={`seg ${s.cls}`} style={`flex:${s.flex}`}></span>)}</span>
+                  <ul class="m-legend">{p.alloc.segs.map((s) => <li><span><i class={`sw ${s.cls}`}></i>{s.label}</span><b>{s.strong}</b></li>)}</ul>
+                </>
+              ) : (
+                <ul class="m-stages">{p.compare.stages?.map((t) => <li>{t}</li>)}</ul>
+              )}
+            </div>
+            <div class="m-where" data-label="Invests in">
+              <p>{p.where}</p>
+              <p class="m-reg">{p.compare.regShort}</p>
+            </div>
+            <a class="m-link" href={`/products/${p.slug}`}>Explore {p.name.replace('Ironclad ', '')}<Arrow /></a>
+          </article>
         ))}
       </div>
     </div>

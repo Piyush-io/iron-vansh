@@ -28,6 +28,7 @@ export interface Product {
   sections: ItemSection[];
   /** Short facts for the comparison table on the homepage. */
   portfolioSummary: string;
+  compare: { figure: string; figureLabel: string; detail: string; stages?: string[]; status: 'registered' | 'pending'; regShort: string };
   alloc?: { title: string; sub: string; aria: string; segs: Seg[]; note?: string };
   construction?: { title: string; bullets: string[] };
   chips?: { title: string; items: string[] };
@@ -76,6 +77,7 @@ export const products: Product[] = [
       },
     ],
     portfolioSummary: '15–20 companies across large-, mid- and small-cap',
+    compare: { figure: '15–20', figureLabel: 'companies', detail: 'A concentrated portfolio across large-, mid- and small-cap.', status: 'registered', regShort: 'SEBI PMS · INP000009074' },
     alloc: {
       title: 'Portfolio construction',
       sub: 'Indicative allocation',
@@ -134,6 +136,7 @@ export const products: Product[] = [
       },
     ],
     portfolioSummary: '25–40 companies, mainly Series A and early Series B',
+    compare: { figure: '25–40', figureLabel: 'companies', detail: 'Diversified across startups backed by established VC funds.', stages: ['Series A', 'Early Series B', 'Selective seed'], status: 'registered', regShort: 'SEBI Category I AIF · IN/AIF/25-26/1899' },
     construction: {
       title: 'Portfolio construction',
       bullets: [
@@ -198,6 +201,7 @@ export const products: Product[] = [
       },
     ],
     portfolioSummary: 'US-led global equities and ETFs, 3–5 year horizon',
+    compare: { figure: '3–5', figureLabel: 'year suggested horizon', detail: 'Direct equities and ETFs, led by the United States.', status: 'pending', regShort: 'GIFT City · IFSCA licence under application' },
     alloc: {
       title: 'Geographic allocation',
       sub: 'Indicative; actual allocations may vary with market conditions',
