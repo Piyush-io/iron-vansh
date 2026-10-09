@@ -1,0 +1,149 @@
+.wpcf7-form{
+	max-width: 950px;
+	margin: 0 auto;
+	.row{
+		margin: 0 -10px;
+		> div{
+			padding: 0 10px;
+		}
+	}
+	p{
+		margin-bottom: 20px;
+		font-weight: 600;
+	}
+	.wpcf7-form-control-wrap{
+		display: block;
+		margin-bottom: 22px;
+	} 
+	label{
+		display: inline-block;
+		font-weight: 500;
+		color: $black;
+		margin-bottom: 5px;
+	}
+	input[type*="email"], input[type*="text"], input[type*="tel"]{
+		width: 100%;
+		height: 60px;
+		padding: 0 15px;
+		border: none!important;
+		background: $bg-gray;
+		border: 1px solid transparent!important;
+		font-size: 14px;
+		border-radius: 0;
+		transition: all 0.35s;
+		&:focus, &:active{
+			border-color: $theme-color!important;
+		}
+	}
+	select{ 
+		background: $bg-gray;
+		border: 1px solid transparent!important;
+		line-height: 60px;
+		height: 60px;
+		width: 100%;
+		color: $body-color;
+		font-size: 14px;
+		&:focus, &:active{
+			border-color: $theme-color!important;
+		}
+	}
+	textarea{
+		width: 100%;
+		padding: 10px 20px;
+		max-height: 180px;
+		border: none!important;
+		background: $bg-gray;
+		border: 1px solid transparent!important;
+		font-size: 14px;
+		border-radius: 0;
+		&::-webkit-input-placeholder { 
+		  color: $body-color;
+		}
+		&::-moz-placeholder {
+		  color: $body-color;
+		}
+		&:-ms-input-placeholder { 
+		  color: $body-color;
+		}
+		&:-moz-placeholder { 
+		  color: $body-color;
+		}
+		&:focus, &:active{
+			border-color: $theme-color!important;
+		}
+		&.size-medium{
+			max-height: 135px;
+		}
+	}
+	.form-action{
+		text-align: center;
+		padding: 0;
+		position: relative;
+		input{
+			padding: 25px 50px 20px!important;
+		}
+		.ajax-loader{
+		  position: absolute;
+		  right: 0;
+		  top: 50%;
+		  margin-top: -8px;
+		}
+	}
+}
+
+.newsletter-form{
+  	position: relative;
+  	max-width: 710px;
+  	overflow: hidden;
+  	margin: 0 auto;
+  	.title{
+  		color: $white;
+  		font-size: 16px;
+  		margin: 0 0 15px;
+  	}
+  	.content-form{
+  		position: relative;
+  		display: flex;
+	  	input[type="email"]{
+		 	padding: 0 15px;
+		 	text-align: left;
+		 	width: calc(100% - 72px);
+		 	line-height: 60px;
+		 	transition: all 0.35s;
+		 	font-size: 16px;
+		 	color: $footer-color;
+		 	background: none;
+		 	border-radius: 0;
+		 	border: 1px solid rgba(255, 255, 255, 0.2);
+		 	background: $theme-color-2;
+		 	&:focus, &:hover{ 
+				border-color: $theme-color;
+		 	}
+		 	&::-webkit-input-placeholder { 
+			  color: $footer-color;
+			}
+			&::-moz-placeholder {
+			  color: $footer-color;
+			}
+			&:-ms-input-placeholder { 
+			  color: $footer-color;
+			}
+			&:-moz-placeholder { 
+			  color: $footer-color;
+			}
+	  	}
+	 	input.newsletter-submit{
+			border: none;
+			width: 72px;
+			padding: 0!important;
+			align-items: center;
+			background: $theme-color;
+			position: relative;
+			z-index: 11;
+	 	}
+	 	&:hover{
+		 	opacity: 0.88;
+		 	cursor: pointer;
+		}
+	}
+}

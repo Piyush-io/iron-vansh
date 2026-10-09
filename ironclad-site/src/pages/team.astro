@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import TeamGrid from '../components/TeamGrid.astro';
+---
+<Base title="Team" description="The people who research and manage Ironclad's three strategies." darkHero={true}>
+  <PageHero title="Our team." summary="Investors and operators managing Ironclad’s public market, private market and global strategies." crest />
+  <section class="team" aria-label="Team members">
+    <div class="wrap"><TeamGrid full /></div>
+  </section>
+</Base>

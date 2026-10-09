@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+const r = site.registrations;
+const sections = [
+  { id: 'disclaimer', title: 'Disclaimer' },
+  { id: 'risk-factors', title: 'Risk factors' },
+  { id: 'investor-charter', title: 'Investor charter' },
+  { id: 'grievance', title: 'Grievance redressal / SCORES' },
+  { id: 'latius-ifsca', title: 'Latius IFSCA status', status: 'IFSCA licence under application' },
+];
+---
+<Base title="SEBI disclosures" description="Registrations and regulatory disclosures for Ironclad Asset Management LLP." darkHero={true}>
+  <PageHero title="SEBI disclosures." crest />
+
+  <section class="section" id="registrations" aria-labelledby="reg-title">
+    <div class="wrap">
+      <h2 class="d3" id="reg-title" style="color:var(--ink);margin-bottom:32px">Registrations</h2>
+      <table class="reg-table">
+        <tbody>
+          <tr><th scope="row">Entity</th><td>{site.legalName}</td></tr>
+          <tr><th scope="row">SEBI PMS registration</th><td>{r.pms}</td></tr>
+          <tr><th scope="row">SEBI Category I AIF registration</th><td>{r.aif}</td></tr>
+          <tr><th scope="row">GST</th><td>{r.gst}</td></tr>
+          <tr><th scope="row">PAN</th><td>{r.pan}</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      {sections.map((s) => (
+        <div class="disc" id={s.id}>
+          <h2>{s.title}</h2>
+          {s.status && <span class="status">{s.status}</span>}
+          <p><span class="tbc">To be supplied by compliance</span></p>
+        </div>
+      ))}
+    </div>
+  </section>
+</Base>

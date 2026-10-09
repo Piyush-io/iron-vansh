@@ -1,0 +1,16 @@
+---
+import { products } from '../data/products';
+---
+<div class="idx" role="list">
+  <div class="idx-row idx-headrow" aria-hidden="true">
+    <span>Strategy</span><span>Invests in</span><span>Regulation</span><span></span>
+  </div>
+  {products.map((p) => (
+    <a class="idx-row" role="listitem" href={`/products/${p.slug}`}>
+      <span class="idx-name">{p.name}</span>
+      <span>{p.where}</span>
+      <span>{p.status ?? p.reg?.replace(/ \(.*\)$/, '')}</span>
+      <span class="idx-go">View</span>
+    </a>
+  ))}
+</div>

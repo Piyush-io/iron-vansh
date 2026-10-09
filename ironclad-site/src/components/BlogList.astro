@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import { site } from '../data/site';
+interface Props { limit?: number }
+const { limit } = Astro.props;
+const all = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const posts = limit ? all.slice(0, limit) : all;
+const fmt = new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+{posts.length === 0 ? (
+  <div class="empty">
+    <p class="d3" style="color:var(--ink)">Our first posts are on the way.</p>
+    <p>In the meantime, write to us at <a class="textlink" href={`mailto:${site.email}`}>{site.email}</a> with any questions.</p>
+  </div>
+) : (
+  <div class="posts">
+    {posts.map((p) => (
+      <a class="post" href={`/blogs/${p.id}`}>
+        <time datetime={p.data.date.toISOString()}>{fmt.format(p.data.date)}</time>
+        <h3>{p.data.title}</h3>
+        <p>{p.data.summary}</p>
+      </a>
+    ))}
+  </div>
+)}

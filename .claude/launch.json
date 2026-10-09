@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "design-ref",
+      "runtimeExecutable": "/usr/bin/python3",
+      "runtimeArgs": ["-I", "-c", "import http.server,socketserver,functools; socketserver.TCPServer.allow_reuse_address=True; H=functools.partial(http.server.SimpleHTTPRequestHandler,directory='/private/tmp/claude-501/-Users-piyushmittal-Downloads-Vansh/c3b8e1e5-f4f5-4945-9c85-6c9c76c65e99/scratchpad/site'); socketserver.TCPServer(('127.0.0.1',4173),H).serve_forever()"],
+      "port": 4173
+    }
+  ]
+}

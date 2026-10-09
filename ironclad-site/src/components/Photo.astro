@@ -1,0 +1,12 @@
+---
+import { photos, photoUrl, type PhotoName } from '../data/photos';
+interface Props { name: PhotoName; sizes?: string; eager?: boolean; decorative?: boolean; class?: string }
+const { name, sizes = '100vw', eager = false, decorative = false, class: className } = Astro.props;
+const photo = photos[name];
+const local = 'file' in photo;
+const widths = local ? [640, 960, 1440, 1672] : [640, 960, 1440, 1920, 2560, 3840];
+const url = (width: number) => 'file' in photo ? `${photo.file}-${width}.webp` : photoUrl(photo.id, width);
+const fallback = 'fallback' in photo ? photo.fallback : `${photo.file}.png`;
+const fallbackAlt = 'fallbackAlt' in photo ? photo.fallbackAlt : photo.alt;
+---
+<img class={className} src={url(local ? 1672 : 1920)} srcset={widths.map(w => `${url(w)} ${w}w`).join(', ')} sizes={sizes} alt={decorative ? '' : photo.alt} width={'width' in photo ? photo.width : 3840} height={'height' in photo ? photo.height : 2560} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} decoding="async" data-fallback={fallback} data-fallback-alt={decorative ? '' : fallbackAlt} onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.fallback;this.alt=this.dataset.fallbackAlt;this.classList.add('image-fallback')" />

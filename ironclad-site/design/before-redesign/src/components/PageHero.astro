@@ -1,0 +1,34 @@
+---
+import Globe from './Globe.astro';
+interface Props {
+  title: string;
+  summary?: string;
+  where?: string;
+  reg?: string;
+  status?: string;
+  image?: string;
+  imagePos?: string;
+  globe?: boolean;
+  crest?: boolean;
+}
+const { title, summary, where, reg, status, image, imagePos = 'center 45%', globe = false } = Astro.props;
+---
+<section class="ph">
+  <div class="wrap">
+    <div class="g12 ph-top">
+      <p class="lbl">{where ?? 'Ironclad Asset Management'}</p>
+      <h1 class="ph-title">{title.replace(/\.$/, '')}</h1>
+    </div>
+    {(summary || reg || status) && (
+      <div class="g12 ph-sub">
+        <div class="ph-meta">
+          {reg && <p>{reg}</p>}
+          {status && <p class="status">{status}</p>}
+        </div>
+        {summary && <p class="ph-summary">{summary}</p>}
+      </div>
+    )}
+    {image && <figure class="ph-img"><img src={image} alt="" style={`object-position:${imagePos}`} /></figure>}
+    {globe && <figure class="ph-img ph-globe"><Globe /></figure>}
+  </div>
+</section>

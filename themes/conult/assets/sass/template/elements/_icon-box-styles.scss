@@ -1,0 +1,70 @@
+.gsc-icon-box-styles{
+  	&.style-1{
+	 	position: relative;
+	 	@include clearfix();
+	 	text-align: left;
+	 	margin-bottom: 30px;
+	 	.icon-box-content{
+			text-align: center;
+			transition: all 0.35s;
+			background: $bg-gray;
+			.box-icon{
+			  	display: inline-block;
+			  	transition: all 0.35s;
+			  	width: 84px;
+			  	height: 84px;
+			  	line-height: 84px;
+			  	border-radius: 50%;
+			  	background: $theme-color;
+			  	position: absolute;
+			  	left: 50%;
+			  	top: -42px;
+			  	margin-left: -42px;
+			  	box-shadow: 0px 16px 30px 0px rgba(0, 0, 0, 0.1);
+			  	i, svg{
+				 	color: $white;
+				 	fill: $white;
+				 	transition: all 0.35s;
+				 	height: auto;
+			  }
+			}
+	 	}
+	 	.box-content{
+	 		padding: 68px 30px 30px;
+			.title{
+			  	color: $black;
+			  	font-size: 20px;
+			  	line-height: 30px;
+			  	margin: 0 0 10px;
+			  	display: block;
+				transition: all 0.35s;
+			  	@include media-breakpoint-down(lg){
+				 	font-size: 20px;
+			  	}
+			}
+	  		.desc{
+		 		font-weight: 500;
+		 		line-height: 28px;
+	  		}
+	 	}
+	 	.link-overlay{
+	 		@include size(100%, 100%);
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 1;
+		}
+  	}
+  	
+  	&:hover, &.active{
+	 	.icon-inner{
+			.box-icon{
+			  	svg, i{
+				 	color: $white;
+				 	fill: $white;
+				 	animation: beat 1.5s ease 0s infinite;
+			  	}
+			}
+		}
+  	}
+}

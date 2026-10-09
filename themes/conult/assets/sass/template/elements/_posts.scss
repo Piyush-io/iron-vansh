@@ -1,0 +1,206 @@
+.gva-posts-grid{
+	.posts-grid-filter{
+	  margin-bottom: 15px;
+	  width: 100%;
+	  float: left;
+	  ul.nav-tabs{
+		 display: inline-block;
+		 text-align: left;
+		 float: left;
+		 padding-top: 15px;
+		 > li{
+			> a{
+			  background: none;
+			  font-weight: 500;
+			  color: $black;
+			  @include transition(all 0.35s);
+			  text-transform: uppercase;
+			  padding: 0 10px;
+			  &.active{
+				 color: $theme-color;
+			  }
+			}
+		 }
+	  }
+	  .view-all{
+		 float: right;
+	  }
+	}
+	.gva-content-items{
+	  float: left;
+	  width: 100%;
+	}
+}
+.gva-posts-grid{
+  .post{
+	 margin-bottom: 30px;
+  }
+}
+
+.gva-posts-sticky{
+	.gva-content-items{
+	 	position: relative;
+	  	float: left;
+	  	width: 100%;
+		.first-post{
+		  	overflow: hidden;
+		  	@include media-breakpoint-down(md){
+			 	width: 100%;
+			 	position: relative;
+			 	margin-bottom: 30px;
+		  	}
+		  	.post{
+			 	margin-bottom: 0!important;
+			 	position: relative;
+			 	max-width: 600px;
+			 	.entry-content{
+				  	bottom: 0;
+				  	padding: 35px 35px;
+				  	background: $theme-color;
+				  	z-index: 11;
+				  	border: none;
+					box-shadow: none;
+					@media(max-width: 1200px){
+						padding: 30px;
+					}
+					&:after{
+					  	content: '';
+					  	width: 100%;
+					  	height: 150px;
+					  	background: $theme-color;
+					  	border-radius: 0;
+					  	position: absolute;
+					  	top: 100%;
+					  	left: 0;
+					  	z-index: 11;
+					}
+				  	@include media-breakpoint-down(lg){
+					 	padding: 20px 30px 20px;
+					}
+					.content-inner{
+				  		text-align: left;
+				  		padding: 0;
+				  		.entry-meta{
+					 		background: none;
+					 		color: $white;
+					 		i{
+								color: $white!important;
+							}
+					 		.entry-date{
+								color: $white;
+					 		}
+				  		}
+				  		.entry-title{
+						 	font-size: 26px;
+						 	line-height: 40px;
+						 	padding: 0;
+						 	margin: 0;
+						 	@include media-breakpoint-down(lg){
+							  	font-size: 22px;
+							  	line-height: 30px;
+						 	}
+					 		a{
+						  		color: $white;
+					 		}
+					  	}
+				 	}
+			  	}
+			}
+		}
+
+		.list-post{
+			.post{
+				margin-bottom: 30px;
+				position: relative;
+				@include media-breakpoint-down(lg){
+					margin-bottom: 20px;
+				}
+				.post-thumbnail{
+					width: 230px;
+					z-index: 1;
+					float: left;
+					border-radius: 0;
+					@include media-breakpoint-down(xl){
+					  width: 160px;
+					}
+					@include media-breakpoint-down(lg){
+					  width: 150px;
+					}
+				}
+				.entry-content{
+					width: 100%;
+					padding: 15px 0 0 230px;
+					border: none;
+					box-shadow: none;
+					background: none;
+					@include media-breakpoint-down(xl){
+						padding-top: 0;
+					  	padding-left: 160px;
+					}
+					@include media-breakpoint-down(lg){
+					  	padding-left: 150px;
+					}
+					.content-inner{
+					  text-align: left;
+					  max-width: unset;
+					  padding-left: 30px;
+					  width: 100%;
+					  @include media-breakpoint-down(xl){
+							padding-left: 20px;
+					  }
+					  .entry-meta{
+							box-shadow: none;
+							float: left;
+							width: 100%;
+							padding: 0;
+							text-align: left;
+							margin-top: 0;
+							@include media-breakpoint-down(xl){
+							 	.author-seperate, .post-comment{
+								 	display: none;
+							 	}
+							}
+							.meta-inline{
+								> span{
+									&:last-child{
+										margin-right: 0;
+									}
+								}
+							}
+					  	}
+					  	.entry-title{
+							float: left;
+							width: 100%;
+							font-size: 22px;
+							line-height: 34px;
+							padding: 0;
+							margin: 0;
+							@include media-breakpoint-down(xl){
+							  font-size: 20px;
+							  line-height: 28px;
+							}
+							@include media-breakpoint-down(lg){
+							  margin-top: 0;
+							  font-size: 18px;
+							}
+					  	}
+					}
+				}
+				&:last-child{
+					margin-bottom: 0;
+				}
+				&:hover{
+					box-shadow: none;
+				}
+			}
+	 	}
+  	}
+}
+
+.gva-posts-list-small{
+	.gva-content-items{
+		> .post:last-child{
+			margin-bottom: 0;
+		}
+	}
+}

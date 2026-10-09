@@ -1,0 +1,43 @@
+---
+import { products } from '../data/products';
+import { site } from '../data/site';
+const year = 2026;
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <img src="/images/logo-navy.png" alt="Ironclad Asset Management" width="230" height="52">
+        <p style="max-width:28em">{site.tagline}</p>
+      </div>
+      <nav aria-label="Products"><h2>Products</h2><ul>
+        {products.map((p) => <li><a href={`/products/${p.slug}`}>{p.name}</a></li>)}
+      </ul></nav>
+      <nav aria-label="Company"><h2>Company</h2><ul>
+        <li><a href="/team">Team</a></li>
+        <li><a href="/blogs">Blogs</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/disclosures">SEBI disclosures</a></li>
+        <li><a href="/disclosures#investor-charter">Investor charter</a></li>
+        <li><a href="/disclosures#grievance">Grievance redressal</a></li>
+      </ul></nav>
+      <div><h2>Contact</h2><ul>
+        <li>{site.addressShort[0]}<br>{site.addressShort[1]}</li>
+        <li><a href={site.phoneHref}>{site.phone}</a></li>
+        <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+        <li><a href={site.investorLoginUrl} rel="noopener" target="_blank">Investor login</a></li>
+      </ul></div>
+    </div>
+    <dl class="regs">
+      <div><dt>Entity</dt><dd>{site.legalName}</dd></div>
+      <div><dt>SEBI PMS registration</dt><dd>{site.registrations.pms}</dd></div>
+      <div><dt>SEBI AIF registration</dt><dd>{site.registrations.aif}</dd></div>
+      <div><dt>GST</dt><dd>{site.registrations.gst}</dd></div>
+      <div><dt>PAN</dt><dd>{site.registrations.pan}</dd></div>
+    </dl>
+    <div class="legal">
+      <p>{site.sebiLine}<span class="tbc">Full disclosures to be supplied by compliance</span></p>
+      <p>© {year} {site.legalName}.</p>
+    </div>
+  </div>
+</footer>

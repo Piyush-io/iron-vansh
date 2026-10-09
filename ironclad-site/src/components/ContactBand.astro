@@ -1,0 +1,11 @@
+---
+import { site } from '../data/site';
+interface Props { heading?: string; lede?: string }
+const { heading = 'Talk to our investment team.', lede = 'We can walk you through the mandates, the investment process, and the risks of each strategy.' } = Astro.props;
+---
+<section class="contact-band" id="contact" aria-labelledby="contact-title">
+  <div class="wrap contact-layout">
+    <div><h2 id="contact-title">{heading}</h2><p>{lede}</p><a class="button button-light" href="/contact">Contact the team</a></div>
+    <dl class="contact-direct"><div><dt>Email</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div><div><dt>Phone</dt><dd><a href={site.phoneHref}>{site.phone}</a></dd></div><div><dt>Office</dt><dd>Noida, India</dd></div></dl>
+  </div>
+</section>

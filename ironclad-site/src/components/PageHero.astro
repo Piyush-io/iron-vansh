@@ -1,0 +1,13 @@
+---
+import Photo from './Photo.astro';
+interface Props { title: string; summary?: string; where?: string; reg?: string; status?: string; image?: string; imagePos?: string; globe?: boolean; crest?: boolean }
+const { title, summary, where, reg, status, image, globe = false } = Astro.props;
+---
+<section class="ph">
+  <div class="wrap">
+    <div class="ph-top"><h1 class="ph-title">{title.replace(/\.$/, '')}</h1>{where && <p class="ph-market">{where}</p>}</div>
+    {(summary || reg || status) && <div class="ph-sub">{summary && <p class="ph-summary">{summary}</p>}<div class="ph-meta">{reg && <p>{reg}</p>}{status && <p class="status">{status}</p>}</div></div>}
+    {image && <figure class="ph-img"><Photo name={image.includes('ventures') ? 'ventures' : 'mumbai'} eager decorative /></figure>}
+    {globe && <figure class="ph-img"><Photo name="global" eager decorative /></figure>}
+  </div>
+</section>

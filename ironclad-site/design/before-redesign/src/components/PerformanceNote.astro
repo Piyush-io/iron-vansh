@@ -1,0 +1,16 @@
+---
+import { SHOW_PERFORMANCE_CLAIMS } from '../data/site';
+interface Props { claims: string[] }
+const { claims } = Astro.props;
+---
+{SHOW_PERFORMANCE_CLAIMS && claims.length > 0 && (
+  <div class="perf-wrap">
+    <div class="wrap">
+      <aside class="perf" aria-labelledby="perf-title">
+        <h2 id="perf-title">Targets and historical context</h2>
+        <ul>{claims.map((c) => <li>{c}</li>)}</ul>
+        <p class="disclaimer">Targets are not guarantees. Past performance does not indicate future results. Wording subject to compliance review.</p>
+      </aside>
+    </div>
+  </div>
+)}

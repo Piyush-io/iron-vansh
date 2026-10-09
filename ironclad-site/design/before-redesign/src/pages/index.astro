@@ -1,0 +1,89 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import StrategyList from '../components/StrategyList.astro';
+import ContactBand from '../components/ContactBand.astro';
+import BlogList from '../components/BlogList.astro';
+import { site } from '../data/site';
+import { team } from '../data/team';
+
+const founder = team[0];
+const hasPosts = (await getCollection('blog')).length > 0;
+---
+<Base>
+  <section class="sx-hero">
+    <div class="wrap sx-hero-inner">
+      <h1 class="sx-title">Patient capital, invested across India and the world.</h1>
+      <p class="sx-intro">Ironclad Asset Management invests across listed Indian equities, Indian private companies and global equities, with a long horizon and an owner’s discipline.</p>
+    </div>
+  </section>
+
+  <aside class="proof" aria-label="Registrations">
+    <div class="wrap proof-row">
+      <div>
+        <span>SEBI Portfolio Manager</span>
+        <b>{site.registrations.pms}</b>
+      </div>
+      <div>
+        <span>SEBI Category I AIF</span>
+        <b>{site.registrations.aif}</b>
+      </div>
+      <div>
+        <span>GIFT City</span>
+        <b>IFSCA licence under application</b>
+      </div>
+    </div>
+  </aside>
+
+  <section class="claim" aria-labelledby="claim-horizon">
+    <div class="wrap g12">
+      <h2 class="claim-title" id="claim-horizon">An owner’s horizon</h2>
+      <p class="claim-body">We judge businesses on what they can earn over a decade, not on this quarter’s price. Positions are sized as if the capital were our own.</p>
+    </div>
+  </section>
+
+  <section class="claim claim-panel" aria-labelledby="claim-cycle">
+    <div class="wrap g12">
+      <h2 class="claim-title" id="claim-cycle">Through the cycle</h2>
+      <p class="claim-body">Drawdowns are inevitable. We aim to participate in the upside while managing risk through the downturns.</p>
+    </div>
+  </section>
+
+  <section class="claim" aria-labelledby="claim-operator">
+    <div class="wrap g12">
+      <h2 class="claim-title" id="claim-operator">Investor and operator</h2>
+      <p class="claim-body">Our team has evaluated businesses as investors and built them as operators. That shapes how we underwrite every position.</p>
+    </div>
+  </section>
+
+  <section class="sx sx-strat" aria-labelledby="strat-title">
+    <div class="wrap">
+      <h2 class="sx-title sx-title-section" id="strat-title">Three strategies, each with its own mandate and its own regulator.</h2>
+      <StrategyList />
+    </div>
+  </section>
+
+  <section class="sx sx-lead" aria-labelledby="lead-title">
+    <div class="wrap g12">
+      <h2 class="lbl" id="lead-title">Leadership</h2>
+      <figure class="sx-portrait"><img src={founder.image} alt={founder.name} loading="lazy" /></figure>
+      <div class="sx-person">
+        <p class="sx-name">{founder.name}</p>
+        <p class="sx-role">{founder.title}</p>
+        <p class="sx-bio">{founder.bio}</p>
+        <a class="textlink" href="/team">Meet our team</a>
+      </div>
+    </div>
+  </section>
+
+  {hasPosts && (
+    <section class="sx" aria-labelledby="writing-title">
+      <div class="wrap g12">
+        <h2 class="lbl" id="writing-title">Blogs</h2>
+        <div class="sx-body"><BlogList limit={3} /></div>
+      </div>
+    </section>
+  )}
+
+  <ContactBand />
+</Base>

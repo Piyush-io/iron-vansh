@@ -1,0 +1,218 @@
+.gsc-icon-box-group{
+	&.style-1{
+		.icon-box-item{
+			background: $white;
+			width: 100%;
+			position: relative;
+			padding: 46px 32px 40px;
+			margin: 10px 0 20px;
+			box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.08);
+			@media(max-width: 1024px){
+				padding: 36px 26px 30px;
+			}
+			overflow: hidden;
+			&:after{
+				content: '';
+				background: $theme-color;
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: -100%;
+				left: 0;
+				z-index: 1;
+				opacity: 0;
+				transition: all 0.4s ease-in-out;
+				transition-delay: 0.1s;
+			}
+			.link-overlay{
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 11;
+				width: 100%;
+				height: 100%;
+			}
+			.icon-box-content{
+				position: relative;
+				z-index: 11;
+				display: flex; 
+				align-items: center;
+				.box-icon{
+					position: relative;
+					padding-left: 18px;
+					&:after{
+						content: '';
+						width: 38px;
+						height: 38px;
+						background: $theme-color;
+						opacity: 0.1;
+						position: absolute;
+						top: 0;
+						left: 0;
+						z-index: -1;
+						transition: all 0.6s ease;
+						transition-delay: 0.2s; 
+					}
+					i, svg{
+						transition: all 0.5s ease;
+					}
+					i{
+						font-size: 62px;
+						color: $theme-color;
+					}
+					svg{
+						width: 62px;
+						fill: $theme-color;
+					}
+				}
+				.content-inner{
+					padding-left: 20px;
+					.title{
+						font-size: 19px;
+						font-weight: 700;
+						margin: 0 0 10px;
+						transition: color 0.5s ease;
+						a{
+							transition: color 0.5s ease;
+						}
+					}
+					.desc{
+						font-size: 16px;
+						margin-top: 5px;
+						line-height: 30px;
+						transition: color 0.5s ease;
+					}
+				}
+			}
+			&:hover, &.active{
+				&:after{
+					opacity: 1;
+					top: 0;
+				}
+				.box-icon{
+					&:after{
+						opacity: 1;
+						background: #016BAE;
+					}
+					i{
+						color: $white;
+					}
+					svg{
+						fill: $white;
+					}
+				}
+				.content-inner{
+					.title{
+						color: $white;
+						a{
+							color: $white;
+						}
+					}
+					.desc{
+						color: $white;
+						opacity: 0.82;
+					}
+				}
+			}
+		}
+		.swiper-slide{
+			&.item-active.center{
+				.icon-box-item{
+					&:after{
+						opacity: 1;
+						top: 0;
+					}
+					.box-icon{
+						&:after{
+							opacity: 1;
+							background: #016BAE;
+						}
+						i{
+							color: $white;
+						}
+						svg{
+							fill: $white;
+						}
+					}
+					.content-inner{
+						.title{
+							color: $white;
+							a{
+								color: $white;
+							}
+						}
+						.desc{
+							color: $white;
+							opacity: 0.82;
+						}
+					}
+				}
+			}
+		}
+		&.margin-disable{
+			.icon-box-item{
+				margin-top: 0;
+				margin-bottom: 0;
+			}
+		}
+	}
+	&.style-2{
+		.icon-box-item{
+			background: $white;
+			text-align: center;
+			width: 100%;
+			position: relative;
+			padding: 35px 15px 30px;
+			transition: all 0.35s;
+			margin-bottom: 30px;
+			&:after{
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 1;
+				background: $theme-color;
+				width: 100%;
+				height: 0;
+				opacity: 0;
+				border-radius: 8px;
+				transition: all 0.35s;
+			}			
+			.link-overlay{
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 11;
+				width: 100%;
+				height: 100%;
+			}
+			.icon-box-content{
+				position: relative;
+				z-index: 11;
+				text-align: center;
+				.box-icon{
+					i{
+						font-size: 60px;
+						color: $theme-color;
+					}
+					svg{
+						width: 60px;
+						fill: $theme-color;
+					}
+				}
+				.title{
+					font-size: 17px;
+					margin: 16px 0 0;
+				}
+			}
+			&:hover, &.active{
+				box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+			}
+		}
+		.swiper-slide.item-active.center{
+			.icon-box-item{
+				box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+			}
+		}
+	}
+}

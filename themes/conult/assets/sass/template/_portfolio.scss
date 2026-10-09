@@ -1,0 +1,351 @@
+// Portfolio Block I
+.portfolio-v1{
+	position: relative;
+	overflow: hidden;
+	max-width: 680px;
+	margin: 0 auto 30px;
+	.bg-overlay{
+		content: "";
+		position: absolute;
+		top: -100%;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: $theme-color;
+		@include opacity(0);
+		z-index: 1;
+		transition: all 0.6s ease;
+	}
+	.images{
+		position: relative;
+		text-align: center;
+		.link-image-content{
+			display: block;
+			&:after{
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				z-index: 1;
+				background: linear-gradient( 0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0,0) 100%);
+	         background: -moz-linear-gradient( 0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0,0) 100%);
+	         background: -webkit-linear-gradient( 0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0,0) 100%);
+	         background: -ms-linear-gradient( 0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0,0) 100%);
+	         transition: all 0.35s;
+			}
+			img{
+				transition: all 0.35s;
+			}
+		}
+	}
+	.case-content, .case-content-hover{
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		z-index: 1;
+		padding: 5px 25px 40px;
+		opacity: 1;
+		transition: all 0.3s;
+		.content-inner{
+			margin: 0 auto;
+			.case-meta{
+				font-size: 12px;
+				line-height: 18px;
+				text-transform: uppercase;
+				position: relative;
+				letter-spacing: 1px;
+				font-weight: 500;
+				color: rgba(255, 255, 255, 0.8);
+				a{
+					color: rgba(255, 255, 255, 0.8);
+					display: inline-block;
+					position: relative;
+					&:hover{
+						color: $white;
+					}
+				}
+			}
+			.title{
+				display: block;
+				font-size: 24px;
+				font-weight: 700;
+				margin: 5px 0 15px;
+				color: $white;
+				a{
+					color: $white;
+					&:hover{
+						text-decoration: underline;
+					}
+				}
+			}
+			.desc{
+				font-size: 16px;
+				color: rgba(255, 255, 255, 0.8);
+				margin-bottom: 20px;
+				line-height: 28px;
+			}
+			.link-to-content{
+				display: inline-block;
+				border-radius: 50%;
+				width: 52px;
+				height: 52px;
+				background: rgba(255, 255, 255, 0.3);
+				color: $white;
+				font-size: 24px;
+				line-height: 54px;
+				text-align: center;
+				transition: all 0.35s;
+			}
+		}
+	}
+	.case-content-hover{
+		opacity: 0;
+		bottom: -50px;
+		z-index: 6;
+		visibility: hidden;
+	}
+	&:hover, &:active, &:focus{
+		.bg-overlay{
+			opacity: 0.96;
+			top: 0;
+		}
+		.case-content{
+			opacity: 0;
+		}
+		.case-content-hover{
+			opacity: 1;
+			bottom: 0;
+			visibility: visible;
+			transition: all 500ms ease 500ms;
+			.link-to-content{
+				background: $white;
+				color: $theme-color;
+			}
+		}
+		.images{
+			.link-image-content{
+				img{
+					@include scale(1.1);
+				}
+			}
+		}
+	}
+}
+
+.swiper{
+	.item-active.center{
+		.portfolio-v1{
+			.bg-overlay{
+				opacity: 0.96;
+				top: 0;
+			}
+			.case-content{
+				opacity: 0;
+			}
+			.case-content-hover{
+				opacity: 1;
+				bottom: 0;
+				visibility: visible;
+				transition: all 500ms ease 500ms;
+				.link-to-content{
+					background: $white;
+					color: $theme-color;
+				}
+			}
+			.images{
+				.link-image-content{
+					img{
+						@include scale(1.1);
+					}
+				}
+			}	
+		}
+	}
+}
+
+.owl-carousel{
+  .portfolio-v1{
+	 margin-bottom: 0;
+  }
+}
+
+// Portfolio Block II
+.portfolio-v2{
+	position: relative;
+	overflow: hidden;
+	max-width: 680px;
+	margin: 0 auto 30px;
+	transition: all 0.35s;
+	.images{
+		position: relative;
+		text-align: center;
+		.link-image-content{
+			img{
+				transition: all 0.6s;
+			}
+		}
+		.bg-overlay{
+			content: "";
+			position: absolute;
+			top: -100%;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: $theme-color;
+			@include opacity(0);
+			z-index: 1;
+			transition: all 0.6s ease;
+		}
+	}
+	.case-content{
+		position: relative;
+		background: $white;
+		z-index: 1;
+		padding: 25px 25px 25px;
+		transition: all 0.3s;
+		border: 2px solid $border-color;
+		border-top: 0;
+		.content-inner{
+			display: flex;
+			align-items: center;
+			.content-left{
+				width: calc(100% - 50px);
+				padding-right: 15px;
+				.case-meta{
+					font-size: 12px;
+					line-height: 18px;
+					text-transform: uppercase;
+					position: relative;
+					letter-spacing: 1px;
+					font-weight: 500;
+					margin-bottom: 3px;
+					a{
+						color: $body-color;
+						position: relative;
+					}
+				}
+				.title{
+					display: block;
+					font-size: 20px;
+					font-weight: 700;
+					margin: 0;
+				}
+			}
+			.content-right{
+				width: 50px;
+				height: 50px;
+				a{
+					display: inline-block;
+					border-radius: 50%;
+					width: 50px;
+					height: 50px;
+					background: $bg-gray;
+					line-height: 50px;
+					text-align: center;
+					transition: all 0.35s;
+				}
+			}
+		}
+	}
+	&:hover, &:active, &:focus{
+		box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.06);
+		.images{
+			.link-image-content{
+				img{
+					@include scale(1.1);
+				}
+			}
+			.bg-overlay{
+				opacity: 0.6;
+				top: 0;
+			}
+			a.link-gallery{
+				@include opacity(1);
+				margin-top: 0;
+			}
+		}
+		.case-content{
+			.content-right{
+				a{
+					background: $theme-color;
+					color: $white;
+				}
+			}
+		}
+	}
+}
+
+// Portfolio Filter
+.portfolio-filter{
+	margin-bottom: 25px;
+	width: 100%;
+	ul.nav-tabs{
+		display: inline-block;
+		text-align: center;
+		border: none;
+		width: 100%;
+		> li{
+			padding: 5px 8px 0;
+			> a{
+				font-weight: 500;
+				color: $black;
+				@include transition(all 0.35s);
+				padding: 0;
+				font-size: 16px;
+				position: relative;
+				z-index: 11;
+				&:after{
+					content: '';
+					@include size(0, 2px);
+					background: $black;
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					z-index: -1px;
+					transition: all 0.35s;
+				}
+				.count{
+					border-radius: 50%;
+					z-index: 1;
+					position: absolute;
+					top: -20px;
+					right: -17px;
+					font-size: 12px;
+					color: $body-color;
+					opacity: 0;
+					transition: all 0.35s;
+				}
+				&:hover, &.active{
+					color: $black;
+					&:after{
+						width: 100%;
+					}
+					.count{
+						top: -10px;
+						opacity: 1;
+					}
+				}
+			}
+		}
+	}
+}
+
+.gva-portfolio-items{
+  float: left;
+  width: 100%;
+}
+.gsc-portfolio-carousel{
+  &.remove-padding{
+	 .init-carousel-owl{
+		margin-left: 0!important;
+		margin-right: 0!important;
+		.owl-item{
+		  padding-left: 0!important;
+		  padding-right: 0!important;
+		}
+	 }
+  }
+}

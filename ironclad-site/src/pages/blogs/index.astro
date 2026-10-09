@@ -1,0 +1,11 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import BlogList from '../../components/BlogList.astro';
+---
+<Base title="Insights" description="Writing and investment perspectives from the Ironclad team." darkHero={true}>
+  <PageHero title="Ideas & perspectives." summary="Notes on businesses, markets, and investing for the long term." crest />
+  <section class="section" aria-label="Posts">
+    <div class="wrap"><BlogList /></div>
+  </section>
+</Base>
