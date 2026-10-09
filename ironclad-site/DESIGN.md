@@ -38,11 +38,17 @@ Allocation bars: Compounders `--navy`, Special situations `#6F93B6`, Seed `--gol
 
 ## 3. Typography
 
-- **Geist** (variable 300–700), self-hosted. **Geist Mono** (400–500) for labels and indices.
-- Headlines: weight 500, tracking `-0.045em` (display) to `-0.03em` (h3), leading 0.96–1.1. Never bold.
-- Numbers: weight 300, tabular, tracking `-0.05em`.
-- Body 17/1.65. Lead 20–22/1.5, `--text-2`. Measure ≤ 62ch.
+Blackstone-style pairing: a fine, high-contrast serif for everything that is a title or a figure; a neutral grotesk for reading and UI. The serif also echoes the Ironclad wordmark.
+
+- **Newsreader** (variable, optical sizes 6–72, weights 300–500), self-hosted. Headlines, section titles, the statement, strategy names, numbers.
+- **Geist** (300–700) for body, navigation, buttons. **Geist Mono** (400–500) for labels and registration numbers.
+- Display (`h1`, page titles): Newsreader 300, tracking `-0.028em`, leading 0.98.
+- Section titles (`h2`): Newsreader 300, tracking `-0.022em`, leading 1.02. Card and row titles: Newsreader 400.
+- Numbers: Newsreader 300, tabular, with the separator (`/`, `+`) in `--gold`.
+- Body 17/1.65 Geist. Lead 20–22/1.5, `--text-2`. Measure ≤ 62ch.
 - Labels: Geist Mono 12px, uppercase, tracking `0.08em`, `--text-3`.
+
+**Title placement.** Section headers are split rows: eyebrow across the top, the serif title on the left (7 cols), a short intro on the right (4 cols) aligned to the title's last line. The hero follows the same rule: title left, lead and actions bottom-right. Titles are always left-aligned, never centred.
 
 | Role | Size (fluid) |
 |---|---|

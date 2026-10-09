@@ -1,6 +1,7 @@
 /* Ironclad — light-mode design system. Spec: ../../DESIGN.md */
 
 @font-face { font-family: 'Geist'; src: url('/fonts/geist-latin.woff2') format('woff2'); font-weight: 300 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Newsreader'; src: url('/fonts/newsreader-latin.woff2') format('woff2'); font-weight: 300 500; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Geist Mono'; src: url('/fonts/geist-mono-latin.woff2') format('woff2'); font-weight: 400 500; font-style: normal; font-display: swap; }
 
 :root {
@@ -24,6 +25,7 @@
   --c-later: #bfd0e2;
 
   --sans: 'Geist', 'Helvetica Neue', Arial, system-ui, sans-serif;
+  --serif: 'Newsreader', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
   --mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
   --ease: cubic-bezier(.2, .7, .2, 1);
 
@@ -350,6 +352,27 @@ a.compare-row:hover { background: var(--bg-soft); padding-inline: 16px; margin-i
   *, *::before, *::after { transition-duration: .01ms !important; }
 }
 
+/* ───── serif display layer (Blackstone-style: fine serif headlines, sans for reading) ───── */
+.display, .d1, .d2, .d3, .sec-head h2, .approach-intro h2, .cta h2, .statement, .num b, .s-body h3,
+.principles h3, .interlude-line, .person-lead h3, .ph-title, .disc h2, .others b, .post h3,
+.drawer nav a, .hero-links b, .c-name, .kp h3, .person h3, .alloc h3, .perf h2, .empty .d3 {
+  font-family: var(--serif); font-optical-sizing: auto; font-weight: 400; letter-spacing: -.012em;
+}
+.display, .ph-title, .d1 { font-weight: 300; letter-spacing: -.028em; line-height: .98; }
+.sec-head h2, .approach-intro h2, .cta h2, .d2, .person-lead h3, .interlude-line { font-weight: 300; letter-spacing: -.022em; line-height: 1.02; }
+.statement { font-weight: 300; letter-spacing: -.018em; line-height: 1.16; }
+.num b { font-weight: 300; letter-spacing: -.03em; }
+.num b i { margin-left: .04em; }
+.s-body h3, .principles h3 { letter-spacing: -.016em; }
+.hero-links b, .c-name { font-size: clamp(21px, 1.9vw, 26px); }
+.drawer nav a { font-weight: 300; font-size: 34px; }
+
+/* split section header: title left, intro bottom-right */
+.sec-head { max-width: none; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); column-gap: clamp(32px, 6vw, 112px); align-items: end; }
+.sec-head .eyebrow { grid-column: 1 / -1; }
+.sec-head .lede { margin-top: 0; padding-bottom: .45em; max-width: 40ch; }
+.sec-head > :only-child, .sec-head h2:last-child { grid-column: 1 / -1; }
+
 /* ───── responsive ───── */
 @media (max-width: 1200px) {
   .people-row { grid-template-columns: repeat(2, 1fr); }
@@ -378,7 +401,8 @@ a.compare-row:hover { background: var(--bg-soft); padding-inline: 16px; margin-i
   .compare-row { grid-template-columns: 1fr; gap: 14px; padding: 24px 0; }
   .compare-row > span[data-label]::before { content: attr(data-label); display: block; margin-bottom: 4px; font: 500 11px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); }
   a.compare-row:hover { padding-inline: 0; margin-inline: 0; }
-  .approach-layout, .head, .ph-sub, .person.person-lead { grid-template-columns: 1fr; }
+  .approach-layout, .head, .ph-sub, .person.person-lead, .sec-head { grid-template-columns: 1fr; }
+  .sec-head .lede { margin-top: 20px; padding-bottom: 0; }
   .approach-intro, .head h2 { position: static; }
   .principles li { padding: 30px 0; }
   .person.person-lead figure { max-width: 420px; }

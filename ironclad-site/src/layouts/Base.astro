@@ -26,6 +26,7 @@ const isHome = Astro.url.pathname === '/';
   <meta property="og:image" content={new URL('/images/og.jpg', Astro.site)}>
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#ffffff">
+  <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
   <script is:inline>document.documentElement.classList.add('js')</script>
 </head>
