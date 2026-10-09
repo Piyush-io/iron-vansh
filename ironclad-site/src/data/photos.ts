@@ -10,15 +10,16 @@ export const productPhoto = { pms: 'mumbai', ventures: 'glass', latius: 'giftcit
 
 const WIDTHS = [640, 1280, 1920, 2560, 3840];
 interface Entry { width: number; height: number; widths: number[] }
-interface Source { alt: string; page: string; cdn?: string; id?: string; file?: string }
+interface Source { alt: string; page: string; cdn?: string; id?: string; pexels?: string; file?: string }
 let manifest: Record<string, Entry> | undefined;
 const read = (): Record<string, Entry> => {
   try { return JSON.parse(fs.readFileSync(path.resolve('public/images/photos/manifest.json'), 'utf8')); } catch { return {}; }
 };
 
-// Unsplash serves any width of a photo from its CDN; the short-id download route redirects there.
+// Unsplash and Pexels serve any width of a photo from their CDNs; Unsplash short ids go through its download redirect.
 const remote = (s: Source, w: number) =>
-  s.cdn ? `https://images.unsplash.com/${s.cdn}?auto=format&fit=max&w=${w}&q=80`
+  s.pexels ? `https://images.pexels.com/photos/${s.pexels}/pexels-photo-${s.pexels}.jpeg?auto=compress&cs=tinysrgb&w=${w}`
+  : s.cdn ? `https://images.unsplash.com/${s.cdn}?auto=format&fit=max&w=${w}&q=80`
   : s.id ? `https://unsplash.com/photos/${s.id}/download?w=${w}` : '';
 
 export function getPhoto(name: PhotoName) {
@@ -30,7 +31,7 @@ export function getPhoto(name: PhotoName) {
     return { alt: s.alt, ready: true, width: m.width, height: m.height,
       src: url(m.widths.includes(1920) ? 1920 : m.widths.at(-1)!), srcset: m.widths.map((w) => `${url(w)} ${w}w`).join(', ') };
   }
-  const ok = !!(s.cdn || s.id);
+  const ok = !!(s.cdn || s.id || s.pexels);
   return { alt: s.alt, ready: ok, width: 3840, height: 2560,
     src: ok ? remote(s, 1920) : '', srcset: ok ? WIDTHS.map((w) => `${remote(s, w)} ${w}w`).join(', ') : '' };
 }

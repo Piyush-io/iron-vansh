@@ -32,11 +32,14 @@ const manifest = JSON.parse(await fs.readFile(manifestPath, 'utf8').catch(() => 
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
 const get = (url, accept = 'image/avif,image/webp,image/*,*/*;q=0.8') =>
   fetch(url, { redirect: 'follow', signal: AbortSignal.timeout(90_000), headers: { 'user-agent': UA, accept } });
-const cdnUrl = (base, w) => `${base}${base.includes('?') ? '&' : '?'}auto=format&fit=max&w=${w}&q=85&fm=jpg`;
+const cdnUrl = (base, w) => base.includes('images.pexels.com')
+  ? `${base}?auto=compress&cs=tinysrgb&w=${w}`
+  : `${base}${base.includes('?') ? '&' : '?'}auto=format&fit=max&w=${w}&q=85&fm=jpg`;
 
 // Turn a short unsplash.com id into its images.unsplash.com address, trying three routes.
 async function resolve(s) {
   if (s.cdn) return `https://images.unsplash.com/${s.cdn}`;
+  if (s.pexels) return `https://images.pexels.com/photos/${s.pexels}/pexels-photo-${s.pexels}.jpeg`;
   const errors = [];
   try {
     const r = await get(`https://unsplash.com/napi/photos/${s.id}`, 'application/json');
@@ -63,7 +66,7 @@ async function load(s, width = 3840) {
   const res = await get(cdnUrl(base, width));
   if (!res.ok) throw new Error(`HTTP ${res.status} from ${res.url}`);
   if (!(res.headers.get('content-type') || '').startsWith('image/')) throw new Error(`not an image (${res.headers.get('content-type')})`);
-  return { buf: Buffer.from(await res.arrayBuffer()), cdn: base.replace('https://images.unsplash.com/', '') };
+  return { buf: Buffer.from(await res.arrayBuffer()), cdn: base.includes('images.unsplash.com') ? base.replace('https://images.unsplash.com/', '') : undefined };
 }
 
 if (args.includes('--scout')) {
