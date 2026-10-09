@@ -13,7 +13,7 @@ export function getStaticPaths() {
 }
 const { product: p } = Astro.props;
 const others = products.filter((o) => o.slug !== p.slug);
-const position = p.slug === 'pms' ? '50% 64%' : p.slug === 'latius' ? '50% 42%' : '50% 70%';
+const position = p.slug === 'pms' ? '50% 55%' : p.slug === 'latius' ? '50% 45%' : '50% 32%';
 const portfolioTitle = p.alloc?.title ?? p.construction?.title ?? 'Portfolio';
 ---
 <Base title={p.name} description={p.metaDescription}>

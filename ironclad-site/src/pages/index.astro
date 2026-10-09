@@ -15,7 +15,7 @@ const market = { pms: 'Indian listed equities', ventures: 'Venture-backed startu
 const shortReg = { pms: 'PMS', ventures: 'Category I AIF', latius: 'GIFT City' } as const;
 const slides = [
   { photo: 'harbour' as const, position: '50% 58%', title: 'Our Investment Philosophy', blurb: 'We believe exceptional investing begins with understanding the world around a business and then understanding the business itself.', href: '#approach' },
-  ...products.map((p) => ({ photo: productPhoto[p.slug], position: '50% 55%', title: p.name, blurb: p.intro.paras[0], href: `/products/${p.slug}` })),
+  ...products.map((p) => ({ photo: productPhoto[p.slug], position: ({ pms: '50% 55%', ventures: '50% 32%', latius: '50% 45%' } as const)[p.slug], title: p.name, blurb: p.intro.paras[0], href: `/products/${p.slug}` })),
 ];
 ---
 <Base dark>
