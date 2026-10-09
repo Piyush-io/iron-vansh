@@ -113,11 +113,11 @@ const isHome = Astro.url.pathname === '/';
             const show = () => e.target.classList.add('in');
             if (img && !img.complete) { img.loading = 'eager'; img.decode().then(show, show); } else show();
           });
-        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+        }, { rootMargin: '0px 0px -12% 0px', threshold: 0 });
         document.querySelectorAll(revealSel).forEach((el) => {
           if (el.closest('.promo-header')) return;
           const sibs = [...el.parentElement.children].filter((c) => c.matches(revealSel));
-          el.style.setProperty('--d', String(Math.min(sibs.indexOf(el), 5)));
+          el.style.setProperty('--d', String(Math.min(sibs.indexOf(el), 4)));
           el.dataset.reveal = '';
           io.observe(el);
         });

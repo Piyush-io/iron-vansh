@@ -30,5 +30,20 @@
     "file": "design/assets/hero-harbour.jpg",
     "page": "https://www.ironcladamc.com/",
     "alt": "A city waterfront at sunset, the hero image of the Ironclad website"
+  },
+  "mumbai-night": {
+    "pexels": "18048286",
+    "page": "https://www.pexels.com/photo/cityscape-of-mumbai-at-night-18048286/",
+    "alt": "Mumbai's skyline and streets lit up at night, seen from above"
+  },
+  "sealink-pillars": {
+    "pexels": "3893788",
+    "page": "https://www.pexels.com/photo/bridge-over-the-sea-3893788/",
+    "alt": "The Bandra–Worli Sea Link's pillars and cable-stayed towers at golden hour"
+  },
+  "manhattan-hudson": {
+    "pexels": "34642898",
+    "page": "https://www.pexels.com/photo/stunning-aerial-view-of-manhattan-skyline-34642898/",
+    "alt": "Lower Manhattan and the Hudson River from the air"
   }
 }
