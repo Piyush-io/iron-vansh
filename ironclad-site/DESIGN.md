@@ -28,7 +28,11 @@ Blackstone's design system, applied to Ironclad's own content and photography.
 
 ## 3. Typography
 
-Blackstone uses **Sanomat 300** (serif) for headings and **Guardian Sans 300** for everything else. Both are Commercial Type fonts and need a paid web licence, so the site ships free stand-ins: **Noto Serif Display Light** (OFL) and **Public Sans** 300/400/500 (OFL). The stacks list Sanomat and Guardian Sans first, so after licensing you only need to add their `@font-face` rules.
+Fontshare's **Gambetta + General Sans** pairing (Indian Type Foundry, ITF Free Font License: free for commercial use and web embedding). Files are self-hosted in `public/fonts/`; candidates are kept in `design/font-candidates/`.
+
+- Headings: Gambetta 300 (light), with 600 for the bold first word of the hero.
+- Body and UI: General Sans 400, with 500/600 for emphasis.
+- Geist Mono only for registration codes.
 
 | Role | Font | Size |
 |---|---|---|
