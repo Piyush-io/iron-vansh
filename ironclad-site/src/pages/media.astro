@@ -1,44 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-// Press coverage, carried over from the current ironcladamc.com/media.html.
-const press: { outlet: string; url: string; text: string }[] = [
-  {
-    "outlet": "The Economic Times",
-    "url": "https://economictimes.indiatimes.com/markets/stocks/news/investment-firm-ironclad-launches-rs-200-crore-fund-focused-on-esops/articleshow/124215425.cms",
-    "text": "Investment firm Ironclad Asset Management on Monday launched Ironclad Ventures, a Rs 200 crore SEBI-approved fund on Employee stock ownership (ESOP) secondaries."
-  },
-  {
-    "outlet": "YourStory",
-    "url": "https://yourstory.com/2025/09/ironclad-asset-management-esop-fund-venture-backed-startups",
-    "text": "Ironclad Asset Management launches Rs 200 Cr ESOP-focused fund. With this fund, Ironclad Asset Management aims to unlock liquidity opportunities for employees holding ESOPs, reducing long waiting periods for liquidity events in venture-backed startups."
-  },
-  {
-    "outlet": "Inc42",
-    "url": "https://inc42.com/buzz/ironclad-asset-management-launches-inr-200-cr-esop-focused-fund/",
-    "text": "Investment firm Ironclad Asset Management has launched INR 200 Cr ($22.5 Mn) ESOP-focused fund Ironclad Ventures to provide liquidity to employees in the Indian startup ecosystem."
-  },
-  {
-    "outlet": "BW Businessworld",
-    "url": "https://www.businessworld.in/article/ironclad-asset-management-announces-launch-of-sebi-registered-flexicap-pms-562622",
-    "text": "Ironclad Asset Management, a SEBI-registered Portfolio Management Service (PMS) provider, formally announced the launch of its flagship FlexiCap PMS Strategy, focused on building concentrated portfolios of high-quality Indian businesses across market capitalizations."
-  },
-  {
-    "outlet": "CNBC-TV18",
-    "url": "https://www.cnbctv18.com/budget/union-budget-2025-income-tax-section-80c-standard-deduction-nri-exemptions-savings-19537875.htm",
-    "text": "“We expect the 2025 Budget to rationalise personal income tax slabs, both at the bottom end and at the top end, to reduce tax burden and improve disposable income in the hands of individuals,” says Krishna Killa, Founder of Ironclad Asset Management."
-  },
-  {
-    "outlet": "Financial Express",
-    "url": "https://www.financialexpress.com/money/budget-2025-annual-income-up-to-rs-10-lakh-to-be-tax-exempt-higher-deductions-new-25-slab-on-taxpayers-wishlist-3727781/",
-    "text": "Krishna Killa, Founder, Ironclad Asset Management, believes the government is likely to keep increasing the slabs in order to boost discretionary consumption."
-  },
-  {
-    "outlet": "openPR",
-    "url": "https://www.openpr.com/news/3792507/ironclad-asset-management-launches-india-focused-public",
-    "text": "Ironclad Asset Management is an India-focused asset management company specializing in public market investments. With a FlexiCap PMS product as its flagship offering, the firm emphasizes value creation through in-depth research and a selective investment approach."
-  }
-];
+// Press coverage. Edited in the CMS (/admin → Media coverage); newest first.
+import data from '../data/press.json';
+const press: { outlet: string; url: string; text: string }[] = data.items;
 ---
 <Base title="Media" description="Press coverage of Ironclad Asset Management.">
   <PageHero title="Media." summary="Ironclad Asset Management in the press." />

@@ -1,9 +1,11 @@
 ---
 import { products } from '../data/products';
 import { site } from '../data/site';
+import docs from '../data/regulatory-docs.json';
 const year = 2026;
 // Every document and portal from the footer of the current ironcladamc.com is linked below.
-const doc = (name: string) => `/docs/${encodeURIComponent(name)}`;
+// The regulatory PDFs are edited in the CMS (/admin → Regulatory documents); file names may contain spaces.
+const doc = (path: string) => encodeURI(path);
 const ext = { rel: 'noopener', target: '_blank' };
 const columns = [
   { title: 'Products', links: products.map((p) => ({ label: p.name.replace('Ironclad ', ''), href: `/products/${p.slug}` })) },
@@ -15,12 +17,12 @@ const columns = [
     { label: 'SEBI Disclosures', href: '/disclosures' },
   ] },
   { title: 'Investor Resources', links: [
-    { label: 'Disclosure', href: doc('Disclosure-Document-2026-Ironclad-Signed.pdf') },
-    { label: 'SEBI Certificate', href: doc('01 SEBI Reg Certificate.pdf') },
-    { label: 'Investor Charter', href: doc('03 Investor Charter.pdf') },
-    { label: 'Investor Grievance', href: doc('Investor-Grevience-Sept-2026.pdf') },
-    { label: 'Complaints Data PMS', href: doc('PMS-Investor-Complains-Sept-2026.pdf') },
-    { label: 'Complaints Data AIF', href: doc('AIF-Investor-Complains-Sept-2026.pdf') },
+    { label: 'Disclosure', href: doc(docs.disclosure) },
+    { label: 'SEBI Certificate', href: doc(docs.sebiCertificate) },
+    { label: 'Investor Charter', href: doc(docs.investorCharter) },
+    { label: 'Investor Grievance', href: doc(docs.grievance) },
+    { label: 'Complaints Data PMS', href: doc(docs.complaintsPms) },
+    { label: 'Complaints Data AIF', href: doc(docs.complaintsAif) },
   ] },
   { title: 'Get in Touch', links: [
     { label: 'Contact Us', href: '/contact' },

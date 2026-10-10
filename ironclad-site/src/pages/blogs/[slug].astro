@@ -16,6 +16,7 @@ const fmt = new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'long', ye
     <div class="wrap">
       <p class="small"><time datetime={post.data.date.toISOString()}>{fmt.format(post.data.date)}</time></p>
       <h1 class="d2 article-title">{post.data.title}</h1>
+      {post.data.cover && <figure class="article-cover"><img src={post.data.cover} alt={post.data.coverAlt ?? ''} loading="eager" decoding="async" /></figure>}
       <div class="post-body"><Content /></div>
       <p class="article-back"><a class="textlink" href="/blogs">All posts</a></p>
     </div>

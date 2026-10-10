@@ -2,6 +2,8 @@
 
 Astro site for Ironclad Asset Management. Light-mode design system documented in `DESIGN.md`.
 
+Insights, Media coverage, Investor updates and Regulatory documents are edited without code at `/admin` (Sveltia CMS). Setup and how-to: `ADMIN.md`.
+
 ```
 npm install
 npm run dev        # fetches photos first (npm run photos), then starts Astro
