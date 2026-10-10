@@ -5,19 +5,20 @@
     "page": "https://www.ironcladamc.com/",
     "alt": "A city waterfront at sunset, the hero image of the Ironclad website"
   },
-  "sealink-pillars": {
-    "pexels": "3893788",
-    "page": "https://www.pexels.com/photo/bridge-over-the-sea-3893788/",
-    "alt": "The Bandra–Worli Sea Link's pillars and cable-stayed towers at golden hour"
-  },
-  "manhattan-hudson": {
-    "pexels": "34642898",
-    "page": "https://www.pexels.com/photo/stunning-aerial-view-of-manhattan-skyline-34642898/",
-    "alt": "Lower Manhattan and the Hudson River from the air"
-  },
   "office-view": {
     "pexels": "35074089",
     "page": "https://www.pexels.com/photo/modern-office-with-panoramic-city-skyline-view-35074089/",
     "alt": "A city skyline seen through the floor-to-ceiling windows of a high-rise office"
+  },
+  "dolomites-peaks": {
+    "pexels": "34720589",
+    "page": "https://www.pexels.com/photo/stunning-sunset-over-the-dolomites-mountains-34720589/",
+    "alt": "A jagged Dolomites ridge lit gold by the setting sun"
+  },
+  "manhattan-dusk": {
+    "file": "design/assets/manhattan-dusk.jpg",
+    "page": "https://www.pexels.com/photo/skyline-of-new-york-city-at-sunset-29297529/",
+    "alt": "Midtown Manhattan and the Empire State Building at sunset, the harbour beyond",
+    "note": "Pexels 29297529, retouched to remove the Comcast and H&M rooftop signs"
   }
 }

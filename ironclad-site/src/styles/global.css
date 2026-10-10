@@ -299,12 +299,16 @@ a:focus-visible > .bx-icon .bx-icon__fill { opacity: 1; }
 .ticker { padding-block: var(--pad-stack) var(--pad); overflow: hidden; }
 .ticker__inner { overflow: hidden; }
 .ticker__track { display: flex; width: max-content; animation: ticker 50s linear infinite; }
+.ticker__track--ghost { animation-direction: reverse; margin-top: -.15em; }
+.ticker__track--ghost .ticker__title { color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, .55); font-style: italic; font-weight: 300; }
+/* with JS, scroll drives the tape (see Base.astro): CSS animation off, transform set per frame */
+.js [data-ticker] .ticker__track { animation: none; will-change: transform; }
 .ticker__title { flex: none; padding-right: 7.5rem; font: 400 4rem/1.3 var(--f-serif); white-space: nowrap; }
 .ticker__title strong { font-weight: 700; }
 .ticker__disclaimer { margin-top: 3.5rem; font-size: .875rem; }
 @keyframes ticker { to { transform: translateX(-50%); } }
 @media (min-width: 48em) { .ticker__title { font-size: 6.5rem; padding-right: 8.5rem; } .ticker__disclaimer { margin-top: 4.5rem; } }
-@media (min-width: 80em) { .ticker__title { font-size: 10.5rem; padding-right: 12rem; } .ticker__disclaimer { margin-top: 7.5rem; } }
+@media (min-width: 80em) { .ticker__track--ghost .ticker__title { -webkit-text-stroke-width: 1.5px; } .ticker__title { font-size: 10.5rem; padding-right: 12rem; } .ticker__disclaimer { margin-top: 7.5rem; } }
 @media (min-width: 90em) { .ticker__title { font-size: 12rem; padding-right: 13.5rem; } .ticker__disclaimer { margin-top: 8rem; } }
 
 /* ───── product comparison: three aligned cards ───── */

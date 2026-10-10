@@ -10,9 +10,9 @@
       3840
     ]
   },
-  "sealink-pillars": {
+  "office-view": {
     "width": 3840,
-    "height": 5760,
+    "height": 2880,
     "widths": [
       640,
       1280,
@@ -21,20 +21,20 @@
       3840
     ]
   },
-  "manhattan-hudson": {
-    "width": 3024,
-    "height": 4032,
+  "dolomites-peaks": {
+    "width": 3840,
+    "height": 2160,
     "widths": [
       640,
       1280,
       1920,
       2560,
-      3024
+      3840
     ]
   },
-  "office-view": {
+  "manhattan-dusk": {
     "width": 3840,
-    "height": 2880,
+    "height": 2177,
     "widths": [
       640,
       1280,

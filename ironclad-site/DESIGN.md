@@ -91,14 +91,16 @@ Geist Mono is used only for registration codes.
 
 - Real photography only, stored in the repo under `public/images/photos/` (WebP at 640 / 1280 / 1920 / 2560 / 3840 + `manifest.json`). The site never fetches images at runtime once these exist.
 - Sources: `src/data/photo-sources.json` (Unsplash `cdn` ids or Pexels ids; both licences allow commercial use without attribution). Changing that file triggers `.github/workflows/photos.yml`, which downloads at 3840px on GitHub's runners and commits the result.
-- Slots: `harbour` (home hero, the photo from the live ironcladamc.com), `office-view` (Flexicap+), `sealink-pillars` (Ventures), `manhattan-hudson` (Latius). Team portraits are built by `scripts/portraits.mjs` from originals in `design/assets/`.
+- Slots: `harbour` (home hero, the photo from the live ironcladamc.com), `office-view` (Flexicap+), `dolomites-peaks` (Ventures), `manhattan-dusk` (Latius; retouched to remove rooftop brand signs). Team portraits are built by `scripts/portraits.mjs` from originals in `design/assets/`.
 - Choosing new photos: add candidates to `src/data/photo-candidates.json`; the workflow saves 1280px previews to `design/photo-scout/` for review. Promote the winner into `photo-sources.json`.
 - Text never sits directly on a photo. Hero copy sits on a solid black card, with no scrims or gradients.
 
 ## 8. Motion
-
-- The hero words rise in once per visit, and the marquee scrolls slowly. Nothing else moves except hover states.
-- Everything respects `prefers-reduced-motion`.
+- Curves are tokens: `--ease-out` (entering/exiting UI), `--ease-in-out` (things moving on screen, e.g. the carousel), `--ease-drawer` (the bio panel). No hand-typed beziers.
+- UI stays under 300ms (dropdown 180ms in / 120ms out, scaling from its top-left origin); panels up to 500ms. Header compaction is transform-only.
+- Hover motion only under `(hover: hover) and (pointer: fine)`; buttons and cards press to `scale(.97)`.
+- Ticker: two rows drift in opposite directions; scroll speed throws them faster, reverses them on scroll-up and skews them (max 10deg) with a spring back. Runs only while on screen.
+- `prefers-reduced-motion`: movement goes, opacity fades stay; the ticker is static.
 
 ## 9. Content and compliance rules
 

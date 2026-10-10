@@ -132,6 +132,33 @@ const isHome = Astro.url.pathname === '/';
         document.querySelectorAll(curtainSel).forEach((el) => { el.dataset.curtain = ''; observer.observe(el); });
       }
 
+      // Ticker tape: two rows drift in opposite directions; scrolling throws them faster (and reverses them
+      // when scrolling up), with a skew that leans into the speed and springs back. Runs only while on screen.
+      document.querySelectorAll('[data-ticker]').forEach((tape) => {
+        if (reduce) return;
+        const rows = [...tape.querySelectorAll('.ticker__track')].map((el) => ({ el, dir: +el.dataset.dir, x: 0, w: el.scrollWidth / 2 }));
+        let lastY = scrollY, vel = 0, dir = 1, raf = 0, visible = false, lastT = 0;
+        const frame = (t) => {
+          const dt = Math.min((t - (lastT || t)) / 16.67, 3); lastT = t;
+          const y = scrollY, dy = y - lastY; lastY = y;
+          if (dy) dir = Math.sign(dy);
+          vel += (dy - vel) * 0.12 * dt;                       // smoothed scroll speed, px/frame
+          const speed = (1.2 + Math.min(Math.abs(vel), 60) * 0.35) * dir;
+          const skew = Math.max(-10, Math.min(10, vel * -0.3));
+          rows.forEach((r) => {
+            r.x = (r.x - speed * r.dir * dt) % r.w;
+            if (r.x > 0) r.x -= r.w;
+            r.el.style.transform = `translate3d(${r.x}px,0,0) skewX(${skew * r.dir}deg)`;
+          });
+          raf = visible ? requestAnimationFrame(frame) : 0;
+        };
+        rows.forEach((r) => { if (r.dir < 0) r.x = -r.w / 2; });
+        const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible && !raf) { lastT = 0; lastY = scrollY; raf = requestAnimationFrame(frame); } });
+        io.observe(tape);
+        addEventListener('resize', () => rows.forEach((r) => { r.w = r.el.scrollWidth / 2; }), on);
+        teardown.signal.addEventListener('abort', () => { io.disconnect(); cancelAnimationFrame(raf); visible = false; });
+      });
+
       // Team bios: each card opens its full-width <dialog> panel; the close button or Esc closes it.
       document.addEventListener('click', (e) => {
         const open = e.target.closest('[data-bio]');
