@@ -305,7 +305,7 @@ a:focus-visible > .bx-icon .bx-icon__fill { opacity: 1; }
 .reel__text { width: var(--container); max-width: 100%; margin-inline: auto; font: 700 clamp(2.5rem, 12vw, 13rem)/.95 var(--f-serif); letter-spacing: -.02em; }
 .reel__disclaimer { padding-block: var(--pad-stack) var(--pad); font-size: .875rem; }
 @media (prefers-reduced-motion: no-preference) {
-  .js .reel__track { height: 420vh; }
+  .js .reel__track { height: 300vh; }
   .js .reel__pin { position: sticky; top: 0; height: 100vh; height: 100svh; }
   .js .reel__knock { position: absolute; inset: 0; padding: 0; }
   .js .reel__text { position: absolute; top: 50%; left: 0; width: max-content; max-width: none; margin: 0; white-space: nowrap; font-size: min(36vh, 70vw); line-height: 1; transform: translate3d(8vw, -50%, 0); }
