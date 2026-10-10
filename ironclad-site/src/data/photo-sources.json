@@ -20,5 +20,10 @@
     "page": "https://www.pexels.com/photo/skyline-of-new-york-city-at-sunset-29297529/",
     "alt": "Midtown Manhattan and the Empire State Building at sunset, the harbour beyond",
     "note": "Pexels 29297529, retouched to remove the Comcast and H&M rooftop signs"
+  },
+  "sea-sunset": {
+    "pexels": "31974889",
+    "page": "https://www.pexels.com/photo/golden-sunset-over-the-tranquil-sea-31974889/",
+    "alt": "A golden sunset over the Arabian Sea off Goa"
   }
 }
