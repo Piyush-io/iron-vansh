@@ -361,9 +361,9 @@ a:hover > .bx-icon .bx-icon__arrow, button:hover > .bx-icon .bx-icon__arrow { op
 /* ───── people (after blackstone.com/the-firm/our-people) ───── */
 .people-section { padding-block: var(--pad); border-top: 1px solid var(--c-slate-2); }
 .people-tree { display: grid; gap: 3.5rem; }
-.team-group__title { margin-bottom: 1.5rem; text-align: center; font: 500 var(--t-label)/1.5 var(--f-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--c-muted); }
-/* every row centred, every card the same width: founders above, the team beneath */
-.people-row { --card: calc((100% - var(--gap)) / 2); display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem var(--gap); }
+.team-group__title { margin-bottom: 1.5rem; font: 500 var(--t-label)/1.5 var(--f-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--c-muted); }
+/* every card the same width, rows left-aligned: founders above, the team beneath */
+.people-row { --card: calc((100% - var(--gap)) / 2); display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 2.5rem var(--gap); }
 .people-row > li { flex: 0 0 var(--card); min-width: 0; }
 @media (min-width: 48em) { .people-row { --card: calc((100% - 2 * 2rem) / 3); column-gap: 2rem; } }
 @media (min-width: 80em) { .people-tree { gap: 4.5rem; } .people-row { --card: 17rem; column-gap: 4rem; } }
