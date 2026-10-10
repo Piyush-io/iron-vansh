@@ -1,3 +1,27 @@
 {
-  "_readme": "Shortlist for review. `npm run photos -- --scout` saves each at 1280px into design/photo-scout/ with original sizes in index.json. Empty once a choice is made."
+  "_readme": "Shortlist for review. `npm run photos -- --scout` saves each at 1280px into design/photo-scout/ with original sizes in index.json. Empty once a choice is made.",
+  "fc-aerial-skyline": {
+    "pexels": "32762535"
+  },
+  "fc-skyline-station": {
+    "pexels": "28513284"
+  },
+  "fc-city-skyline": {
+    "pexels": "2062477"
+  },
+  "fc-marine-drive-night": {
+    "pexels": "33948766"
+  },
+  "fc-downtown-aerial": {
+    "pexels": "19446716"
+  },
+  "fc-marine-drive-sunset": {
+    "id": "bAwT-vSd46Y"
+  },
+  "fc-lit-waterfront": {
+    "id": "TReaXxzOszU"
+  },
+  "fc-bulls": {
+    "id": "2Cg8bSQarDg"
+  }
 }
