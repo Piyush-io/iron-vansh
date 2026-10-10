@@ -1,3 +1,7 @@
 node_modules
 dist
 .astro
+
+# deploy credentials and backups (never commit)
+.env.deploy
+backups/

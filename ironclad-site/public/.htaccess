@@ -1,0 +1,33 @@
+# Hostinger (LiteSpeed/Apache). Uploaded with the site by `npm run deploy`.
+
+# Addresses from the previous ironcladamc.com, so old links and search results land on the new pages.
+Redirect 301 /product.html /products/pms/
+Redirect 301 /media.html /media/
+Redirect 301 /investor-update.html /investor-update/
+Redirect 301 /contact.html /contact/
+Redirect 301 /privacy-policy.html /privacy-policy/
+Redirect 301 /blog-single.html /blogs/
+Redirect 301 /about.html /team/
+
+ErrorDocument 404 /404.html
+
+# Caching: files under /_astro/ have content hashes in their names, so they can be cached for a year.
+# Fonts and images keep their names when replaced, so 30 days. Pages always revalidate.
+<IfModule mod_headers.c>
+  <If "%{REQUEST_URI} =~ m#^/_astro/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+  <ElseIf "%{REQUEST_URI} =~ m#\.(woff2|webp|png|jpe?g|svg)$#">
+    Header set Cache-Control "public, max-age=2592000"
+  </ElseIf>
+  <ElseIf "%{REQUEST_URI} =~ m#(\.html|/)$#">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </ElseIf>
+</IfModule>
+
+# The CMS admin page is never indexed
+<IfModule mod_headers.c>
+  <If "%{REQUEST_URI} =~ m#^/admin#">
+    Header set X-Robots-Tag "noindex, nofollow"
+  </If>
+</IfModule>
