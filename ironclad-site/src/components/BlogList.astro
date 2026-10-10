@@ -1,9 +1,9 @@
 ---
-import { getCollection } from 'astro:content';
+import { getPosts } from '../data/posts';
 import { site } from '../data/site';
 interface Props { limit?: number }
 const { limit } = Astro.props;
-const all = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const all = (await getPosts()).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const posts = limit ? all.slice(0, limit) : all;
 const fmt = new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
 ---

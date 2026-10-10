@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { hasPosts } from '../data/posts';
 import Base from '../layouts/Base.astro';
 import ContactBand from '../components/ContactBand.astro';
 import BlogList from '../components/BlogList.astro';
@@ -11,7 +11,6 @@ import Ranges from '../components/Ranges.astro';
 import { site } from '../data/site';
 import { products } from '../data/products';
 import { productPhoto } from '../data/photos';
-const hasPosts = (await getCollection('blog')).length > 0;
 const market = { pms: 'Indian listed equities', ventures: 'Venture-backed startups', latius: 'Global equities' } as const;
 const shortReg = { pms: 'PMS', ventures: 'Category I AIF', latius: 'GIFT City' } as const;
 const slides = [
