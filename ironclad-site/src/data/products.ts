@@ -199,7 +199,7 @@ export const products: Product[] = [
       },
     ],
     portfolioSummary: 'US-led global equities and ETFs, 3–5 year horizon',
-    compare: { figure: '3–5', figureLabel: 'year suggested horizon', detail: 'Direct equities and ETFs, led by the United States.', regShort: 'GIFT City' },
+    compare: { figure: '18–22', figureLabel: '', detail: 'Direct equities and ETFs, led by the United States.', regShort: 'GIFT City' },
     alloc: {
       title: 'Geographic allocation',
       sub: 'Indicative; actual allocations may vary with market conditions',

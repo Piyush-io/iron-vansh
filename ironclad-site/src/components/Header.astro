@@ -40,19 +40,21 @@ const chevron = '<svg class="chev" viewBox="0 0 12 8" fill="none" stroke="curren
 
 <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Navigation menu" aria-hidden="true" inert>
   <div class="drawer__top">
-    <img src="/images/logo-white.png" alt="Ironclad Asset Management" width="200" height="58">
+    <img src="/images/logo-navy.png" alt="Ironclad Asset Management" width="200" height="58">
     <button class="menu-btn" type="button" aria-label="Close menu" id="close" style="display:flex">
       <svg width="20" height="20" viewBox="0 0 20 20" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 3l14 14M17 3L3 17"/></svg>
     </button>
   </div>
   <nav aria-label="Mobile">
+    <a href="/" aria-current={cur('/')}>Home</a>
+    <p class="drawer__label">Products</p>
     {products.map((p) => (
-      <a href={`/products/${p.slug}`} aria-current={cur(`/products/${p.slug}`)}>{p.name}<small>{p.navSub}</small></a>
+      <a class="drawer__sub" href={`/products/${p.slug}`} aria-current={cur(`/products/${p.slug}`)}>{p.name.replace('Ironclad ', '')}<small>{p.navSub}</small></a>
     ))}
     <a href="/team" aria-current={cur('/team')}>The Firm</a>
     <a href="/blogs" aria-current={cur('/blogs')}>Insights</a>
     <a href="/media" aria-current={cur('/media')}>Media</a>
     <a href="/contact" aria-current={cur('/contact')}>Contact</a>
-    <a href={site.investorLoginUrl} rel="noopener" target="_blank">Investor Login</a>
   </nav>
+  <a class="drawer__login" href={site.investorLoginUrl} rel="noopener" target="_blank">Investor Login</a>
 </div>

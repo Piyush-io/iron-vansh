@@ -122,7 +122,7 @@ const slides = [
             <div class="cmp__figure">
               <p class="cmp__label">Portfolio</p>
               <p class="cmp__num">{p.compare.figure}</p>
-              <p class="cmp__unit">{p.compare.figureLabel}</p>
+              {p.compare.figureLabel && <p class="cmp__unit">{p.compare.figureLabel}</p>}
               <p class="cmp__detail">{p.compare.detail}</p>
             </div>
             <div class="cmp__build">

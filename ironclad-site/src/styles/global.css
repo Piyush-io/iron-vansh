@@ -152,13 +152,19 @@ a:focus-visible > .bx-icon .bx-icon__fill { opacity: 1; }
 .menu-btn i::before { top: -8px; } .menu-btn i::after { top: 8px; }
 @media (max-width: 79.99em) { .primary-nav { display: none; } .menu-btn { display: flex; } }
 
-.drawer { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; padding: 0 16px 32px; background: #000; color: #fff; opacity: 0; visibility: hidden; transform: translateY(-12px); transition: opacity .2s ease, transform .3s var(--ease-out), visibility .2s; overflow-y: auto; }
+/* phone menu, after the live ironcladamc.com: white panel, compact uppercase rows with hairlines */
+.drawer { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; padding: 0 16px max(24px, env(safe-area-inset-bottom)); background: #fff; color: #000; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: opacity .2s ease, transform .25s var(--ease-out), visibility .2s; overflow-y: auto; overscroll-behavior: contain; }
 .drawer[data-open] { opacity: 1; visibility: visible; transform: none; }
-.drawer__top { display: flex; align-items: center; justify-content: space-between; min-height: 7rem; }
-.drawer__top img { height: 2.5rem; width: auto; }
+.drawer__top { display: flex; align-items: center; justify-content: space-between; min-height: var(--h-header); border-bottom: 1px solid var(--c-slate-2); }
+.drawer__top img { height: var(--logo-h); width: auto; }
 .drawer nav { display: flex; flex-direction: column; }
-.drawer nav a { display: flex; flex-direction: column; padding: 1rem 0; border-top: 1px solid rgba(255, 255, 255, .4); font: 400 1.5rem/1.3 var(--f-serif); }
-.drawer nav small { margin-top: 4px; font: 300 .9375rem/1.4 var(--f-sans); opacity: .72; }
+.drawer nav a { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; min-height: 3.25rem; padding: .9rem 0; border-bottom: 1px solid var(--c-slate-2); font: 500 .8125rem/1.4 var(--f-sans); letter-spacing: .1em; text-transform: uppercase; }
+.drawer nav a[aria-current] { box-shadow: inset 2px 0 #000; padding-left: .75rem; }
+.drawer nav .drawer__sub[aria-current] { padding-left: 1rem; }
+.drawer__label { padding: 1.25rem 0 .25rem; font: 500 .6875rem/1.4 var(--f-sans); letter-spacing: .12em; text-transform: uppercase; color: var(--c-muted); }
+.drawer nav .drawer__sub { flex-direction: column; justify-content: center; gap: .2rem; padding-left: 1rem; }
+.drawer nav small { font: 400 .75rem/1.4 var(--f-sans); letter-spacing: 0; text-transform: none; color: var(--c-muted); font-weight: 400; }
+.drawer__login { display: flex; align-items: center; justify-content: center; min-height: 3rem; margin-top: 1.75rem; border: 1px solid #000; font: 500 .8125rem/1 var(--f-sans); letter-spacing: .1em; text-transform: uppercase; }
 
 /* ───── home: hero title (staggered, bold first word, second line indented) ───── */
 .promo-header__title { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); column-gap: var(--gap); row-gap: .25rem; font-size: min(2.75rem, 11.4vw); line-height: 1.05; font-weight: 700; letter-spacing: -.015em; }
