@@ -143,35 +143,38 @@ a:hover > .bx-icon .bx-icon__arrow, button:hover > .bx-icon .bx-icon__arrow { op
 .drawer nav a { display: flex; flex-direction: column; padding: 1rem 0; border-top: 1px solid rgba(255, 255, 255, .4); font: 400 1.5rem/1.3 var(--f-serif); }
 .drawer nav small { margin-top: 4px; font: 300 .9375rem/1.4 var(--f-sans); opacity: .72; }
 
-/* ───── home: promo header ───── */
-.promo-header { padding-block: 2.5rem 4.5rem; }
-.promo-header__inner { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); column-gap: var(--gap); }
+/* ───── home: hero title (staggered, bold first word, second line indented) ───── */
 .promo-header__title { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); column-gap: var(--gap); row-gap: .25rem; font-size: min(2.75rem, 11.4vw); line-height: 1.05; font-weight: 700; letter-spacing: -.015em; }
 .promo-header__title strong { font-weight: inherit; }
 .promo-header__t1 { grid-column: 1 / -1; }
 .promo-header__t2 { grid-column: 2 / -1; }
-.promo-header__desc { grid-column: 1 / -1; margin-top: 2rem; font-size: var(--t-lead); line-height: 1.55; }
-@media (min-width: 48em) {
-  .promo-header { padding-block: 3.5rem 6rem; }
-  .promo-header__title { font-size: 4.75rem; }
-  .promo-header__t2 { grid-column: 2 / -1; }
-  .promo-header__desc { grid-column: 2 / -1; margin-top: 2.5rem; }
-}
+@media (min-width: 48em) { .promo-header__title { font-size: 4.75rem; } }
+@media (min-width: 80em) { .promo-header__title { grid-column: 1 / 12; font-size: 5rem; } }
+@media (min-width: 90em) { .promo-header__title { font-size: 5.75rem; row-gap: .5rem; } .promo-header__t2 { grid-column: 3 / -1; } }
+
+/* ───── home: full-image hero (as on the current ironcladamc.com) ─────
+   The harbour photo fills the first screen edge to edge; the header sits on top of it, transparent.
+   An even tint (no gradient) keeps the photo's real colours while white text stays readable. */
+.home .site-header { position: absolute; inset: 0 0 auto 0; background: transparent; }
+.home .site-header__container:not(.is-fixed) { background: transparent; }
+.hero-full { position: relative; display: flex; align-items: flex-end; min-height: 100svh; overflow: hidden; color: #fff; background: #111; }
+.hero-full__media { position: absolute; inset: 0; }
+.hero-full__media::after { content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, .38); }
+.hero-full__inner { position: relative; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); column-gap: var(--gap); padding-block: calc(var(--h-header) + 2rem) 4.5rem; }
+.hero-full__desc { grid-column: 1 / -1; margin-top: 1.5rem; max-width: 34rem; font-size: var(--t-lead); line-height: 1.55; }
+.hero-full__actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: .5rem 2.5rem; margin-top: 2rem; }
+@media (min-width: 48em) { .hero-full__inner { padding-bottom: 6rem; } .hero-full__desc { grid-column: 2 / -1; } .hero-full__actions { grid-column: 2 / -1; } }
 @media (min-width: 80em) {
-  .promo-header { padding-block: 2.5rem 7rem; }
-  .promo-header__inner { grid-template-columns: repeat(16, minmax(0, 1fr)); }
-  .promo-header__title { grid-column: 1 / 12; font-size: 5rem; }
-  .promo-header__t2 { grid-column: 2 / -1; }
-  .promo-header__desc { grid-column: 13 / -1; align-self: end; margin-top: 0; }
+  .hero-full__inner { grid-template-columns: repeat(16, minmax(0, 1fr)); padding-bottom: 7.5rem; }
+  .hero-full__desc, .hero-full__actions { grid-column: 2 / 10; }
 }
-@media (min-width: 90em) {
-  .promo-header { padding-block: 3rem 7.5rem; }
-  .promo-header__title { font-size: 5.75rem; row-gap: .5rem; }
-  .promo-header__t2 { grid-column: 3 / -1; }
-}
+@media (min-width: 90em) { .hero-full__desc, .hero-full__actions { grid-column: 3 / 11; } }
+/* the photo settles from a slight zoom on load */
+@keyframes settle { from { transform: scale(1.08); } to { transform: none; } }
+.js .hero-full__media img { animation: settle 2.4s cubic-bezier(.16, 1, .3, 1) both; }
 
 /* ───── home: promo carousel ───── */
-.carousel { padding-bottom: var(--pad); }
+.carousel { padding-block: var(--pad); }
 .carousel__viewport { overflow: hidden; }
 .carousel__track { display: flex; transition: transform .8s cubic-bezier(.65, 0, .35, 1); }
 .carousel__slide { flex: 0 0 100%; min-width: 0; }
@@ -605,8 +608,6 @@ a:hover > .bx-icon .bx-icon__arrow, button:hover > .bx-icon .bx-icon__arrow { op
 .js [data-curtain] { background: transparent; }
 .js [data-curtain] > * { clip-path: inset(0 0 100% 0); transform: scale(1.08); transform-origin: 50% 100%; transition: clip-path .9s var(--ease-io), transform 1.4s var(--ease-out); }
 .js [data-curtain].in > * { clip-path: inset(0); transform: none; }
-/* the hero photo waits for the headline */
-.js .carousel__slide:first-child [data-curtain] > * { transition-delay: .52s; }
 
 /* ───── narrow screens ───── */
 @media (max-width: 47.99em) {
@@ -625,7 +626,7 @@ a:hover > .bx-icon .bx-icon__arrow, button:hover > .bx-icon .bx-icon__arrow { op
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .js .promo-header__title .w, .js .intro, .js .site-header__inner, .ticker__track { animation: none; }
+  .js .promo-header__title .w, .js .intro, .js .site-header__inner, .js .hero-full__media img, .ticker__track { animation: none; }
   .carousel__track { transition: none; }
   .js [data-reveal], .js [data-curtain] > * { opacity: 1; transform: none; clip-path: none; }
   *, *::before, *::after { transition-duration: .01ms !important; }

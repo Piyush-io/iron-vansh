@@ -15,18 +15,19 @@ const hasPosts = (await getCollection('blog')).length > 0;
 const market = { pms: 'Indian listed equities', ventures: 'Venture-backed startups', latius: 'Global equities' } as const;
 const shortReg = { pms: 'PMS', ventures: 'Category I AIF', latius: 'GIFT City' } as const;
 const slides = [
-  { photo: 'harbour' as const, position: '50% 58%', title: 'Our Investment Philosophy', blurb: 'We believe exceptional investing begins with understanding the world around a business and then understanding the business itself.', href: '#approach' },
   ...products.map((p) => ({ photo: productPhoto[p.slug], position: ({ pms: '50% 55%', ventures: '50% 32%', latius: '50% 45%' } as const)[p.slug], title: p.name, blurb: p.intro.paras[0], href: `/products/${p.slug}` })),
 ];
 ---
 <Base dark>
-  <section class="promo-header is-dark" aria-labelledby="hero-title">
-    <div class="wrap promo-header__inner">
+  <section class="hero-full is-dark" aria-labelledby="hero-title">
+    <div class="hero-full__media"><Photo name="harbour" eager decorative sizes="100vw" position="50% 55%" /></div>
+    <div class="wrap hero-full__inner">
       <h1 class="promo-header__title" id="hero-title">
         <span class="promo-header__t1"><strong class="w" style="--i:0">Ironclad</strong> <span class="w" style="--i:1">Asset</span></span>
         <span class="promo-header__t2"><span class="w" style="--i:2">Management</span></span>
       </h1>
-      <p class="promo-header__desc intro" style="--i:3">A multi-asset investment firm across Indian listed equities, venture-backed startups and global markets.</p>
+      <p class="hero-full__desc intro" style="--i:3">A multi-asset investment firm across Indian listed equities, venture-backed startups and global markets.</p>
+      <div class="hero-full__actions intro" style="--i:4"><Go href="#products" label="Our Products" /><Go href="/contact" label="Contact Us" /></div>
     </div>
   </section>
 
