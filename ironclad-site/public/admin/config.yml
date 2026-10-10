@@ -6,7 +6,7 @@ backend:
   name: github
   repo: Piyush-io/iron-vansh
   branch: main
-  # For the "Sign in with GitHub" button, deploy Sveltia CMS Authenticator (see ADMIN.md) and uncomment:
+  # Username/password sign-in goes through our login gate (cms-auth/, see ADMIN.md). After deploying it, uncomment:
   # base_url: https://ironclad-cms-auth.<your-account>.workers.dev
   commit_messages:
     create: 'CMS: add {{collection}} “{{slug}}”'

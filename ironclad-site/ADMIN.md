@@ -31,11 +31,26 @@ These need the firm's own accounts, so they can't be done from the codebase.
 
 The CMS commits to `main`, so this branch must be merged into `main` first.
 
-### 2. Sign-in
-- **Quick (works today):** on the login screen choose **Sign In with Token**, follow the link to create a GitHub token for this repo, paste it. Fine for one or two people.
-- **Proper "Sign in with GitHub" button:** deploy [Sveltia CMS Authenticator](https://github.com/sveltia/sveltia-cms-auth) to Cloudflare Workers (free; its README has a one-click deploy), register a GitHub OAuth app with the callback URL it gives you, then uncomment `base_url` in `public/admin/config.yml` and set it to the worker URL.
+### 2. Username & password sign-in (login gate in `cms-auth/`)
+Editors sign in with a username and password; they never need a GitHub account. The gate checks the password and gets the CMS a GitHub key that only works on this repository and expires after 1 hour.
 
-Each editor needs a free GitHub account with write access to the repository (GitHub → repo → Settings → Collaborators).
+1. **GitHub App** (holds the access): GitHub → Settings → Developer settings → GitHub Apps → New. Name `Ironclad CMS`, homepage `https://ironcladamc.com`, untick Webhook. Permissions: Repository → **Contents: Read and write**. Create, then **Generate a private key** (downloads a `.pem`) and note the **App ID**. Click **Install App** → only `iron-vansh`; the number at the end of the resulting URL is the **installation ID**.
+2. **Deploy the gate** (free Cloudflare Worker), from `ironclad-site/cms-auth/`:
+   ```
+   npx wrangler login
+   npx wrangler secret put GITHUB_APP_ID
+   npx wrangler secret put GITHUB_INSTALLATION_ID
+   npx wrangler secret put GITHUB_APP_PRIVATE_KEY < path/to/key.pem
+   node hash-password.mjs krishna          # repeat per editor; min 14 characters
+   npx wrangler secret put USERS           # paste: {"krishna":"pbkdf2$…","aritra":"pbkdf2$…"}
+   npx wrangler deploy
+   ```
+3. Put the worker URL in `public/admin/config.yml` as `base_url` (uncomment the line).
+4. Recommended: Cloudflare → Security → WAF → Rate limiting rule on the worker, e.g. 10 POSTs per minute per IP.
+
+Add or remove an editor, or change a password: rebuild the `USERS` JSON and run `wrangler secret put USERS` again. Passwords are stored only as salted PBKDF2 hashes.
+
+Note: every change is committed by the "Ironclad CMS" app, not a named person, so GitHub history shows when and what changed but not which editor. Signing in again after an hour is expected (the key expires by design).
 
 ## For developers
 - Config: `public/admin/config.yml`. Live previews: `public/admin/preview.js` (rendered with the site's own stylesheet, served at `/admin/preview.css` by `src/pages/admin/preview.css.ts`).
