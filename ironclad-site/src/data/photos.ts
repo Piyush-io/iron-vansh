@@ -6,7 +6,7 @@ import path from 'node:path';
 import sources from './photo-sources.json';
 
 export type PhotoName = Exclude<keyof typeof sources, '_readme'>;
-export const productPhoto = { pms: 'mumbai-night', ventures: 'sealink-pillars', latius: 'manhattan-hudson' } as const satisfies Record<string, PhotoName>;
+export const productPhoto = { pms: 'office-view', ventures: 'sealink-pillars', latius: 'manhattan-hudson' } as const satisfies Record<string, PhotoName>;
 
 const WIDTHS = [640, 1280, 1920, 2560, 3840];
 interface Entry { width: number; height: number; widths: number[] }

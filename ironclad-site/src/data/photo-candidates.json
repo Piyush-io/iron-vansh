@@ -1,30 +1,3 @@
 {
-  "_readme": "Shortlist for review. `npm run photos -- --scout` saves each at 1280px into design/photo-scout/ with original sizes in index.json. Empty once a choice is made.",
-  "win-office-panoramic": {
-    "pexels": "35074089"
-  },
-  "win-empty-office": {
-    "pexels": "5483236"
-  },
-  "win-modern-interior": {
-    "pexels": "31008751"
-  },
-  "win-white-room": {
-    "pexels": "7031616"
-  },
-  "win-industrial-room": {
-    "pexels": "18132317"
-  },
-  "win-hotel-skyscraper": {
-    "pexels": "20021123"
-  },
-  "win-night-highrise": {
-    "pexels": "9811817"
-  },
-  "win-flat-night": {
-    "pexels": "3223855"
-  },
-  "win-light-empty": {
-    "pexels": "14126667"
-  }
+  "_readme": "Shortlist for review. `npm run photos -- --scout` saves each at 1280px into design/photo-scout/ with original sizes in index.json. Empty once a choice is made."
 }
