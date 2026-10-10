@@ -24,14 +24,14 @@ const isHome = Astro.url.pathname === '/';
   <meta property="og:type" content="website">
   <meta property="og:image" content={new URL('/images/og.jpg', Astro.site)}>
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content={dark ? '#000000' : '#ffffff'}>
+  <meta name="theme-color" content="#000000">
   <link rel="preload" href="/fonts/zodiak-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/general-sans-400.woff2" as="font" type="font/woff2" crossorigin>
   <script is:inline>document.documentElement.classList.add('js')</script>
 </head>
 <body class:list={{ home: isHome, 'theme-dark': dark }}>
   <a class="skip" href="#main">Skip to content</a>
-  <Header pathname={Astro.url.pathname} dark={dark} />
+  <Header pathname={Astro.url.pathname} dark />
   <main id="main">
     <slot />
   </main>
@@ -97,13 +97,13 @@ const isHome = Astro.url.pathname === '/';
         const revealSel = [
           'main .eyebrow', 'main .eyebrow-plain', 'main .divider', 'main h2', 'main .split-head__desc', 'main .lede',
           '.offerings__sub', '.offerings__content', '.offerings__stat', '.two-up__copy', '.two-up__cta', '.two-up__links li',
-          '.cmp__card', '.vlist__item', '.tenets li', '.founder-body', '.associate', '.team-title', '.kp', '.checklist li',
-          '.bullets-lg li', '.focus', '.alloc', '.philosophy-line', '.philosophy-by', '.capture__copy', '.capture__fields div',
+          '.cmp__card', '.vlist__item', '.tenets li', '.person', '.kp', '.checklist li',
+          '.bullets-lg li', '.focus', '.ranges', '.philosophy-line', '.philosophy-by', '.capture__copy', '.capture__fields div',
           '.doclist li', '.post', '.disc', '.rows .row', '.reg-table', '.legal-text > *', '.prose .lede', '.ticker__disclaimer',
           '.page-header__desc', '.linklist li', '.carousel__main',
           '.site-footer__col', '.site-footer__bottom',
         ].join(',');
-        const curtainSel = '.carousel__media, .hero-media, .founder figure, .associate figure';
+        const curtainSel = '.carousel__media, .hero-media, .person__photo';
         const io = new IntersectionObserver((entries) => {
           entries.forEach((e) => {
             if (!e.isIntersecting) return;
@@ -123,6 +123,14 @@ const isHome = Astro.url.pathname === '/';
         });
         document.querySelectorAll(curtainSel).forEach((el) => { el.dataset.curtain = ''; io.observe(el); });
       }
+
+      // Team bios: each card opens its <dialog> side panel; Esc, the close button or a click outside closes it.
+      document.addEventListener('click', (e) => {
+        const open = e.target.closest('[data-bio]');
+        if (open) { document.getElementById(open.dataset.bio)?.showModal(); return; }
+        const dlg = e.target.closest('dialog.bio');
+        if (dlg && (e.target.closest('[data-close]') || e.target === dlg)) dlg.close();
+      });
 
       // Carousels: prev/next buttons and dots; inactive slides are inert.
       document.querySelectorAll('[data-carousel]').forEach((root) => {

@@ -1,14 +1,10 @@
 ---
 import type { Product } from '../data/products';
+import Ranges from './Ranges.astro';
 interface Props { alloc: NonNullable<Product['alloc']> }
 const { alloc } = Astro.props;
 ---
 <div class="alloc">
   <p class="alloc-sub">{alloc.sub}</p>
-  <div class="alloc-bar" role="img" aria-label={alloc.aria}>
-    {alloc.segs.map((s) => (
-      <div class={`seg ${s.cls}`} style={`flex:${s.flex}`}><span><b>{s.strong}</b>{s.label}</span></div>
-    ))}
-  </div>
-  <ul class="alloc-legend alloc-legend-sm" aria-hidden="true">{alloc.segs.map((s) => <li><i class={`sw ${s.cls}`}></i>{s.label} <b>{s.strong}</b></li>)}</ul>
+  <Ranges segs={alloc.segs} aria={alloc.aria} large key />
 </div>

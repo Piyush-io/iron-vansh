@@ -7,6 +7,7 @@ import Photo from '../components/Photo.astro';
 import TeamGrid from '../components/TeamGrid.astro';
 import ArrowIcon from '../components/ArrowIcon.astro';
 import Go from '../components/Go.astro';
+import Ranges from '../components/Ranges.astro';
 import { site } from '../data/site';
 import { products } from '../data/products';
 import { productPhoto } from '../data/photos';
@@ -117,7 +118,7 @@ const slides = [
             <header class="cmp__head">
               <p class="cmp__market">{market[p.slug]}</p>
               <h3 id={`cmp-${p.slug}`}>{p.name}</h3>
-              <span class:list={['cmp__status', p.compare.status]}>{p.compare.status === 'pending' ? 'Licence under application' : 'SEBI-registered'}</span>
+              <span class:list={['status', { pending: p.compare.status === 'pending' }]}>{p.compare.status === 'pending' ? 'Licence under application' : 'SEBI-registered'}</span>
             </header>
             <div class="cmp__figure">
               <p class="cmp__label">Portfolio</p>
@@ -128,12 +129,9 @@ const slides = [
             <div class="cmp__build">
               <p class="cmp__label">Construction</p>
               {p.alloc ? (
-                <>
-                  <span class="alloc-bar" role="img" aria-label={p.alloc.aria}>{p.alloc.segs.map((sg) => <span class={`seg ${sg.cls}`} style={`flex:${sg.flex}`}></span>)}</span>
-                  <ul class="cmp__rows">{p.alloc.segs.map((sg) => <li><span><i class={`sw ${sg.cls}`}></i>{sg.label}</span><b>{sg.strong}</b></li>)}</ul>
-                </>
+                <Ranges segs={p.alloc.segs} aria={p.alloc.aria} />
               ) : (
-                <ul class="cmp__rows cmp__rows--stages">{p.compare.stages?.map((t) => <li><span>{t}</span></li>)}</ul>
+                <ul class="stages">{p.compare.stages?.map((t) => <li>{t}</li>)}</ul>
               )}
             </div>
             <footer class="cmp__foot">

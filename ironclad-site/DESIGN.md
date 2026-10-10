@@ -45,6 +45,23 @@ Fontshare's **Zodiak + General Sans** (Indian Type Foundry, ITF Free Font Licens
 
 Geist Mono is used only for registration codes.
 
+## Type scale (the only sizes on the site)
+
+| Token | Phone | Desktop (1440) | Used for |
+|---|---|---|---|
+| `--t-page` | 40px | 64px | Inner page titles, Zodiak Bold (same opening as home) |
+| `--t-h2` | 28px | 40px | Section titles |
+| `--t-h3` | 22px | 24px | Card and item titles, team names |
+| `--t-lead` | 18px | 20px | Intros and descriptions |
+| `--t-body` | 16px | 17px | Paragraphs, links |
+| `--t-small` | 14px | 14px | Meta, notes, summaries |
+| `--t-label` | 13px | 14px | Uppercase labels |
+
+- **One bullet:** a 5px dot, used in every list (product points, checklists, legal text, investor-update points, venture stages).
+- **One status style:** "SEBI-registered" (filled dot) and "Licence under application" (ring) share colour and size on every product.
+- **Allocation:** range bars, solid to the low end and shaded to the high end, so "50–70%" reads correctly.
+- **People:** colour photo, name and designation in a grid; the bio opens in a side panel (`<dialog>`).
+
 ## 4. Layout (Blackstone's values)
 
 - Container: 100% − 32px on phones, then 43rem from 48em, 71rem from 80em, 79rem from 90em and 103rem from 120em.

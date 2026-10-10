@@ -1,0 +1,22 @@
+---
+// Allocation shown as ranges, one row each: solid up to the low end, shaded up to the high end.
+// "50–70%" draws solid to 50% and shaded to 70%, so the bar says exactly what the label says.
+interface Seg { label: string; strong: string }
+interface Props { segs: Seg[]; large?: boolean; aria: string; key?: boolean }
+const { segs, large = false, aria, key = false } = Astro.props;
+const range = (t: string) => { const [lo, hi] = (t.match(/\d+(\.\d+)?/g) ?? ['0', '0']).map(Number); return { lo, hi: hi ?? lo }; };
+---
+<div>
+  <ul class:list={['ranges', { 'ranges--lg': large }]} aria-label={aria}>
+    {segs.map((s) => {
+      const { lo, hi } = range(s.strong);
+      return (
+        <li>
+          <span class="ranges__row"><span>{s.label}</span><b>{s.strong}</b></span>
+          <span class="ranges__track" aria-hidden="true"><i style={`--lo:${(lo / hi) * 100}%;--hi:${hi}%`}></i></span>
+        </li>
+      );
+    })}
+  </ul>
+  {key && <p class="ranges__key" aria-hidden="true"><span>Minimum</span><span>Up to maximum</span></p>}
+</div>

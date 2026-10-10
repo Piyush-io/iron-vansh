@@ -17,7 +17,7 @@ const position = p.slug === 'pms' ? '50% 55%' : p.slug === 'latius' ? '50% 45%' 
 const portfolioTitle = p.alloc?.title ?? p.construction?.title ?? 'Portfolio';
 ---
 <Base title={p.name} description={p.metaDescription}>
-  <PageHero title={p.name} where={p.kicker} reg={p.reg} status={p.status} summary={p.headline} photo={productPhoto[p.slug]} position={position} />
+  <PageHero title={p.name} where={p.kicker} reg={p.compare.regShort} status={p.compare.status === 'pending' ? 'Licence under application' : 'SEBI-registered'} pending={p.compare.status === 'pending'} summary={p.headline} photo={productPhoto[p.slug]} position={position} />
 
   <section class="section" aria-labelledby="intro-title">
     <div class="wrap head">
