@@ -84,20 +84,17 @@ const isHome = Astro.url.pathname === '/';
       }, on);
       matchMedia('(min-width:1280px)').addEventListener('change', (e) => { if (e.matches && drawer.hasAttribute('data-open')) setDrawer(false); }, on);
 
-      // Header: sits in the page; once scrolled past, it slides back in (fixed) whenever you scroll up.
+      // Header: always on screen; compacts with a solid background as soon as the page scrolls.
       const bar = document.getElementById('header-bar');
       // Overscroll (rubber-band) areas show the root background: match the nearest section.
       // Top: the hero / header colour of this page. Bottom: the footer, black on every page.
       const root = document.documentElement;
       const topColour = getComputedStyle(document.querySelector('main > :first-child') ?? document.body).backgroundColor;
       const edgeTop = header.classList.contains('is-dark') || /rgb\(0, 0, 0\)|rgb\(17, 17, 17\)/.test(topColour) ? '#000' : '#fff';
-      let lastY = scrollY;
       const onScroll = () => {
-        const y = scrollY, past = y > header.offsetHeight;
-        bar.classList.toggle('is-fixed', past);
-        bar.classList.toggle('is-shown', past && y < lastY);
+        const y = scrollY;
+        bar.classList.toggle('is-fixed', y > 8);
         root.style.backgroundColor = y > (root.scrollHeight - innerHeight) / 2 ? '#000' : edgeTop;
-        lastY = y;
       };
       addEventListener('scroll', onScroll, { passive: true, signal: teardown.signal });
       onScroll();

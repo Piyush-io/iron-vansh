@@ -32,7 +32,7 @@
   --container: calc(100% - 32px);
   --gap: 16px;
   --h-header: 7rem;
-  --h-header-fixed: 6.375rem;
+  --h-header-fixed: 4.5rem;
   --logo-h: 2.5rem;
   --pad: 4.5rem;        /* section spacing */
   --pad-stack: 2.5rem;  /* a dark section following another dark section */
@@ -46,15 +46,15 @@
   --t-small: .875rem;   /* meta, notes, captions */
   --t-label: .8125rem;  /* uppercase labels */
 }
-@media (min-width: 48em) { :root { --container: 43rem; --h-header: 8.75rem; --h-header-fixed: 6.75rem; --logo-h: 3rem; --pad: 6rem; --t-page: 3rem; --t-h2: 2rem; } }
-@media (min-width: 80em) { :root { --container: 71rem; --h-header: 10rem; --pad: 7.5rem; --pad-stack: 3rem; --t-h3: 1.5rem; --t-body: 1.0625rem; --t-label: .875rem; } }
+@media (min-width: 48em) { :root { --container: 43rem; --h-header: 8.75rem; --h-header-fixed: 5rem; --logo-h: 3rem; --pad: 6rem; --t-page: 3rem; --t-h2: 2rem; } }
+@media (min-width: 80em) { :root { --container: 71rem; --h-header: 10rem; --h-header-fixed: 5.5rem; --pad: 7.5rem; --pad-stack: 3rem; --t-h3: 1.5rem; --t-body: 1.0625rem; --t-label: .875rem; } }
 @media (min-width: 90em) { :root { --container: 79rem; --pad: 8rem; --pad-stack: 3.5rem; --t-page: 3.5rem; --t-h2: 2.5rem; --t-lead: 1.25rem; } }
 @media (min-width: 120em) { :root { --container: 103rem; } }
 
 .is-dark { --c-copy: var(--c-white); --c-background: var(--c-black); --c-highlight: #121317; --c-graphics: var(--c-white); --c-muted: rgba(255, 255, 255, .72); background: var(--c-background); color: var(--c-copy); }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { background: #000; -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: calc(var(--h-header-fixed) + 16px); }
+html { background: #000; -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: calc(var(--h-header-fixed) + 24px); }
 body { font: 400 var(--t-body)/1.6 var(--f-sans); color: var(--c-copy); background: var(--c-background); -webkit-font-smoothing: antialiased; overflow-x: clip; }
 img, svg { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
@@ -103,13 +103,16 @@ a:hover > .bx-icon .bx-icon__arrow, button:hover > .bx-icon .bx-icon__arrow { op
 .photo-missing { background: #222; }
 
 /* ───── header ───── */
+/* The header stays on screen: fixed to the top, it compacts and gains a solid background once you scroll.
+   .site-header keeps its full height in the page flow so content never jumps under it. */
 .site-header { position: relative; z-index: 60; height: var(--h-header); }
-.site-header__container { height: var(--h-header); display: flex; align-items: center; background: #fff; color: #000; }
+.site-header__container { position: fixed; inset: 0 0 auto 0; z-index: 60; height: var(--h-header); display: flex; align-items: center; background: #fff; color: #000; transition: height .35s cubic-bezier(.16, 1, .3, 1), background-color .35s, box-shadow .35s; }
 .site-header.is-dark .site-header__container { background: #000; color: #fff; }
-.site-header__container.is-fixed { position: fixed; inset: 0 0 auto 0; height: var(--h-header-fixed); transform: translateY(-100%); transition: transform .45s cubic-bezier(.16, 1, .3, 1); }
-.site-header__container.is-fixed.is-shown { transform: none; }
+.site-header__container.is-fixed { height: var(--h-header-fixed); }
+.site-header:not(.is-dark) .site-header__container.is-fixed { box-shadow: 0 1px 0 var(--c-slate-2); }
 .site-header__inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
-.site-header__logo img { height: var(--logo-h); width: auto; }
+.site-header__logo img { height: var(--logo-h); width: auto; transition: height .35s cubic-bezier(.16, 1, .3, 1); }
+.is-fixed .site-header__logo img { height: calc(var(--logo-h) * .85); }
 .site-header:not(.is-dark) .site-header__logo img { filter: brightness(0); }
 .primary-nav ul { display: flex; align-items: center; column-gap: 1.5rem; }
 .primary-nav a, .primary-nav button { display: inline-flex; align-items: center; gap: .5rem; padding: .5rem 0; font: 400 1rem/1.5 var(--f-sans); letter-spacing: .02em; background: linear-gradient(currentColor, currentColor) 0 calc(100% - 4px) / 0 1px no-repeat; transition: background-size .3s; }
