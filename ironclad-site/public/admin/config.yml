@@ -17,7 +17,7 @@ backend:
 
 app_title: Ironclad CMS
 logo:
-  src: /images/logo-navy.png
+  src: /images/icon-180.png
 site_url: https://ironcladamc.com
 
 # images go to /images/uploads; PDF fields override this to /docs
