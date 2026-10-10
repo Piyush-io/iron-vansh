@@ -86,11 +86,17 @@ const isHome = Astro.url.pathname === '/';
 
       // Header: sits in the page; once scrolled past, it slides back in (fixed) whenever you scroll up.
       const bar = document.getElementById('header-bar');
+      // Overscroll (rubber-band) areas show the root background: match the nearest section.
+      // Top: the hero / header colour of this page. Bottom: the footer, black on every page.
+      const root = document.documentElement;
+      const topColour = getComputedStyle(document.querySelector('main > :first-child') ?? document.body).backgroundColor;
+      const edgeTop = header.classList.contains('is-dark') || /rgb\(0, 0, 0\)|rgb\(17, 17, 17\)/.test(topColour) ? '#000' : '#fff';
       let lastY = scrollY;
       const onScroll = () => {
         const y = scrollY, past = y > header.offsetHeight;
         bar.classList.toggle('is-fixed', past);
         bar.classList.toggle('is-shown', past && y < lastY);
+        root.style.backgroundColor = y > (root.scrollHeight - innerHeight) / 2 ? '#000' : edgeTop;
         lastY = y;
       };
       addEventListener('scroll', onScroll, { passive: true, signal: teardown.signal });
@@ -100,7 +106,7 @@ const isHome = Astro.url.pathname === '/';
       // so the page is fully visible without JS. Siblings get a stagger index.
       if (!reduce && 'IntersectionObserver' in window) {
         const revealSel = [
-          'main .eyebrow', 'main .eyebrow-plain', 'main .divider', 'main h2', 'main .split-head__desc', 'main .lede',
+          'main .eyebrow', 'main .eyebrow-plain', 'main h2', 'main .split-head__desc', 'main .lede',
           '.offerings__sub', '.offerings__content', '.offerings__stat', '.two-up__copy', '.two-up__cta', '.two-up__links li',
           '.cmp__card', '.vlist__item', '.tenets li', '.person', '.team-group__title', '.kp', '.checklist li',
           '.bullets-lg li', '.focus', '.ranges', '.philosophy-line', '.philosophy-by', '.capture__copy', '.capture__fields div',

@@ -10,7 +10,7 @@ Blackstone's design system, applied to Ironclad's own content and photography.
 
 1. **Black and white only.** Pages are white, and black is used for the header, hero card, product section, marquee, contact band and footer. The only colour comes from photographs, shown at their true colour with no overlay or fade.
 2. **One serif, one light sans.** Serif headlines in sentence case, never uppercase. Body copy in a light grotesk.
-3. **Eyebrow + rule.** Every section opens with a small uppercase label followed by a 48px rule.
+3. **Eyebrow.** Every section opens with a small uppercase label (no trailing rule).
 4. **No filled buttons.** Every action is a text link with a circled arrow (`.btn`).
 5. **Say only what is true.** No invented AUM, returns or client counts. Numbers come from `src/data/*`.
 
