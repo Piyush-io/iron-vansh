@@ -1,1 +1,27 @@
-{}
+{
+  "fc-aerial-skyline": {
+    "pexels": "32762535",
+    "width": 5472,
+    "height": 3648
+  },
+  "fc-skyline-station": {
+    "pexels": "28513284",
+    "width": 4624,
+    "height": 3468
+  },
+  "fc-city-skyline": {
+    "pexels": "2062477",
+    "width": 5184,
+    "height": 3456
+  },
+  "fc-marine-drive-night": {
+    "pexels": "33948766",
+    "width": 4608,
+    "height": 2592
+  },
+  "fc-downtown-aerial": {
+    "pexels": "19446716",
+    "width": 3024,
+    "height": 4032
+  }
+}
