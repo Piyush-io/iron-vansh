@@ -3,8 +3,8 @@
 // then a contained photograph. Pages without a description get the title alone (bx-page-header-no-desc).
 import Photo from './Photo.astro';
 import type { PhotoName } from '../data/photos';
-interface Props { title: string; summary?: string; where?: string; reg?: string; status?: string; pending?: boolean; photo?: PhotoName; position?: string }
-const { title, summary, where, reg, status, pending = false, photo, position } = Astro.props;
+interface Props { title: string; summary?: string; where?: string; reg?: string; photo?: PhotoName; position?: string }
+const { title, summary, where, reg, photo, position } = Astro.props;
 ---
 <section class="page-header">
   <div class="wrap page-header__inner">
@@ -12,15 +12,10 @@ const { title, summary, where, reg, status, pending = false, photo, position } =
       {where && <p class="eyebrow page-header__eyebrow">{where}</p>}
       <h1 class="page-header__title">{title.replace(/\.$/, '')}</h1>
     </div>
-    {(summary || reg || status) && (
+    {(summary || reg) && (
       <div class="page-header__desc">
         {summary && <p>{summary}</p>}
-        {(reg || status) && (
-          <p class="page-header__meta">
-            {status && <span class:list={['status', { pending }]}>{status}</span>}
-            {reg && <span>{reg}</span>}
-          </p>
-        )}
+        {reg && <p class="page-header__meta">{reg}</p>}
       </div>
     )}
   </div>

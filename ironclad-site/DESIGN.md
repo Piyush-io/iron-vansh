@@ -8,7 +8,7 @@ Blackstone's design system, applied to Ironclad's own content and photography.
 
 ## 1. Principles
 
-1. **Black and white only.** Pages are white, and black is used for the header, hero card, product section, marquee, contact band and footer. The only colour comes from photographs, shown at their true colour with no overlay or fade. One amber marks Latius's pending licence.
+1. **Black and white only.** Pages are white, and black is used for the header, hero card, product section, marquee, contact band and footer. The only colour comes from photographs, shown at their true colour with no overlay or fade.
 2. **One serif, one light sans.** Serif headlines in sentence case, never uppercase. Body copy in a light grotesk.
 3. **Eyebrow + rule.** Every section opens with a small uppercase label followed by a 48px rule.
 4. **No filled buttons.** Every action is a text link with a circled arrow (`.btn`).
@@ -24,7 +24,6 @@ Blackstone's design system, applied to Ironclad's own content and photography.
 | `--text` | `#1A1A1A` | Body |
 | `--text-2` | `#555555` | Secondary |
 | `--line` | `#D9D9D9` | Hairlines on white |
-| `--c-pending` | `#A95228` (Blackstone copper) | "Licence under application" only |
 
 ## 3. Typography
 
@@ -58,7 +57,7 @@ Geist Mono is used only for registration codes.
 | `--t-label` | 13px | 14px | Uppercase labels |
 
 - **One bullet:** a 5px dot, used in every list (product points, checklists, legal text, investor-update points, venture stages).
-- **One status style:** "SEBI-registered" (filled dot) and "Licence under application" (ring) share colour and size on every product.
+- **Registration:** each product shows its registration line (SEBI PMS, SEBI Category I AIF, GIFT City); no status badges.
 - **Allocation:** range bars, solid to the low end and shaded to the high end, so "50–70%" reads correctly.
 - **People:** colour photo, name and designation in a grid; the bio opens in a side panel (`<dialog>`).
 

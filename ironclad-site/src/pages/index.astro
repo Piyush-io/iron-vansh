@@ -74,7 +74,7 @@ const slides = [
         <div class="offerings__stat">
           <p class="stat__value">3</p>
           <p class="stat__label">Investment Products</p>
-          <p class="stat__note">Two SEBI-registered. Ironclad Latius’ IFSCA licence is under application.</p>
+          <p class="stat__note">Indian listed equities, venture-backed startups and global equities.</p>
         </div>
       </div>
     </div>
@@ -118,7 +118,6 @@ const slides = [
             <header class="cmp__head">
               <p class="cmp__market">{market[p.slug]}</p>
               <h3 id={`cmp-${p.slug}`}>{p.name}</h3>
-              <span class:list={['status', { pending: p.compare.status === 'pending' }]}>{p.compare.status === 'pending' ? 'Licence under application' : 'SEBI-registered'}</span>
             </header>
             <div class="cmp__figure">
               <p class="cmp__label">Portfolio</p>

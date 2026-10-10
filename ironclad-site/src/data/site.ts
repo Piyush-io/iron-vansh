@@ -9,8 +9,8 @@ export const site = {
     'Independent investment management across Indian public and private markets and global equities.',
   description:
     'Ironclad Asset Management: a SEBI-registered portfolio manager and Category I AIF investing across listed Indian equities, Indian private companies and global markets.',
-  address: '3rd Floor, C-175, Block C, Sector 100, Noida, Uttar Pradesh 201301',
-  addressShort: ['3rd Floor, C-175, Block C', 'Sector 100, Noida 201301'],
+  address: 'Wave One, Silver Tower, Sector 18, Noida, Uttar Pradesh 201301',
+  addressShort: ['Wave One, Silver Tower', 'Sector 18, Noida 201301'],
   phone: '+91 93195 27524',
   phoneHref: 'tel:+919319527524',
   email: 'info@ironcladamc.com',

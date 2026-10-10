@@ -88,10 +88,6 @@ strong, b { font-weight: 600; }
 .note { margin-top: 1.5rem; }
 .textlink { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 .textlink:hover { text-decoration-color: transparent; }
-/* registration status: identical treatment for every product; only the dot differs (filled = registered, ring = pending) */
-.status { display: inline-flex; align-items: center; gap: .5rem; font: 500 var(--t-small)/1.5 var(--f-sans); }
-.status::before { content: ''; flex: none; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
-.status.pending::before { background: transparent; box-shadow: inset 0 0 0 1.5px currentColor; }
 .divider { display: block; width: var(--divider); height: 2px; margin-inline: auto; background: var(--c-graphics); }
 
 /* ───── circled-arrow icon + "Learn More" link (bx-singular-link) ───── */
@@ -302,7 +298,6 @@ a:hover > .bx-icon .bx-icon__arrow, button:hover > .bx-icon .bx-icon__arrow { op
 .cmp__head { padding-bottom: 1.75rem; }
 .cmp__market { font: 500 var(--t-label)/1.5 var(--f-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--c-muted); }
 .cmp__head h3 { margin-top: .5rem; font-size: var(--t-h3); }
-.cmp__head .status { margin-top: .75rem; }
 .cmp__label { margin-bottom: .75rem; font: 500 var(--t-label)/1.5 var(--f-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--c-muted); }
 .cmp__figure { padding-block: 1.75rem; border-top: 1px solid #000; }
 .cmp__num { font: 700 3rem/1 var(--f-serif); font-variant-numeric: lining-nums tabular-nums; }
