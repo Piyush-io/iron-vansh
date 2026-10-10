@@ -105,6 +105,16 @@
       "skip": true
     },
     {
+      "name": "bx-our-people-live",
+      "url": "https://www.blackstone.com/the-firm/our-people/",
+      "clicks": [
+        "text=I am not a United States Resident",
+        "text=I Understand"
+      ],
+      "html": true,
+      "fonts": true
+    },
+    {
       "name": "bx-our-people",
       "url": "https://web.archive.org/web/2026/https://www.blackstone.com/the-firm/our-people/",
       "clicks": [
