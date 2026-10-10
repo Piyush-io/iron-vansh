@@ -1,0 +1,42 @@
+{
+  "faces": [],
+  "fontFaceRules": [],
+  "els": [
+    {
+      "sel": "h1",
+      "text": "www.blackstone.com",
+      "family": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+      "size": "40px",
+      "weight": "600",
+      "lh": "50px",
+      "ls": "normal",
+      "tt": "none",
+      "color": "rgb(49, 49, 49)",
+      "bg": "rgba(0, 0, 0, 0)"
+    },
+    {
+      "sel": "h2",
+      "text": "Performing security verification",
+      "family": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+      "size": "24px",
+      "weight": "600",
+      "lh": "30px",
+      "ls": "normal",
+      "tt": "none",
+      "color": "rgb(49, 49, 49)",
+      "bg": "rgba(0, 0, 0, 0)"
+    },
+    {
+      "sel": "p",
+      "text": "This website uses a security service to protect against mali",
+      "family": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+      "size": "16px",
+      "weight": "400",
+      "lh": "24px",
+      "ls": "normal",
+      "tt": "none",
+      "color": "rgb(49, 49, 49)",
+      "bg": "rgba(0, 0, 0, 0)"
+    }
+  ]
+}
