@@ -1,27 +1,30 @@
 {
   "_readme": "Shortlist for review. `npm run photos -- --scout` saves each at 1280px into design/photo-scout/ with original sizes in index.json. Empty once a choice is made.",
-  "fc-aerial-skyline": {
-    "pexels": "32762535"
+  "win-office-panoramic": {
+    "pexels": "35074089"
   },
-  "fc-skyline-station": {
-    "pexels": "28513284"
+  "win-empty-office": {
+    "pexels": "5483236"
   },
-  "fc-city-skyline": {
-    "pexels": "2062477"
+  "win-modern-interior": {
+    "pexels": "31008751"
   },
-  "fc-marine-drive-night": {
-    "pexels": "33948766"
+  "win-white-room": {
+    "pexels": "7031616"
   },
-  "fc-downtown-aerial": {
-    "pexels": "19446716"
+  "win-industrial-room": {
+    "pexels": "18132317"
   },
-  "fc-marine-drive-sunset": {
-    "id": "bAwT-vSd46Y"
+  "win-hotel-skyscraper": {
+    "pexels": "20021123"
   },
-  "fc-lit-waterfront": {
-    "id": "TReaXxzOszU"
+  "win-night-highrise": {
+    "pexels": "9811817"
   },
-  "fc-bulls": {
-    "id": "2Cg8bSQarDg"
+  "win-flat-night": {
+    "pexels": "3223855"
+  },
+  "win-light-empty": {
+    "pexels": "14126667"
   }
 }
