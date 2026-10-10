@@ -99,8 +99,8 @@ Geist Mono is used only for registration codes.
 - Curves are tokens: `--ease-out` (entering/exiting UI), `--ease-in-out` (things moving on screen, e.g. the carousel), `--ease-drawer` (the bio panel). No hand-typed beziers.
 - UI stays under 300ms (dropdown 180ms in / 120ms out, scaling from its top-left origin); panels up to 500ms. Header compaction is transform-only.
 - Hover motion only under `(hover: hover) and (pointer: fine)`; buttons and cards press to `scale(.97)`.
-- Ticker: two rows drift in opposite directions; scroll speed throws them faster, reverses them on scroll-up and skews them (max 10deg) with a spring back. Runs only while on screen.
-- `prefers-reduced-motion`: movement goes, opacity fades stay; the ticker is static.
+- Reel (home, after the products): the harbour photo shows through giant bold type (black layer + white type, `mix-blend-mode: multiply`). The section pins, the type glides left with scroll, then zooms through the stem of the "d" and the black fades, leaving the photo full-screen. Scroll position drives it (no scroll hijacking), eased per frame; runs only while on screen.
+- `prefers-reduced-motion`: movement goes, opacity fades stay; the reel is a static block of photo-filled type.
 
 ## 9. Content and compliance rules
 

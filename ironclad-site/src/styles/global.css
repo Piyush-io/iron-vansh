@@ -295,21 +295,22 @@ a:focus-visible > .bx-icon .bx-icon__fill { opacity: 1; }
   .two-up__link { padding-block: 2.5rem; }
 }
 
-/* ───── ticker tape ───── */
-.ticker { padding-block: var(--pad-stack) var(--pad); overflow: hidden; }
-.ticker__inner { overflow: hidden; }
-.ticker__track { display: flex; width: max-content; animation: ticker 50s linear infinite; }
-.ticker__track--ghost { animation-direction: reverse; margin-top: -.15em; }
-.ticker__track--ghost .ticker__title { color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, .55); font-style: italic; font-weight: 300; }
-/* with JS, scroll drives the tape (see Base.astro): CSS animation off, transform set per frame */
-.js [data-ticker] .ticker__track { animation: none; will-change: transform; }
-.ticker__title { flex: none; padding-right: 7.5rem; font: 400 4rem/1.3 var(--f-serif); white-space: nowrap; }
-.ticker__title strong { font-weight: 700; }
-.ticker__disclaimer { margin-top: 3.5rem; font-size: .875rem; }
-@keyframes ticker { to { transform: translateX(-50%); } }
-@media (min-width: 48em) { .ticker__title { font-size: 6.5rem; padding-right: 8.5rem; } .ticker__disclaimer { margin-top: 4.5rem; } }
-@media (min-width: 80em) { .ticker__track--ghost .ticker__title { -webkit-text-stroke-width: 1.5px; } .ticker__title { font-size: 10.5rem; padding-right: 12rem; } .ticker__disclaimer { margin-top: 7.5rem; } }
-@media (min-width: 90em) { .ticker__title { font-size: 12rem; padding-right: 13.5rem; } .ticker__disclaimer { margin-top: 8rem; } }
+/* ───── reel: the photo seen through giant type; pinned, glides sideways, then zooms through a letter ───── */
+/* Without JS (or with reduced motion) it is a static block of photo-filled type. */
+.reel__pin { position: relative; overflow: hidden; isolation: isolate; }
+.reel__media { position: absolute; inset: 0; }
+.reel__media img { width: 100%; height: 100%; object-fit: cover; }
+/* black layer with white type, multiplied over the photo: black stays black, the letters become windows */
+.reel__knock { position: relative; background: #000; color: #fff; mix-blend-mode: multiply; padding-block: var(--pad); }
+.reel__text { width: var(--container); max-width: 100%; margin-inline: auto; font: 700 clamp(3.5rem, 15vw, 13rem)/.95 var(--f-serif); letter-spacing: -.02em; }
+.reel__disclaimer { padding-block: var(--pad-stack) var(--pad); font-size: .875rem; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .reel__track { height: 420vh; }
+  .js .reel__pin { position: sticky; top: 0; height: 100vh; height: 100svh; }
+  .js .reel__knock { position: absolute; inset: 0; padding: 0; }
+  .js .reel__text { position: absolute; top: 50%; left: 0; width: max-content; max-width: none; margin: 0; white-space: nowrap; font-size: min(36vh, 70vw); line-height: 1; transform: translate3d(8vw, -50%, 0); }
+  .js .reel__media img { transform: scale(1.15); }
+}
 
 /* ───── product comparison: three aligned cards ───── */
 .compare { padding-block: var(--pad); }
@@ -638,7 +639,7 @@ a:focus-visible > .bx-icon .bx-icon__fill { opacity: 1; }
 /* reduced motion: fewer and gentler, not zero. Keep short opacity fades that aid comprehension; remove all movement. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .ticker__track, .js .hero-full__media img { animation: none; }
+  .js .hero-full__media img { animation: none; }
   .js .promo-header__title .w, .js .intro, .js .site-header__inner { animation: fade .4s ease both; }
   .js [data-reveal] { transform: none; transition: opacity .4s ease; transition-delay: 0s; }
   .js [data-curtain] > * { clip-path: none; transform: none; opacity: 0; transition: opacity .4s ease; }

@@ -96,16 +96,14 @@ const slides = [
     </div>
   </section>
 
-  <section class="ticker is-dark" aria-label="Capital, Conviction and Compounding">
-    <div class="ticker__inner" aria-hidden="true" data-ticker>
-      <div class="ticker__track" data-dir="1">
-        {[0, 1, 2, 3].map(() => <p class="ticker__title"><strong>Capital,</strong> Conviction &amp; Compounding</p>)}
-      </div>
-      <div class="ticker__track ticker__track--ghost" data-dir="-1">
-        {[0, 1, 2, 3].map(() => <p class="ticker__title">Ironclad Asset Management</p>)}
+  <section class="reel is-dark" aria-label="Capital, Conviction and Compounding" data-reel>
+    <div class="reel__track">
+      <div class="reel__pin">
+        <div class="reel__media"><Photo name="harbour" decorative sizes="100vw" position="50% 55%" /></div>
+        <div class="reel__knock" aria-hidden="true"><p class="reel__text">Capital, Conviction &amp; Compoun<span data-reel-target>d</span>ing</p></div>
       </div>
     </div>
-    <div class="wrap ticker__disclaimer"><p>Investments in securities markets are subject to market risks. Read all related documents carefully before investing.</p></div>
+    <div class="wrap reel__disclaimer"><p>Investments in securities markets are subject to market risks. Read all related documents carefully before investing.</p></div>
   </section>
 
   <section class="compare" id="compare" aria-labelledby="compare-title">
