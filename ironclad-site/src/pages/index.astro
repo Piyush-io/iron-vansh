@@ -15,7 +15,7 @@ const hasPosts = (await getCollection('blog')).length > 0;
 const market = { pms: 'Indian listed equities', ventures: 'Venture-backed startups', latius: 'Global equities' } as const;
 const shortReg = { pms: 'PMS', ventures: 'Category I AIF', latius: 'GIFT City' } as const;
 const slides = [
-  ...products.map((p) => ({ photo: productPhoto[p.slug], position: ({ pms: '50% 22%', ventures: '50% 32%', latius: '50% 45%' } as const)[p.slug], title: p.name, blurb: p.intro.paras[0], href: `/products/${p.slug}` })),
+  ...products.map((p) => ({ photo: productPhoto[p.slug], position: ({ pms: '50% 4%', ventures: '50% 32%', latius: '50% 45%' } as const)[p.slug], title: p.name, blurb: p.intro.paras[0], href: `/products/${p.slug}` })),
 ];
 ---
 <Base dark>
