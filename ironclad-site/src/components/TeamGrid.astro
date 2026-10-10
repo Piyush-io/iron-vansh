@@ -1,21 +1,20 @@
 ---
-// People, after blackstone.com/the-firm/our-people: group headings, a four-across grid of cards
-// (photo, name, designation); hovering one fades the rest. Clicking opens a full-width bio panel
+// People, after blackstone.com/the-firm/our-people, laid out as a tree: founders centred on top,
+// the investment team centred beneath, every card the same size; hovering one fades the rest. Clicking opens a full-width bio panel
 // from the right: black band with name, designation and a large photo, then the biography.
 import { founders, associates, type Person } from '../data/team';
 import Go from './Go.astro';
-interface Props { groups?: boolean }
-const { groups = false } = Astro.props;
 const id = (p: Person) => 'bio-' + p.name.toLowerCase().replace(/[^a-z]+/g, '-').replace(/-+$/, '');
 const photo = (p: Person, sizes: string, eager = false) => p.image
   ? `<picture><source srcset="${p.image}.webp" type="image/webp" /><img src="${p.image}.jpg" alt="" width="1000" height="1000" loading="${eager ? 'eager' : 'lazy'}" decoding="async" sizes="${sizes}" /></picture>`
   : `<span class="monogram" aria-hidden="true">${p.initials}</span>`;
-const sets = groups ? [{ title: 'Founders', people: founders }, { title: 'Investment Team', people: associates }] : [{ title: '', people: [...founders, ...associates] }];
+const sets = [{ title: 'Founders', people: founders }, { title: 'Investment Team', people: associates }];
 ---
+<div class="people-tree">
 {sets.map((g) => (
   <div class="team-group">
-    {g.title && <h2 class="team-group__title">{g.title}</h2>}
-    <ul class="people-grid">
+    <h3 class="team-group__title">{g.title}</h3>
+    <ul class="people-row">
       {g.people.map((p) => (
         <li>
           <button type="button" class="person" data-bio={id(p)} aria-haspopup="dialog">
@@ -28,6 +27,7 @@ const sets = groups ? [{ title: 'Founders', people: founders }, { title: 'Invest
     </ul>
   </div>
 ))}
+</div>
 
 {[...founders, ...associates].map((p) => (
   <dialog class="bio" id={id(p)} aria-labelledby={`${id(p)}-name`}>

@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { ClientRouter } from 'astro:transitions';
 import { site } from '../data/site';
 
 interface Props { title?: string; description?: string; dark?: boolean }
@@ -27,45 +28,49 @@ const isHome = Astro.url.pathname === '/';
   <meta name="theme-color" content={dark ? '#000000' : '#ffffff'}>
   <link rel="preload" href="/fonts/zodiak-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/general-sans-400.woff2" as="font" type="font/woff2" crossorigin>
-  <script is:inline>document.documentElement.classList.add('js')</script>
-</head>
-<body class:list={{ home: isHome, 'theme-dark': dark }}>
-  <a class="skip" href="#main">Skip to content</a>
-  <Header pathname={Astro.url.pathname} dark={dark} />
-  <main id="main">
-    <slot />
-  </main>
-  <Footer />
+  <ClientRouter fallback="swap" />
   <script is:inline>
-    (() => {
-      const header = document.getElementById('header');
+    // Pages share this layout; ClientRouter fetches the next page and swaps only what changed (no full reload).
+    // Everything below binds once in <head>; per-page setup runs on astro:page-load and is torn down before each swap.
+    document.documentElement.classList.add('js');
+    document.addEventListener('astro:after-swap', () => document.documentElement.classList.add('js'));
+    let teardown = new AbortController();
+    let observer = null;
+    document.addEventListener('astro:before-swap', () => { teardown.abort(); observer?.disconnect(); document.body.style.overflow = ''; });
+    document.addEventListener('astro:page-load', () => {
+      teardown = new AbortController();
+      const on = { signal: teardown.signal };
       const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const header = document.getElementById('header');
 
       // Products dropdown: click and keyboard, closes on outside click / Escape
       const dd = document.getElementById('dd'), ddBtn = dd.querySelector('button');
-      const setDD = open => { dd.toggleAttribute('data-open', open); ddBtn.setAttribute('aria-expanded', open); };
-      ddBtn.addEventListener('click', () => setDD(!dd.hasAttribute('data-open')));
-      dd.addEventListener('mouseenter', () => matchMedia('(hover:hover)').matches && setDD(true));
-      dd.addEventListener('mouseleave', () => matchMedia('(hover:hover)').matches && setDD(false));
-      dd.addEventListener('focusout', e => { if (!dd.contains(e.relatedTarget)) setDD(false); });
-      document.addEventListener('click', e => { if (!dd.contains(e.target)) setDD(false); });
+      const setDD = (open) => { dd.toggleAttribute('data-open', open); ddBtn.setAttribute('aria-expanded', open); };
+      // with a mouse, hovering opens the menu, so a click straight after must not toggle it shut again
+      let hoverOpenedAt = 0;
+      ddBtn.addEventListener('click', () => setDD(Date.now() - hoverOpenedAt < 600 || !dd.hasAttribute('data-open')), on);
+      dd.addEventListener('mouseenter', () => { if (matchMedia('(hover:hover)').matches && !dd.hasAttribute('data-open')) { hoverOpenedAt = Date.now(); setDD(true); } }, on);
+      dd.addEventListener('mouseleave', () => matchMedia('(hover:hover)').matches && setDD(false), on);
+      dd.addEventListener('focusout', (e) => { if (!dd.contains(e.relatedTarget)) setDD(false); }, on);
+      dd.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setDD(false), on));
+      document.addEventListener('click', (e) => { if (!dd.contains(e.target)) setDD(false); }, on);
 
       // Mobile drawer
       const drawer = document.getElementById('drawer'), openBtn = document.getElementById('open'), closeBtn = document.getElementById('close');
       const background = [header, document.getElementById('main'), document.querySelector('.site-footer')];
-      const setDrawer = open => {
+      const setDrawer = (open) => {
         drawer.toggleAttribute('data-open', open);
         drawer.inert = !open;
         drawer.setAttribute('aria-hidden', String(!open));
         openBtn.setAttribute('aria-expanded', String(open));
-        background.forEach(el => { if (el) el.inert = open; });
+        background.forEach((el) => { if (el) el.inert = open; });
         document.body.style.overflow = open ? 'hidden' : '';
         (open ? closeBtn : openBtn).focus();
       };
-      openBtn.addEventListener('click', () => setDrawer(true));
-      closeBtn.addEventListener('click', () => setDrawer(false));
-      drawer.querySelectorAll('nav a').forEach(a => a.addEventListener('click', () => setDrawer(false)));
-      document.addEventListener('keydown', e => {
+      openBtn.addEventListener('click', () => setDrawer(true), on);
+      closeBtn.addEventListener('click', () => setDrawer(false), on);
+      drawer.querySelectorAll('nav a').forEach((a) => a.addEventListener('click', () => setDrawer(false), on));
+      document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
           if (dd.hasAttribute('data-open')) { setDD(false); ddBtn.focus(); }
           if (drawer.hasAttribute('data-open')) setDrawer(false);
@@ -76,8 +81,8 @@ const isHome = Astro.url.pathname === '/';
           if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
           if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
         }
-      });
-      matchMedia('(min-width:901px)').addEventListener('change', e => { if (e.matches && drawer.hasAttribute('data-open')) setDrawer(false); });
+      }, on);
+      matchMedia('(min-width:1280px)').addEventListener('change', (e) => { if (e.matches && drawer.hasAttribute('data-open')) setDrawer(false); }, on);
 
       // Header: sits in the page; once scrolled past, it slides back in (fixed) whenever you scroll up.
       const bar = document.getElementById('header-bar');
@@ -88,7 +93,7 @@ const isHome = Astro.url.pathname === '/';
         bar.classList.toggle('is-shown', past && y < lastY);
         lastY = y;
       };
-      addEventListener('scroll', onScroll, { passive: true });
+      addEventListener('scroll', onScroll, { passive: true, signal: teardown.signal });
       onScroll();
 
       // Scroll reveals: content fades up, photos open with a curtain. Elements are tagged here (never in markup),
@@ -97,17 +102,17 @@ const isHome = Astro.url.pathname === '/';
         const revealSel = [
           'main .eyebrow', 'main .eyebrow-plain', 'main .divider', 'main h2', 'main .split-head__desc', 'main .lede',
           '.offerings__sub', '.offerings__content', '.offerings__stat', '.two-up__copy', '.two-up__cta', '.two-up__links li',
-          '.cmp__card', '.vlist__item', '.tenets li', '.person', '.kp', '.checklist li',
+          '.cmp__card', '.vlist__item', '.tenets li', '.person', '.team-group__title', '.kp', '.checklist li',
           '.bullets-lg li', '.focus', '.ranges', '.philosophy-line', '.philosophy-by', '.capture__copy', '.capture__fields div',
-          '.doclist li', '.post', '.disc', '.rows .row', '.reg-table', '.legal-text > *', '.prose .lede', '.ticker__disclaimer',
+          '.doclist > li', '.post', '.disc', '.rows .row', '.reg-table', '.legal-text > *', '.prose .lede', '.ticker__disclaimer',
           '.page-header__desc', '.linklist li', '.carousel__main',
           '.site-footer__col', '.site-footer__bottom',
         ].join(',');
         const curtainSel = '.carousel__media, .hero-media, .person__photo';
-        const io = new IntersectionObserver((entries) => {
+        observer = new IntersectionObserver((entries) => {
           entries.forEach((e) => {
             if (!e.isIntersecting) return;
-            io.unobserve(e.target);
+            observer.unobserve(e.target);
             // open a photo only once it has decoded, so it never wipes in half-loaded
             const img = e.target.matches('[data-curtain]') && e.target.querySelector('img');
             const show = () => e.target.classList.add('in');
@@ -115,13 +120,13 @@ const isHome = Astro.url.pathname === '/';
           });
         }, { rootMargin: '0px 0px -12% 0px', threshold: 0 });
         document.querySelectorAll(revealSel).forEach((el) => {
-          if (el.closest('.promo-header')) return;
+          if (el.closest('.promo-header, dialog')) return;
           const sibs = [...el.parentElement.children].filter((c) => c.matches(revealSel));
           el.style.setProperty('--d', String(Math.min(sibs.indexOf(el), 4)));
           el.dataset.reveal = '';
-          io.observe(el);
+          observer.observe(el);
         });
-        document.querySelectorAll(curtainSel).forEach((el) => { el.dataset.curtain = ''; io.observe(el); });
+        document.querySelectorAll(curtainSel).forEach((el) => { el.dataset.curtain = ''; observer.observe(el); });
       }
 
       // Team bios: each card opens its full-width <dialog> panel; the close button or Esc closes it.
@@ -130,7 +135,7 @@ const isHome = Astro.url.pathname === '/';
         if (open) { document.getElementById(open.dataset.bio)?.showModal(); return; }
         const dlg = e.target.closest('dialog.bio');
         if (dlg && e.target.closest('[data-close]')) dlg.close();
-      });
+      }, on);
 
       // Carousels: prev/next buttons and dots; inactive slides are inert.
       document.querySelectorAll('[data-carousel]').forEach((root) => {
@@ -140,19 +145,26 @@ const isHome = Astro.url.pathname === '/';
         const go = (n) => {
           i = (n + slides.length) % slides.length;
           track.style.transform = `translateX(${-100 * i}%)`;
-          slides.forEach((s, k) => { s.inert = k !== i; s.setAttribute('aria-hidden', String(k !== i)); });
+          slides.forEach((sl, k) => { sl.inert = k !== i; sl.setAttribute('aria-hidden', String(k !== i)); });
           root.querySelectorAll('.dots a').forEach((d) => d.toggleAttribute('aria-current', +d.dataset.i === i));
         };
         root.addEventListener('click', (e) => {
           const b = e.target.closest('[data-go]');
           if (!b) return;
           e.preventDefault();
-          const v = b.dataset.go;
-          go(v === 'prev' ? i - 1 : v === 'next' ? i + 1 : +v);
-        });
+          go(b.dataset.go === 'prev' ? i - 1 : b.dataset.go === 'next' ? i + 1 : +b.dataset.go);
+        }, on);
         go(0);
       });
-    })();
+    });
   </script>
+</head>
+<body class:list={{ home: isHome, 'theme-dark': dark }}>
+  <a class="skip" href="#main">Skip to content</a>
+  <Header pathname={Astro.url.pathname} dark={dark} />
+  <main id="main" transition:animate="fade">
+    <slot />
+  </main>
+  <Footer />
 </body>
 </html>

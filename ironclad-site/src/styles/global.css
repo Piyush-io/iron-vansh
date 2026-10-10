@@ -360,11 +360,16 @@ a:hover > .bx-icon .bx-icon__arrow, button:hover > .bx-icon .bx-icon__arrow { op
 
 /* ───── people (after blackstone.com/the-firm/our-people) ───── */
 .people-section { padding-block: var(--pad); border-top: 1px solid var(--c-slate-2); }
-.team-group + .team-group { margin-top: var(--pad); }
-.team-group__title { margin-bottom: 2.5rem; font-size: var(--t-h2); font-weight: 300; }
-.people-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem var(--gap); }
+.people-tree { display: grid; gap: 3.5rem; }
+.team-group__title { margin-bottom: 1.5rem; text-align: center; font: 500 var(--t-label)/1.5 var(--f-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--c-muted); }
+/* every row centred, every card the same width: founders above, the team beneath */
+.people-row { --card: calc((100% - var(--gap)) / 2); display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem var(--gap); }
+.people-row > li { flex: 0 0 var(--card); min-width: 0; }
+@media (min-width: 48em) { .people-row { --card: calc((100% - 2 * 2rem) / 3); column-gap: 2rem; } }
+@media (min-width: 80em) { .people-tree { gap: 4.5rem; } .people-row { --card: 17rem; column-gap: 4rem; } }
+@media (min-width: 90em) { .people-row { --card: 18.5rem; column-gap: 5rem; } }
 .person { display: block; width: 100%; text-align: left; transition: opacity .15s ease-out; }
-.people-grid:has(.person:hover) .person:not(:hover) { opacity: .5; }
+.people-tree:has(.person:hover) .person:not(:hover) { opacity: .5; }
 .person__photo { display: block; aspect-ratio: 1; overflow: hidden; background: #e9e9e9; }
 .person__photo picture, .person__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .person__name { display: block; margin-top: 1.25rem; font: 400 var(--t-lead)/1.4 var(--f-sans); }
@@ -373,9 +378,6 @@ a:hover > .bx-icon .bx-icon__arrow, button:hover > .bx-icon .bx-icon__arrow { op
 .person__role { display: block; margin-top: .375rem; font-size: var(--t-small); font-weight: 500; color: var(--c-muted); }
 .monogram { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font: 300 3rem/1 var(--f-serif); color: #fff; background: #000; }
 @media (max-width: 47.99em) { .person__name { font-size: var(--t-body); } }
-@media (min-width: 48em) { .people-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 2.5rem; } }
-@media (min-width: 80em) { .people-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4.5rem 4.5rem; } }
-@media (min-width: 90em) { .people-grid { gap: 4.5rem 6rem; } }
 .people-more { margin-top: 3rem; }
 .team { padding-block: 0 var(--pad); }
 
