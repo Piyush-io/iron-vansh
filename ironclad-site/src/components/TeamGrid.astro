@@ -1,37 +1,47 @@
 ---
-// People, Blackstone style: photo, name and designation on the card; the full bio opens in a side panel.
+// People, after blackstone.com/the-firm/our-people: group headings, a four-across grid of cards
+// (photo, name, designation); hovering one fades the rest. Clicking opens a full-width bio panel
+// from the right: black band with name, designation and a large photo, then the biography.
 import { founders, associates, type Person } from '../data/team';
 import Go from './Go.astro';
+interface Props { groups?: boolean }
+const { groups = false } = Astro.props;
 const id = (p: Person) => 'bio-' + p.name.toLowerCase().replace(/[^a-z]+/g, '-').replace(/-+$/, '');
-const photo = (p: Person, sizes: string) => p.image
-  ? `<picture><source srcset="${p.image}.webp" type="image/webp" /><img src="${p.image}.jpg" alt="" width="1000" height="1000" loading="lazy" decoding="async" sizes="${sizes}" /></picture>`
+const photo = (p: Person, sizes: string, eager = false) => p.image
+  ? `<picture><source srcset="${p.image}.webp" type="image/webp" /><img src="${p.image}.jpg" alt="" width="1000" height="1000" loading="${eager ? 'eager' : 'lazy'}" decoding="async" sizes="${sizes}" /></picture>`
   : `<span class="monogram" aria-hidden="true">${p.initials}</span>`;
+const sets = groups ? [{ title: 'Founders', people: founders }, { title: 'Investment Team', people: associates }] : [{ title: '', people: [...founders, ...associates] }];
 ---
-<ul class="people-grid">
-  {[...founders, ...associates].map((p) => (
-    <li>
-      <button type="button" class="person" data-bio={id(p)} aria-haspopup="dialog">
-        <span class="person__photo" set:html={photo(p, '(min-width: 1280px) 240px, 50vw')} />
-        <span class="person__text">
-          <span class="person__name">{p.name}</span>
-          <span class="person__role">{p.title}</span>
-        </span>
-      </button>
-    </li>
-  ))}
-</ul>
+{sets.map((g) => (
+  <div class="team-group">
+    {g.title && <h2 class="team-group__title">{g.title}</h2>}
+    <ul class="people-grid">
+      {g.people.map((p) => (
+        <li>
+          <button type="button" class="person" data-bio={id(p)} aria-haspopup="dialog">
+            <span class="person__photo" set:html={photo(p, '(min-width: 1280px) 290px, 50vw')} />
+            <span class="person__name"><span>{p.name}</span></span>
+            <span class="person__role">{p.title}</span>
+          </button>
+        </li>
+      ))}
+    </ul>
+  </div>
+))}
 
 {[...founders, ...associates].map((p) => (
   <dialog class="bio" id={id(p)} aria-labelledby={`${id(p)}-name`}>
-    <div class="bio__inner">
+    <div class="bio__band">
+      <div class="bio__who">
+        <h2 id={`${id(p)}-name`}>{p.name}</h2>
+        <p class="bio__role">{p.title}</p>
+        {p.linkedin && <Go href={p.linkedin} label="LinkedIn" external />}
+      </div>
+      <div class="bio__photo" set:html={photo(p, '(min-width: 1280px) 552px, 60vw')} />
       <button type="button" class="bio__close" data-close aria-label="Close">
-        <svg width="20" height="20" viewBox="0 0 20 20" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 3l14 14M17 3L3 17"/></svg>
+        <svg width="22" height="22" viewBox="0 0 20 20" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 3l14 14M17 3L3 17"/></svg>
       </button>
-      <div class="bio__photo" set:html={photo(p, '144px')} />
-      <h2 id={`${id(p)}-name`}>{p.name}</h2>
-      <p class="bio__role">{p.title}</p>
-      <p class="bio__text" set:html={p.bio} />
-      {p.linkedin && <Go href={p.linkedin} label="LinkedIn" external />}
     </div>
+    <div class="bio__text" set:html={p.bio} />
   </dialog>
 ))}

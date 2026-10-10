@@ -1,19 +1,19 @@
 ---
-// Inner page opening, styled like the home opening: black band, bold serif title left,
-// description right, then (if given) a contained photograph still on black.
+// Blackstone inner-page opening: white, light serif title left, short description right,
+// then a contained photograph. Pages without a description get the title alone (bx-page-header-no-desc).
 import Photo from './Photo.astro';
 import type { PhotoName } from '../data/photos';
 interface Props { title: string; summary?: string; where?: string; reg?: string; status?: string; pending?: boolean; photo?: PhotoName; position?: string }
 const { title, summary, where, reg, status, pending = false, photo, position } = Astro.props;
 ---
-<section class="page-header is-dark">
+<section class="page-header">
   <div class="wrap page-header__inner">
     <div class="page-header__title-col">
-      {where && <p class="eyebrow page-header__eyebrow intro" style="--i:0">{where}</p>}
-      <h1 class="page-header__title intro" style="--i:1">{title.replace(/\.$/, '')}</h1>
+      {where && <p class="eyebrow page-header__eyebrow">{where}</p>}
+      <h1 class="page-header__title">{title.replace(/\.$/, '')}</h1>
     </div>
     {(summary || reg || status) && (
-      <div class="page-header__desc intro" style="--i:2">
+      <div class="page-header__desc">
         {summary && <p>{summary}</p>}
         {(reg || status) && (
           <p class="page-header__meta">
@@ -25,4 +25,4 @@ const { title, summary, where, reg, status, pending = false, photo, position } =
     )}
   </div>
 </section>
-{photo && <div class="hero-band is-dark"><div class="wrap hero-media"><Photo name={photo} eager decorative sizes="(max-width: 1440px) 100vw, 1264px" position={position} /></div></div>}
+{photo && <div class="wrap hero-media"><Photo name={photo} eager decorative sizes="(max-width: 1440px) 100vw, 1264px" position={position} /></div>}

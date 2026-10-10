@@ -1,6 +1,0 @@
----
-// Plain underlined text link (kept under its old name so existing imports still work).
-interface Props { href: string; label: string; external?: boolean }
-const { href, label, external = false } = Astro.props;
----
-<a class="textlink" href={href} {...(external ? { rel: 'noopener', target: '_blank' } : {})}>{label}</a>

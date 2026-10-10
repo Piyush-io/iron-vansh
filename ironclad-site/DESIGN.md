@@ -92,7 +92,7 @@ Geist Mono is used only for registration codes.
 
 - Real photography only, stored in the repo under `public/images/photos/` (WebP at 640 / 1280 / 1920 / 2560 / 3840 + `manifest.json`). The site never fetches images at runtime once these exist.
 - Sources: `src/data/photo-sources.json` (Unsplash `cdn` ids or Pexels ids; both licences allow commercial use without attribution). Changing that file triggers `.github/workflows/photos.yml`, which downloads at 3840px on GitHub's runners and commits the result.
-- Slots: `harbour` (hero; the photo from the live ironcladamc.com), `mumbai`, `sealink` (Flexicap+), `desk` (Ventures), `nyc` (Latius), `centralpark` (interlude).
+- Slots: `harbour` (home hero, the photo from the live ironcladamc.com), `mumbai-night` (Flexicap+), `sealink-pillars` (Ventures), `manhattan-hudson` (Latius). Team portraits are built by `scripts/portraits.mjs` from originals in `design/assets/`.
 - Choosing new photos: add candidates to `src/data/photo-candidates.json`; the workflow saves 1280px previews to `design/photo-scout/` for review. Promote the winner into `photo-sources.json`.
 - Text never sits directly on a photo. Hero copy sits on a solid black card, with no scrims or gradients.
 

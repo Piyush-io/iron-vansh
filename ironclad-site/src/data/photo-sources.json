@@ -1,31 +1,5 @@
 {
   "_readme": "Real photography for the site. .github/workflows/photos.yml downloads each at 3840px and commits it to public/images/photos/ (CI cannot reach unsplash.com page ids, so use 'cdn' for Unsplash or 'pexels' for Pexels). 'file' = a local photo instead. Unsplash and Pexels licences: free for commercial use, attribution optional.",
-  "mumbai": {
-    "cdn": "photo-1753806390462-580d7a625f76",
-    "page": "https://unsplash.com/photos/city-skyline-is-seen-across-a-body-of-water-Z2SFnEVfqUE",
-    "credit": "Zoshua Colah",
-    "alt": "The South Mumbai skyline across the Arabian Sea under monsoon clouds"
-  },
-  "sealink": {
-    "pexels": "17332547",
-    "page": "https://www.pexels.com/photo/bandra-worli-sea-link-bridge-in-mumbai-17332547/",
-    "alt": "The Bandra–Worli Sea Link in Mumbai with fishing boats in the foreground"
-  },
-  "desk": {
-    "pexels": "6476254",
-    "page": "https://www.pexels.com/photo/team-having-a-meeting-6476254/",
-    "alt": "A team reviewing charts and notes around a desk, seen from above"
-  },
-  "nyc": {
-    "pexels": "11317197",
-    "page": "https://www.pexels.com/photo/aerial-photography-of-new-york-city-11317197/",
-    "alt": "Aerial view of Manhattan with the Empire State Building"
-  },
-  "centralpark": {
-    "pexels": "946688",
-    "page": "https://www.pexels.com/photo/central-park-new-york-946688/",
-    "alt": "Central Park and the Manhattan skyline from above"
-  },
   "harbour": {
     "file": "design/assets/hero-harbour.jpg",
     "page": "https://www.ironcladamc.com/",

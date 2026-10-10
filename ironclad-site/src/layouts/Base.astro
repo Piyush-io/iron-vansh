@@ -24,14 +24,14 @@ const isHome = Astro.url.pathname === '/';
   <meta property="og:type" content="website">
   <meta property="og:image" content={new URL('/images/og.jpg', Astro.site)}>
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" content={dark ? '#000000' : '#ffffff'}>
   <link rel="preload" href="/fonts/zodiak-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/general-sans-400.woff2" as="font" type="font/woff2" crossorigin>
   <script is:inline>document.documentElement.classList.add('js')</script>
 </head>
 <body class:list={{ home: isHome, 'theme-dark': dark }}>
   <a class="skip" href="#main">Skip to content</a>
-  <Header pathname={Astro.url.pathname} dark />
+  <Header pathname={Astro.url.pathname} dark={dark} />
   <main id="main">
     <slot />
   </main>
@@ -124,12 +124,12 @@ const isHome = Astro.url.pathname === '/';
         document.querySelectorAll(curtainSel).forEach((el) => { el.dataset.curtain = ''; io.observe(el); });
       }
 
-      // Team bios: each card opens its <dialog> side panel; Esc, the close button or a click outside closes it.
+      // Team bios: each card opens its full-width <dialog> panel; the close button or Esc closes it.
       document.addEventListener('click', (e) => {
         const open = e.target.closest('[data-bio]');
         if (open) { document.getElementById(open.dataset.bio)?.showModal(); return; }
         const dlg = e.target.closest('dialog.bio');
-        if (dlg && (e.target.closest('[data-close]') || e.target === dlg)) dlg.close();
+        if (dlg && e.target.closest('[data-close]')) dlg.close();
       });
 
       // Carousels: prev/next buttons and dots; inactive slides are inert.
