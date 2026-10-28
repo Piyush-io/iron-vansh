@@ -7,7 +7,6 @@
 @font-face { font-family: 'Zodiak'; src: url('/fonts/zodiak-300.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Zodiak'; src: url('/fonts/zodiak-400.woff2') format('woff2'); font-weight: 400 500; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Zodiak'; src: url('/fonts/zodiak-700.woff2') format('woff2'); font-weight: 600 800; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Zodiak'; src: url('/fonts/zodiak-400-italic.woff2') format('woff2'); font-weight: 300 500; font-style: italic; font-display: swap; }
 @font-face { font-family: 'General Sans'; src: url('/fonts/general-sans-300.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
 @font-face { font-family: 'General Sans'; src: url('/fonts/general-sans-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: 'General Sans'; src: url('/fonts/general-sans-500.woff2') format('woff2'); font-weight: 500 700; font-style: normal; font-display: swap; }
@@ -114,6 +113,7 @@ a:focus-visible > .bx-icon .bx-icon__fill { opacity: 1; }
 
 /* ───── photo ───── */
 .photo { display: block; width: 100%; height: 100%; object-fit: cover; }
+.photo-picture { display: block; width: 100%; height: 100%; }
 .photo-missing { background: #222; }
 
 /* ───── header ───── */
@@ -193,8 +193,8 @@ a:focus-visible > .bx-icon .bx-icon__fill { opacity: 1; }
 }
 @media (min-width: 90em) { .hero-full__desc, .hero-full__actions { grid-column: 3 / 11; } }
 /* the photo settles from a slight zoom on load */
-@keyframes settle { from { transform: scale(1.08); } to { transform: none; } }
-.js .hero-full__media img { animation: settle 2.4s var(--ease-out) both; }
+@keyframes settle { from { transform: scale(1.04); } to { transform: none; } }
+.js .hero-full__media img { animation: settle 1.2s var(--ease-out) both; }
 
 /* ───── home: promo carousel ───── */
 .carousel { padding-block: var(--pad); }
@@ -622,23 +622,23 @@ a:focus-visible > .bx-icon .bx-icon__fill { opacity: 1; }
 
 /* ───── motion ─────
    One easing family: --ease-out (expo) for things arriving, --ease-io for wipes.
-   Load, in sequence: header 0ms → hero words 120/200/280ms → description 420ms → first photo 520ms.
+   Load, in sequence: header 0ms → hero words 80/125/170ms → description 160ms → first photo 300ms.
    Scroll: Base.astro tags content as [data-reveal] / [data-curtain] and adds .in on entry;
-   siblings stagger 60ms (max 4 steps) so groups arrive together, not one by one.
+   siblings stagger 40ms (max 4 steps) so groups arrive together, not one by one.
    Without JS, or with reduced motion, nothing is hidden. */
 @keyframes rise { from { transform: translateY(105%); } to { transform: none; } }
 @keyframes fade-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 .promo-header__t1, .promo-header__t2 { overflow: hidden; padding-bottom: .12em; margin-bottom: -.12em; }
-.js .site-header__inner { animation: fade .6s ease-out both; }
-.js .promo-header__title .w { display: inline-block; animation: rise .9s var(--ease-out) both; animation-delay: calc(120ms + var(--i) * 80ms); }
-.js .intro { animation: fade-up .8s var(--ease-out) both; animation-delay: 420ms; }
+.js .site-header__inner { animation: fade .35s ease-out both; }
+.js .promo-header__title .w { display: inline-block; animation: rise .65s var(--ease-out) both; animation-delay: calc(80ms + var(--i) * 45ms); }
+.js .intro { animation: fade-up .55s var(--ease-out) both; animation-delay: 160ms; }
 
-.js [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .7s ease-out, transform .9s var(--ease-out); transition-delay: calc(var(--d, 0) * 60ms); }
+.js [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .45s ease-out, transform .55s var(--ease-out); transition-delay: calc(var(--d, 0) * 40ms); }
 .js [data-reveal].in { opacity: 1; transform: none; }
 
 .js [data-curtain] { background: transparent; }
-.js [data-curtain] > * { clip-path: inset(0 0 100% 0); transform: scale(1.08); transform-origin: 50% 100%; transition: clip-path .9s var(--ease-in-out), transform 1.4s var(--ease-out); }
+.js [data-curtain] > * { clip-path: inset(0 0 100% 0); transform: scale(1.04); transform-origin: 50% 100%; transition: clip-path .55s var(--ease-in-out), transform .8s var(--ease-out); }
 .js [data-curtain].in > * { clip-path: inset(0); transform: none; }
 
 /* ───── narrow screens ───── */

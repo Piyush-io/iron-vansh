@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Downloads the real photographs listed in src/data/photo-sources.json at 3840px and
-// writes the responsive WebP set + manifest.json into public/images/photos/.
+// writes responsive AVIF + WebP sets + manifest.json into public/images/photos/.
 //
 //   npm run photos                 fetch anything missing
 //   npm run photos -- --force      re-download everything
@@ -17,6 +17,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = path.join(root, 'public/images/photos');
 const sources = JSON.parse(await fs.readFile(path.join(root, 'src/data/photo-sources.json'), 'utf8'));
 delete sources._readme;
+const AVIF_QUALITY = 50;
 
 const args = process.argv.slice(2);
 const soft = args.includes('--soft');
@@ -71,7 +72,7 @@ async function load(s, width = 3840) {
 let failed = 0;
 for (const [name, s] of Object.entries(sources)) {
   if (only.length && !only.includes(name)) continue;
-  const have = manifest[name] && (await fs.stat(path.join(outDir, `${name}-${manifest[name].widths.at(-1)}.webp`)).catch(() => null));
+  const have = manifest[name]?.avif && (await fs.stat(path.join(outDir, `${name}-${manifest[name].widths.at(-1)}.webp`)).catch(() => null));
   if (have && !force) { console.log(`✓ ${name} (cached)`); continue; }
   try {
     const { buf, cdn } = await load(s);
@@ -79,10 +80,12 @@ for (const [name, s] of Object.entries(sources)) {
     const top = Math.min(meta.autoOrient?.width ?? meta.width, 3840);
     const widths = [...new Set([...WIDTHS.filter((w) => w < top), top])];
     for (const w of widths) {
-      await sharp(buf).rotate().resize({ width: w, withoutEnlargement: true }).webp({ quality: w >= 2560 ? 78 : 82, effort: 4 }).toFile(path.join(outDir, `${name}-${w}.webp`));
+      const resized = sharp(buf).rotate().resize({ width: w, withoutEnlargement: true });
+      await resized.clone().webp({ quality: w >= 2560 ? 78 : 82, effort: 4 }).toFile(path.join(outDir, `${name}-${w}.webp`));
+      await resized.clone().avif({ quality: AVIF_QUALITY, effort: 4 }).toFile(path.join(outDir, `${name}-${w}.avif`));
     }
     const h = Math.round(top * ((meta.autoOrient?.height ?? meta.height) / (meta.autoOrient?.width ?? meta.width)));
-    manifest[name] = { width: top, height: h, widths, ...(cdn ? { cdn } : {}) };
+    manifest[name] = { width: top, height: h, widths, avif: true, ...(cdn ? { cdn } : {}) };
     console.log(`✓ ${name}: ${widths.join(', ')}px${top < 3840 ? '  (source is smaller than 4K)' : ''}`);
   } catch (e) {
     failed++;

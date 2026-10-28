@@ -8,7 +8,8 @@
       1920,
       2560,
       3840
-    ]
+    ],
+    "avif": true
   },
   "office-view": {
     "width": 3840,
@@ -19,7 +20,8 @@
       1920,
       2560,
       3840
-    ]
+    ],
+    "avif": true
   },
   "dolomites-peaks": {
     "width": 3840,
@@ -30,7 +32,8 @@
       1920,
       2560,
       3840
-    ]
+    ],
+    "avif": true
   },
   "manhattan-dusk": {
     "width": 3840,
@@ -41,7 +44,8 @@
       1920,
       2560,
       3840
-    ]
+    ],
+    "avif": true
   },
   "sea-sunset": {
     "width": 3840,
@@ -52,6 +56,7 @@
       1920,
       2560,
       3840
-    ]
+    ],
+    "avif": true
   }
 }

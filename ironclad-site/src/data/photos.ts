@@ -1,6 +1,6 @@
 // Real photography. `npm run photos` (runs before dev/build) downloads each source at 3840px into
-// public/images/photos/ and records the widths in manifest.json. When a photo has not been
-// downloaded yet, the page loads it straight from Unsplash's CDN in the visitor's browser instead.
+// public/images/photos/ and records the widths in manifest.json. Each width is written as AVIF and WebP.
+// When a photo has not been downloaded yet, the page loads it straight from Unsplash's CDN in the visitor's browser instead.
 import fs from 'node:fs';
 import path from 'node:path';
 import sources from './photo-sources.json';
@@ -9,7 +9,7 @@ export type PhotoName = Exclude<keyof typeof sources, '_readme'>;
 export const productPhoto = { pms: 'office-view', ventures: 'dolomites-peaks', latius: 'manhattan-dusk' } as const satisfies Record<string, PhotoName>;
 
 const WIDTHS = [640, 1280, 1920, 2560, 3840];
-interface Entry { width: number; height: number; widths: number[] }
+interface Entry { width: number; height: number; widths: number[]; avif?: boolean }
 interface Source { alt: string; page: string; cdn?: string; id?: string; pexels?: string; file?: string }
 let manifest: Record<string, Entry> | undefined;
 const read = (): Record<string, Entry> => {
@@ -29,9 +29,11 @@ export function getPhoto(name: PhotoName) {
   if (m) {
     const url = (w: number) => `/images/photos/${name}-${w}.webp`;
     return { alt: s.alt, ready: true, width: m.width, height: m.height,
-      src: url(m.widths.includes(1920) ? 1920 : m.widths.at(-1)!), srcset: m.widths.map((w) => `${url(w)} ${w}w`).join(', ') };
+      src: url(m.widths.includes(1920) ? 1920 : m.widths.at(-1)!), srcset: m.widths.map((w) => `${url(w)} ${w}w`).join(', '),
+      srcAvif: m.avif ? `/images/photos/${name}-${m.widths.includes(1920) ? 1920 : m.widths.at(-1)}.avif` : undefined,
+      srcsetAvif: m.avif ? m.widths.map((w) => `/images/photos/${name}-${w}.avif ${w}w`).join(', ') : undefined };
   }
   const ok = !!(s.cdn || s.id || s.pexels);
   return { alt: s.alt, ready: ok, width: 3840, height: 2560,
-    src: ok ? remote(s, 1920) : '', srcset: ok ? WIDTHS.map((w) => `${remote(s, w)} ${w}w`).join(', ') : '' };
+    src: ok ? remote(s, 1920) : '', srcset: ok ? WIDTHS.map((w) => `${remote(s, w)} ${w}w`).join(', ') : '', srcAvif: undefined, srcsetAvif: undefined };
 }

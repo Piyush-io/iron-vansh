@@ -4,12 +4,14 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { ClientRouter } from 'astro:transitions';
 import { site } from '../data/site';
+import { getPhoto } from '../data/photos';
 
 interface Props { title?: string; description?: string; dark?: boolean }
 const { title, description = site.description, dark = false } = Astro.props;
 const fullTitle = title ? `${title} | ${site.name}` : site.name;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const isHome = Astro.url.pathname === '/';
+const hero = isHome ? getPhoto('harbour') : null;
 ---
 <!doctype html>
 <html lang="en">
@@ -27,8 +29,11 @@ const isHome = Astro.url.pathname === '/';
   <meta property="og:image" content={new URL('/images/og.jpg', Astro.site)}>
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content={dark ? '#000000' : '#ffffff'}>
-  <link rel="preload" href="/fonts/zodiak-700.woff2" as="font" type="font/woff2" crossorigin>
+  {hero?.srcsetAvif && <link rel="preload" as="image" type="image/avif" href={hero.srcAvif} imagesrcset={hero.srcsetAvif} imagesizes="100vw" fetchpriority="high" />}
+  <link rel="preload" href={isHome ? '/fonts/zodiak-700.woff2' : '/fonts/zodiak-300.woff2'} as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/zodiak-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/general-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/general-sans-500.woff2" as="font" type="font/woff2" crossorigin>
   <ClientRouter fallback="swap" />
   <script is:inline>
     // Pages share this layout; ClientRouter fetches the next page and swaps only what changed (no full reload).

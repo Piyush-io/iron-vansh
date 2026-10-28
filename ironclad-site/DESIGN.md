@@ -89,7 +89,7 @@ Geist Mono is used only for registration codes.
 
 ## 7. Imagery
 
-- Real photography only, stored in the repo under `public/images/photos/` (WebP at 640 / 1280 / 1920 / 2560 / 3840 + `manifest.json`). The site never fetches images at runtime once these exist.
+- Real photography only, stored in the repo under `public/images/photos/` (AVIF + WebP at 640 / 1280 / 1920 / 2560 / 3840 + `manifest.json`). The site never fetches images at runtime once these exist.
 - Sources: `src/data/photo-sources.json` (Unsplash `cdn` ids or Pexels ids; both licences allow commercial use without attribution). Changing that file triggers `.github/workflows/photos.yml`, which downloads at 3840px on GitHub's runners and commits the result.
 - Slots: `harbour` (home hero, the photo from the live ironcladamc.com), `office-view` (Flexicap+), `dolomites-peaks` (Ventures), `manhattan-dusk` (Latius; retouched to remove rooftop brand signs), `sea-sunset` (the home reel). Team portraits are served from `public/images/team/`.
 - Text never sits directly on a photo. Hero copy sits on a solid black card, with no scrims or gradients.

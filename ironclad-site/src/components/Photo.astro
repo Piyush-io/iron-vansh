@@ -1,10 +1,13 @@
 ---
 import { getPhoto, type PhotoName } from '../data/photos';
-interface Props { name: PhotoName; sizes?: string; eager?: boolean; decorative?: boolean; class?: string; position?: string }
-const { name, sizes = '100vw', eager = false, decorative = false, class: className, position } = Astro.props;
+interface Props { name: PhotoName; sizes?: string; eager?: boolean; priority?: boolean; decorative?: boolean; class?: string; position?: string }
+const { name, sizes = '100vw', eager = false, priority = false, decorative = false, class: className, position } = Astro.props;
 const p = getPhoto(name);
 const style = position ? `object-position:${position}` : undefined;
 ---
 {p.ready
-  ? <img class:list={['photo', className]} src={p.src} srcset={p.srcset} sizes={sizes} alt={decorative ? '' : p.alt} width={p.width} height={p.height} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} decoding="async" style={style} />
+  ? <picture class="photo-picture">
+      {p.srcsetAvif && <source type="image/avif" srcset={p.srcsetAvif} sizes={sizes} />}
+      <img class:list={['photo', className]} src={p.src} srcset={p.srcset} sizes={sizes} alt={decorative ? '' : p.alt} width={p.width} height={p.height} loading={eager ? 'eager' : 'lazy'} fetchpriority={priority ? 'high' : 'auto'} decoding="async" style={style} />
+    </picture>
   : <span class:list={['photo', 'photo-missing', className]} aria-hidden="true" data-photo={name}></span>}
