@@ -2,6 +2,13 @@
 
 Astro site for Ironclad Asset Management. Light-mode design system documented in `DESIGN.md`.
 
+## Deploying (Vercel Drop)
+
+1. `npm run drop` builds the site and writes `ironclad-site-vercel.zip` (git-ignored) with `index.html` at the archive root.
+2. Open [vercel.com/drop](https://vercel.com/drop), drag the zip in, pick the team and project name, and deploy.
+
+`dist/` can be dropped directly too. `public/vercel.json` carries the old `*.html` redirects, cache headers and the `/admin` noindex rule; `.htaccess` is for Hostinger and is left out of the zip.
+
 ## Deploying (Hostinger)
 
 The live site is on Hostinger (hPanel); the domain's DNS is at GoDaddy and email is Google Workspace, so DNS is never touched.

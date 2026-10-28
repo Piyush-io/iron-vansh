@@ -5,3 +5,6 @@ dist
 # deploy credentials and backups (never commit)
 .env.deploy
 backups/
+
+# generated Vercel Drop archive
+ironclad-site-vercel.zip

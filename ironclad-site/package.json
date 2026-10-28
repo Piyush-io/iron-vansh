@@ -11,6 +11,7 @@
     "photos": "node scripts/fetch-photos.mjs",
     "predev": "node scripts/fetch-photos.mjs --soft",
     "prebuild": "node scripts/fetch-photos.mjs --soft",
+    "drop": "npm run build && rm -f ironclad-site-vercel.zip && cd dist && zip -qr ../ironclad-site-vercel.zip . -x '.htaccess' '*.DS_Store'",
     "deploy": "node scripts/deploy.mjs"
   },
   "dependencies": {
