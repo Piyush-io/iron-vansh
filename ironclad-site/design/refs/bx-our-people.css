@@ -4,25 +4,25 @@ You have sent too many requests in a given amount of time.
 </body></html>
 
 
-/* https://www.blackstone.com/_static/??-eJzTLy/QzcxLzilNSS3WzyrWz01NyUxMzUnNTc0rQeEU5CRWphbp5qSmJyZX6uVm5uklFxfr6OPTDpRD5sM02efaGppbmJsZmFhYGAAARP8u7A== */
+/* https://www.blackstone.com/_static/??-eJzTLy/QzcxLzilNSS3WzyrWz01NyUxMzUnNTc0rQeEU5CRWphbp5qSmJyZX6uVm5uklFxfr6OPTDpRD5sM02efaGppbGhobmFqYGwMARNAu5w== */
 <html><body><h1>429 Too Many Requests</h1>
 You have sent too many requests in a given amount of time.
 </body></html>
 
 
-/* https://www.blackstone.com/wp-content/mu-plugins/search/elasticpress/dist/css/related-posts-block-styles.min.css?m=1788889278g */
+/* https://www.blackstone.com/wp-content/mu-plugins/search/elasticpress/dist/css/related-posts-block-styles.min.css?m=1792535837g */
 <html><body><h1>429 Too Many Requests</h1>
 You have sent too many requests in a given amount of time.
 </body></html>
 
 
-/* https://www.blackstone.com/_static/??-eJydkMFuwjAQRH+ojgVUJZeqn1IZewtLvevEuy6kX98luSEhkV5n5o004y+DQ465JRAfRXwKcsJYWDpC7kx58RYxQYHVD7kdkcWPDX8dBVGojuGqMxoYKSisg85jgzq5hv/BOsMkYzKnan6+oQIbA9UHEdBl+Cjk5qDolFeMeNQVC1FZ8aACDdnuM4v4c6j2pQ28x/UEZJFDDvFbtDC4n61PKMsrX3WOpRv2Qe+bfd/vdm/99vUPN124Zw== */
+/* https://www.blackstone.com/_static/??-eJydkMFOwzAQRH8Ixy1Egh6qfgpy7aVZ6l0n3jVt+Xq2yQ2pEuE6M2+kGX8ZHXLMLYH4KOJTkAFjYekIuTPlyVvEBAVWP+Z2QhY/Nfx2FEShOoarzmhgpKCwDvqcGtSba/gfrDNMMiZzqua/N1RgY6D6IAK6DJ+E3BwUveUVIx51xUJUVjyoQGO2+8wifh+rfWkDf+M6AFnkmEM8ixYG9/XsE8ryykedY+mOHWi/fd1t+75/e9n8ADc1uF4= */
 <html><body><h1>429 Too Many Requests</h1>
 You have sent too many requests in a given amount of time.
 </body></html>
 
 
-/* https://www.blackstone.com/wp-content/themes/blackstone-v2/assets/css/frontend/components/print.css?m=1788336521g */
+/* https://www.blackstone.com/wp-content/themes/blackstone-v2/assets/css/frontend/components/print.css?m=1791444485g */
 <html><body><h1>429 Too Many Requests</h1>
 You have sent too many requests in a given amount of time.
 </body></html>
@@ -72,6 +72,17 @@ img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 15
 
 /* inline */
 img#wpstats{display:none}
+
+/* inline */
+
+			.wp-block-blackstone-v2-mfe-calculator [data-testid^="filter-"].MuiButton-outlined,
+.wp-block-blackstone-v2-mfe-calculator [data-testid^="filter-"].MuiButton-contained {
+    color: #000;
+    border-color: #000;
+}		
+
+/* inline */
+
 
 /* inline */
 #wm-ipp-base,#wm-ipp-print,#donato{display:none!important}
