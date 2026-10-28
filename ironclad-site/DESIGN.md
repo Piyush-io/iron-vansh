@@ -2,7 +2,7 @@
 
 Blackstone's design system, applied to Ironclad's own content and photography.
 
-> **Provenance.** Ported from blackstone.com's own stylesheet and markup (Wayback Machine capture, 7 Oct 2026): `design/refs/bx-home.css`, `bx-*.html` and screenshots `bx-*-desktop.jpg`.
+> **Provenance.** Ported from blackstone.com's own stylesheet and markup (Wayback Machine capture, 7 Oct 2026).
 
 ---
 
@@ -27,7 +27,7 @@ Blackstone's design system, applied to Ironclad's own content and photography.
 
 ## 3. Typography
 
-Fontshare's **Zodiak + General Sans** (Indian Type Foundry, ITF Free Font License: free for commercial use and web embedding). Files are self-hosted in `public/fonts/`; candidates are kept in `design/font-candidates/`.
+Fontshare's **Zodiak + General Sans** (Indian Type Foundry, ITF Free Font License: free for commercial use and web embedding). Files are self-hosted in `public/fonts/`.
 
 - Hero: Zodiak Bold, the page's main attraction (84–96px desktop). Section headings: Zodiak Regular. Ticker: Bold first word.
 - Body and UI: General Sans 400, with 500/600 for emphasis.
@@ -91,8 +91,7 @@ Geist Mono is used only for registration codes.
 
 - Real photography only, stored in the repo under `public/images/photos/` (WebP at 640 / 1280 / 1920 / 2560 / 3840 + `manifest.json`). The site never fetches images at runtime once these exist.
 - Sources: `src/data/photo-sources.json` (Unsplash `cdn` ids or Pexels ids; both licences allow commercial use without attribution). Changing that file triggers `.github/workflows/photos.yml`, which downloads at 3840px on GitHub's runners and commits the result.
-- Slots: `harbour` (home hero, the photo from the live ironcladamc.com), `office-view` (Flexicap+), `dolomites-peaks` (Ventures), `manhattan-dusk` (Latius; retouched to remove rooftop brand signs), `sea-sunset` (the home reel). Team portraits are built by `scripts/portraits.mjs` from originals in `design/assets/`.
-- Choosing new photos: add candidates to `src/data/photo-candidates.json`; the workflow saves 1280px previews to `design/photo-scout/` for review. Promote the winner into `photo-sources.json`.
+- Slots: `harbour` (home hero, the photo from the live ironcladamc.com), `office-view` (Flexicap+), `dolomites-peaks` (Ventures), `manhattan-dusk` (Latius; retouched to remove rooftop brand signs), `sea-sunset` (the home reel). Team portraits are served from `public/images/team/`.
 - Text never sits directly on a photo. Hero copy sits on a solid black card, with no scrims or gradients.
 
 ## 8. Motion

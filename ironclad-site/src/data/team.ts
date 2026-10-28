@@ -5,7 +5,7 @@ export interface Person {
   group: 'founder' | 'team';
   /** Trusted static HTML: plain text with <strong> emphasis only. */
   bio: string;
-  /** Path without extension: /images/team/<name>.{webp,jpg}, 1000×1000 (built by scripts/portraits.mjs). */
+  /** Path without extension: /images/team/<name>.{webp,jpg}, 1000×1000. */
   image?: string;
   initials: string;
   linkedin?: string;

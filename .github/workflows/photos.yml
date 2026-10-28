@@ -1,6 +1,5 @@
 # Downloads the site's photography (ironclad-site/src/data/photo-sources.json) at 4K on GitHub's
 # runners and commits it to public/images/photos/, so the site never fetches images at runtime.
-# Also saves the review shortlist (photo-candidates.json) to design/photo-scout/.
 name: Fetch photos
 
 on:
@@ -8,7 +7,6 @@ on:
   push:
     paths:
       - 'ironclad-site/src/data/photo-sources.json'
-      - 'ironclad-site/src/data/photo-candidates.json'
       - 'ironclad-site/scripts/fetch-photos.mjs'
       - '.github/workflows/photos.yml'
 
@@ -35,13 +33,11 @@ jobs:
       - run: npm ci
       - name: Download photos at 3840px
         run: node scripts/fetch-photos.mjs --soft
-      - name: Download review shortlist
-        run: node scripts/fetch-photos.mjs --scout
       - name: Commit photos
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/images/photos design/photo-scout
+          git add public/images/photos
           if git diff --cached --quiet; then echo "No new photos."; exit 0; fi
           git commit -m "Add fetched photos [skip ci]"
           git pull --rebase origin "${GITHUB_REF_NAME}"

@@ -1,3 +1,0 @@
-{
-  "_readme": "Shortlist for review. `npm run photos -- --scout` saves each at 1280px into design/photo-scout/ with original sizes in index.json. Empty once a choice is made."
-}

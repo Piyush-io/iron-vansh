@@ -6,7 +6,6 @@
 //   npm run photos -- --force      re-download everything
 //   npm run photos -- dawn mumbai  only these
 //   --soft                         never fail the build (used by predev/prebuild)
-//   --scout                        save the shortlist in photo-candidates.json at 1280px into design/photo-scout/
 //
 // To use your own photograph instead, add  "file": "path/to/photo.jpg"  to its entry.
 import fs from 'node:fs/promises';
@@ -67,27 +66,6 @@ async function load(s, width = 3840) {
   if (!res.ok) throw new Error(`HTTP ${res.status} from ${res.url}`);
   if (!(res.headers.get('content-type') || '').startsWith('image/')) throw new Error(`not an image (${res.headers.get('content-type')})`);
   return { buf: Buffer.from(await res.arrayBuffer()), cdn: base.includes('images.unsplash.com') ? base.replace('https://images.unsplash.com/', '') : undefined };
-}
-
-if (args.includes('--scout')) {
-  const list = JSON.parse(await fs.readFile(path.join(root, 'src/data/photo-candidates.json'), 'utf8').catch(() => '{}'));
-  delete list._readme;
-  const dir = path.join(root, 'design/photo-scout');
-  await fs.mkdir(dir, { recursive: true });
-  const index = {};
-  for (const [name, s] of Object.entries(list)) {
-    try {
-      // the original size tells us whether a candidate is good enough for full-width 4K use
-      const orig = await load(s, 6000).then(({ buf }) => sharp(buf).metadata()).catch(() => ({}));
-      const { buf, cdn } = await load(s, 1280);
-      const meta = await sharp(buf).metadata();
-      index[name] = { ...s, width: orig.width, height: orig.height };
-      await sharp(buf).rotate().resize({ width: 1280, withoutEnlargement: true }).jpeg({ quality: 78 }).toFile(path.join(dir, `${name}.jpg`));
-      console.log(`✓ scout ${name} (${meta.width}x${meta.height}) ${cdn}`);
-    } catch (e) { console.warn(`✗ scout ${name}: ${e.message}`); }
-  }
-  await fs.writeFile(path.join(dir, 'index.json'), JSON.stringify(index, null, 2) + '\n');
-  process.exit(0);
 }
 
 let failed = 0;

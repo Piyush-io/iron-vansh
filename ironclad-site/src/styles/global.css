@@ -1,5 +1,5 @@
 /* Ironclad — design system. Spec: ../../DESIGN.md
-   A one-to-one port of blackstone.com's system (stylesheet captured Oct 2026, design/refs/bx-home.css):
+   A one-to-one port of blackstone.com's system (stylesheet captured Oct 2026):
    container widths, 16-column grid, type scale, section spacing, circled-arrow links, header and footer.
    Type: Fontshare's Zodiak (Bold hero, Regular headings) + General Sans (ITF Free Font License, free for commercial web use).
    Breakpoints: 48em (768) · 80em (1280) · 90em (1440) · 120em (1920). */
